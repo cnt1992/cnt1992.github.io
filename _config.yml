@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 前端路上
+title: Web前端爱好者
 subtitle: 愿景成为一名全栈工程师
 description: sky's blog | css | javascript | 蔡能天
 author: Sky Cai
@@ -39,8 +39,8 @@ relative_link: false
 future: true
 highlight:
   enable: true
-  line_number: true
-  auto_detect: true
+  line_number: false
+  auto_detect: false
   tab_replace:
 
 # Category & Tag
