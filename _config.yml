@@ -70,4 +70,3 @@ theme: modernist
 deploy:
   type: git
   repo: git@github.com:cnt1992/cnt1992.github.io.git
-  branch: gh-pages
