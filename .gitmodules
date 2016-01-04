@@ -1,0 +1,3 @@
+[submodule "themes/maupassant_repo"]
+	path = themes/maupassant_repo
+	url = https://github.com/pagecho/maupassant
