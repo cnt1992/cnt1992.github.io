@@ -72,7 +72,13 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: maupassant
+theme: apollo
+
+archive_generator:
+  per_page: 0
+  yearly: false
+  monghly: false
+  daily: false
 
 # Feeds
 feed:
