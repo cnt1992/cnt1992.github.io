@@ -1,6 +1,6 @@
 {
   "name": "cnt1992.github.io",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "hexo": {
     "version": "3.2.0"
@@ -12,6 +12,7 @@
     "hexo-generator-archive": "^0.1.2",
     "hexo-generator-category": "^0.1.2",
     "hexo-generator-index": "^0.1.2",
+    "hexo-generator-feed": "^1.0.3",
     "hexo-generator-tag": "^0.1.1",
     "hexo-renderer-ejs": "^0.1.0",
     "hexo-renderer-jade": "^0.1.0",

@@ -2,7 +2,7 @@ title: 常用的javascript语句
 date: 2013-09-22 10:16:29
 tags: javascript
 categories: 技术研究
-
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 
 > 我只是大自然的搬运工...

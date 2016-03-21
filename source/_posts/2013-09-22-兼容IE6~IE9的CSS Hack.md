@@ -2,7 +2,7 @@ title: 兼容IE6~IE9的CSS Hack
 date: 2013-09-22 10:16:29
 tags: css hack
 categories: 技术研究
-
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 ```css
 div {

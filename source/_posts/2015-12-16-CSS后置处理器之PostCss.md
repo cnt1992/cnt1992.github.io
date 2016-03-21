@@ -3,6 +3,7 @@ date: 2015-12-16 19:44:29
 categories: 个人学习
 tags: PostCss 后置处理器
 description: PostCSS 是一套利用JS插件实现的用来改变CSS的工具.这些插件能够支持变量和混合语法，转换未来CSS语法，内联图片，还有更多
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 
 ## 初识PostCSS

@@ -3,6 +3,7 @@ date: 2015-12-09 15:03:16
 categories: 翻译
 tags: sass maps
 description: 本文介绍如何利用Sass Maps简化我们的代码，翻译水平有限，敬请指正。
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 
 > 本文翻译自[An Introduction to Sass Maps:Usage and Examples](http://webdesign.tutsplus.com/tutorials/an-introduction-to-sass-maps-usage-and-examples--cms-22184)

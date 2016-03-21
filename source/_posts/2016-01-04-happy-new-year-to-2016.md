@@ -3,6 +3,7 @@ date: 2016-01-04 10:01:36
 categories: 技术研究
 tags: 算法
 description: 2016年是一个非常6的一年，为啥这样子说？请往下看。
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 
 最近网上流传一张图来说明`2016年很6`，大概就是下面的意思：

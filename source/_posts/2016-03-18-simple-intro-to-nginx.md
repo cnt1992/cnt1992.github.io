@@ -3,6 +3,7 @@ date: 2016-03-18 14:10:49
 categories: 教程
 tags: Nginx
 description: 本文手把手带领前端工程师走进Nginx配置
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 
 ![Nginx Logo](/img/nginx/nginx.png)

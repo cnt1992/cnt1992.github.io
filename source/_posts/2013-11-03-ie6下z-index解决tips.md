@@ -2,7 +2,7 @@ title: ie6下z-index解决tips
 date: 2013-11-03 01:26
 tags: css hack ie6 z-index
 categories: 技术研究
-
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 
 IE6虽然已经被公认放弃，但是不少前端开发人员还是在苦逼的兼容IE6.我没有刻意去学习IE6的hack，只有在碰到的时候才会去兼容。至于z-index这个bug发生的条件有三个：

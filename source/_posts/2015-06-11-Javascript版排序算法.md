@@ -2,7 +2,7 @@ title: Javascript版排序算法
 date: 2015-06-11 09:28
 tags: javascript 算法
 categories: 个人学习
-
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 ### 必备知识点
 

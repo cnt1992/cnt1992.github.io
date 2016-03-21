@@ -2,7 +2,7 @@ title: koa下一代nodejs框架
 date: 2014-11-10 11:21:50
 tags: koa,node.js,nvm,javascript
 categories: 技术研究
-
+avatar: "https://avatars2.githubusercontent.com/u/3118988?v=3&s=40"
 ---
 [koa](http://koajs.com)是下一代的NodeJS框架，由原先[Express](http://expressjs.com/)团队开发，致力于更小，更有表现力的web应用程序。
 
