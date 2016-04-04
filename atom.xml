@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnt1992.xyz/"/>
-  <updated>2016-03-31T00:46:55.000Z</updated>
+  <updated>2016-04-04T10:00:46.000Z</updated>
   <id>http://cnt1992.xyz/</id>
   
   <author>
@@ -14,6 +14,84 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>迟来的面试总结</title>
+    <link href="http://cnt1992.xyz/2016/04/05/%E8%BF%9F%E6%9D%A5%E7%9A%84%E9%9D%A2%E7%BB%8F/"/>
+    <id>http://cnt1992.xyz/2016/04/05/迟来的面经/</id>
+    <published>2016-04-04T16:12:38.000Z</published>
+    <updated>2016-04-04T10:00:46.000Z</updated>
+    
+    <content type="html">&lt;p&gt;今天 &lt;code&gt;清明节&lt;/code&gt;，已然是第 &lt;em&gt;4&lt;/em&gt; 个年头没有回家祭祖，现在坐在工位上，刚将手头上的工作做好，装逼范儿先来诗一首：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;清明时节雨纷纷，路上行人欲断魂；&lt;br&gt;借问酒家何处有，牧童遥指杏花村。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;PIA! 装逼结束，下面开始正题！&lt;/p&gt;
+&lt;h2 id=&quot;谈谈最近&quot;&gt;&lt;a href=&quot;#谈谈最近&quot; class=&quot;headerlink&quot; title=&quot;谈谈最近&quot;&gt;&lt;/a&gt;谈谈最近&lt;/h2&gt;&lt;p&gt;来&lt;code&gt;天猫&lt;/code&gt;已经有一个星期，从 &lt;code&gt;京东&lt;/code&gt; 的 &lt;a href=&quot;http://aotu.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;凹凸实验室&lt;/a&gt; 团队的 &lt;strong&gt;老人&lt;/strong&gt; 一下子变成了 &lt;code&gt;天猫&lt;/code&gt; 的 &lt;strong&gt;新人&lt;/strong&gt; ，重新认识周边的同事，申请各种权限再熟悉开发环境，还好脸皮比以前厚了很多，各种不懂的东西到处找人问，总算是进入了开发状态。&lt;/p&gt;
+&lt;p&gt;从过年回来就不断进行 &lt;code&gt;天猫&lt;/code&gt; 的电话面试到交叉面，再到最后的HRG面，以及Leader视频面，感觉身心摧残呀…&lt;/p&gt;
+&lt;p&gt;每次面试都那么累（说得好像面试了很多次一样o(╯□╰)o），但其实也总算是把国内 &lt;code&gt;JBAT&lt;/code&gt; 都面了一下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;去年9月， &lt;code&gt;腾讯&lt;/code&gt; 的一位08级的师兄打电话给我问我有没有意愿去 &lt;code&gt;腾讯应用宝&lt;/code&gt; 试试，于是就去试试了，结果聊的全部都是HTTP的东西，没看书华丽挂掉。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;去年10月面了 &lt;code&gt;百度&lt;/code&gt; 的 &lt;code&gt;凤巢团队&lt;/code&gt;，顺利通过了一面、二面、三面，然而却在三面当天收到了 &lt;strong&gt;百度停止社招&lt;/strong&gt; 的消息，然后就是漫长的冻结期，等到我最后直接放弃了！&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;年前 &lt;code&gt;天猫&lt;/code&gt; 的同事找到我问有没有意愿加入天猫，抱着试一试的心态，结果一路顺畅就通过了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;面试总结&quot;&gt;&lt;a href=&quot;#面试总结&quot; class=&quot;headerlink&quot; title=&quot;面试总结&quot;&gt;&lt;/a&gt;面试总结&lt;/h2&gt;&lt;p&gt;之所以想写面试总结，最大的目的还是想写给自己看，毕竟面试作为你能力的最真实的表现，能否做足准备并将最好的一面表现出来那是一门学问。&lt;/p&gt;
+&lt;p&gt;我想按照面试时间的顺序来写我的总结，因为&lt;code&gt;前车之鉴后事之师&lt;/code&gt;，每次经历过的面试都能让自己清楚地知道自己擅长啥，哪些地方不足需要弥补。&lt;/p&gt;
+&lt;h3 id=&quot;腾讯面试&quot;&gt;&lt;a href=&quot;#腾讯面试&quot; class=&quot;headerlink&quot; title=&quot;腾讯面试&quot;&gt;&lt;/a&gt;腾讯面试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;更多地注重理论知识，扎实的专业理论&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;首先谈谈 &lt;code&gt;腾讯&lt;/code&gt; 的面试，感觉腾讯很注重&lt;code&gt;最基础的东西&lt;/code&gt;，当然这最基础的东西大多是理论的，我们出来工作之后大多时间都是在写码，更多侧重于&lt;code&gt;应用实践&lt;/code&gt;，而越来越少的时间花在了&lt;code&gt;基础理论&lt;/code&gt;上面。&lt;/p&gt;
+&lt;p&gt;比如：我们已经习惯了用 &lt;code&gt;htmlspecial&lt;/code&gt; 方法去处理特殊的 &lt;code&gt;HTML&lt;/code&gt; 字符，也知道这是用来防止 &lt;code&gt;XSS&lt;/code&gt; 攻击的，然而当被问到 &lt;code&gt;XSS&lt;/code&gt; 与 &lt;code&gt;CSRF&lt;/code&gt; 的实现原理以及这两者之间的区别是啥？相信很多人一时半会想不起来。&lt;/p&gt;
+&lt;p&gt;再比如：我们已经习惯于顺手拈来 &lt;code&gt;Ajax&lt;/code&gt; 方法来写各种请求，当然也知道 &lt;code&gt;GET&lt;/code&gt; 和 &lt;code&gt;POST&lt;/code&gt; 等请求的区别，但是你是否知道 &lt;code&gt;Ajax&lt;/code&gt; 的实现原理呢？大多数人知道这是基于 &lt;code&gt;Promise&lt;/code&gt; 来实现的，但是再深入一点问一下 &lt;code&gt;ES6&lt;/code&gt; 的 &lt;code&gt;Promise&lt;/code&gt; 的实现原理？ &lt;code&gt;POST&lt;/code&gt; 请求如何实现跨域？&lt;/p&gt;
+&lt;p&gt;保持学习最新的东西是作为一名 &lt;code&gt;合格&lt;/code&gt; 程序员的最低要求，那作为合格程序员应该都会去了解一下 &lt;code&gt;HTTP 2.0&lt;/code&gt; 的相关知识了吧，什么 &lt;code&gt;首部压缩&lt;/code&gt;、&lt;code&gt;优先级处理&lt;/code&gt;、&lt;code&gt;双向字节流的请求与相应&lt;/code&gt; 都应该了解过了，但当时我被面的时候人家根本不按常理出牌，就问：在一次 &lt;code&gt;POST&lt;/code&gt; 请求中一般会带有什么头部过去？ 咳咳，反正在那之后我是乖乖的去买 &lt;code&gt;《HTTP权威指南》&lt;/code&gt;恶补了。&lt;/p&gt;
+&lt;p&gt;当然那次面试还问 &lt;code&gt;缓存的实现机制&lt;/code&gt;、&lt;code&gt;闭包的实现&lt;/code&gt;等，这些就都是常规的面试题了，总结自己没有通过的原因：在写码的时候会利用各种奇淫技巧去解决问题，但很少去关注背后的一些原理。&lt;/p&gt;
+&lt;h3 id=&quot;百度面试&quot;&gt;&lt;a href=&quot;#百度面试&quot; class=&quot;headerlink&quot; title=&quot;百度面试&quot;&gt;&lt;/a&gt;百度面试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;偏向算法以及逻辑思考能力&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这可能跟我面试的团队有关，听面试官介绍他们团队主要负责百度搜索推荐算法的，部门里面基本都是研究生，所以疯狂抛算法的题目给我。&lt;/p&gt;
+&lt;p&gt;一面的时候还算是比较客气的，让我手写实现 &lt;code&gt;函数继承&lt;/code&gt; ，以及考了一下 &lt;code&gt;如何判断一个变量是否为数组&lt;/code&gt;，基本大家都能够跟我一样答出下面的答案：&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;isArray&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt; o &lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Array&lt;/span&gt;.isArray( o ) || &lt;span class=&quot;built_in&quot;&gt;Object&lt;/span&gt;.prototype.toString.call( o ) === &lt;span class=&quot;string&quot;&gt;&#39;[object Array]&#39;&lt;/span&gt;; &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果你能答出上面的答案，相比你应该读过 &lt;code&gt;jQuery&lt;/code&gt; 或者 &lt;code&gt;Underscore&lt;/code&gt; 之类的源码？于是面试官让我打开电脑定位到源码，然后问一些方法是用来干嘛的之类的，所以平常看看一些开源的库或者框架的源码很有必要，一来去看优秀的库是如何实现，培养自己架构的能力，二来方便面试（PIA，赶紧跑~~）&lt;/p&gt;
+&lt;p&gt;然后二面的时候一上来就让实现 &lt;code&gt;排序算法&lt;/code&gt; 的所有我能讲出来的方法，什么 &lt;code&gt;冒泡&lt;/code&gt;、&lt;code&gt;二分法&lt;/code&gt;等，但我犯了一个错误，那就是我知道有哪些方法可以实现，但我并不知道所有的方法具体是如何实现，这就是 &lt;code&gt;挖坑给自己跳&lt;/code&gt; ，然后继续考算法，考 &lt;code&gt;动态规划&lt;/code&gt; 的实现与原理等。因为在面试之前特地买了一本书 &lt;a href=&quot;http://item.jd.com/11615451.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《算法问题实战策略》&lt;/a&gt; 来看，所以这些算法基本都考不到我了，最后面试官很疑惑的问我怎么会知道这些多算法的问题，我就说我刚好看了算法的书，于是面试官笑呵呵让我过了。&lt;/p&gt;
+&lt;p&gt;前面两面是技术面，第三面好像并没有考特别细的技术细节，就单纯让我拿一个觉得最厉害的项目跟他聊聊，其实就考自己在项目中扮演着什么角色，在项目中具体做了什么，整体的技术能力以及综合能力差不多就出来了，这里想给&lt;a href=&quot;http://aotu.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;凹凸实验室&lt;/a&gt;打个广告 – 我们在大公司基本都扮演着螺丝钉的角色，基本专注到很小的模块然后修修补补，很少有机会让你站在全局上面一路参与一个项目，但我在&lt;code&gt;凹凸实验室&lt;/code&gt;团队拿到了很多自己去主导的项目，也正如此才让我离 &lt;code&gt;全栈工程师&lt;/code&gt; 更仅一步。也正因为有了自己主导的项目，三面面试官很满意。&lt;/p&gt;
+&lt;p&gt;虽然很多人在说百度的各种不好，像什么&lt;code&gt;贴吧事件&lt;/code&gt;，但百度的技术依然还是不可否认很厉害，虽然社招被冻结，没能如愿进去，但也促使自己学习了更多的东西。&lt;/p&gt;
+&lt;h3 id=&quot;天猫面试&quot;&gt;&lt;a href=&quot;#天猫面试&quot; class=&quot;headerlink&quot; title=&quot;天猫面试&quot;&gt;&lt;/a&gt;天猫面试&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;偏向项目实战能力&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其实在百度冻结社招之后，自己并没有想换工作的打算，一来是老大对我的重视，把很多福利都争取给了我，二来是女朋友在同一层楼工作，每天一起下班而不是单身狗…&lt;/p&gt;
+&lt;p&gt;但由于各种原因，当天猫找到我的时候，也并没有拒绝，而是抱着试一试的心态去面，完全没想到就直接过了，搞得我匆匆忙忙离开深圳奔赴杭州，整个平静的生活算是变化特别大了。&lt;/p&gt;
+&lt;p&gt;来阿里也许是注定的，大三的时候曾经面淘宝UED并且已经拿到了实习的offer，但考虑杭州太远而且学校很多事情要忙放弃掉，辗转几年又回到天猫。&lt;/p&gt;
+&lt;p&gt;谈谈一面吧，关于 &lt;code&gt;CSS&lt;/code&gt; 好像就问了我两道题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;列举出所有能够让一个元素看不见的CSS属性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;列举出所有能够让不定宽元素垂直居中的方法&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;考 &lt;code&gt;重构&lt;/code&gt; 的题目我很拿手，毕竟在京东的前大半年还是专注于重构能力的，面试官很满意我的回答，于是考了 &lt;code&gt;性能优化&lt;/code&gt; 的一些东西，以及 &lt;code&gt;Gulp&lt;/code&gt;跟 &lt;code&gt;Grunt&lt;/code&gt; 两个工具的区别等，感觉都答得很不错，但面试官觉得我工作经验不够（因为毕业才1年多），然后我反驳了，我笑了笑说我虽然工作一年多但我实际做的项目已经比很多工作一年多的人要多得多，可能没有我这句话就直接因为经验不足被干掉了…&lt;/p&gt;
+&lt;p&gt;后面的面试全部围绕 &lt;code&gt;你觉得你最牛逼的项目&lt;/code&gt; 来展开，考察了 &lt;code&gt;Angular&lt;/code&gt;、&lt;code&gt;Vue&lt;/code&gt;这些框架在我项目中的使用，考察了&lt;code&gt;ES7&lt;/code&gt;新增加的东西（感觉ES6才出来就要去学习ES7的节奏，伤不起），还是那句话，其实还是想知道你在整个项目中的综合能力。&lt;/p&gt;
+&lt;p&gt;就酱紫入坑 &lt;code&gt;天猫&lt;/code&gt; ，不过杭州阿里巴巴西溪园区真心不错，😄有种重回大学的感觉！&lt;/p&gt;
+&lt;h2 id=&quot;继续碎碎念&quot;&gt;&lt;a href=&quot;#继续碎碎念&quot; class=&quot;headerlink&quot; title=&quot;继续碎碎念&quot;&gt;&lt;/a&gt;继续碎碎念&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Node&lt;/code&gt;的崛起让&lt;code&gt;JS&lt;/code&gt;大展拳脚，前端各种库跟框架层出不穷，社区各种争论喋喋不休，像前几天看到的，现在的学生 &lt;code&gt;JS&lt;/code&gt; 能力是越来越强了，但最基本的 &lt;code&gt;HTML&lt;/code&gt; 跟 &lt;code&gt;CSS&lt;/code&gt; 能力却很弱，基本上都知道了 &lt;code&gt;ECMA 2016&lt;/code&gt;,然而却没几个能关注 &lt;code&gt;HTTP 2.0&lt;/code&gt; 的东西。前端圈子还是有点浮躁，过来天猫给自己的定位还是全栈工程师，做一个重构能力很强的开发，如果可以给自己一句话总结，那便是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;懂设计（PS/Sketch），会视频制作（AE/PR），能写后端脚本（PHP/SHELL），喜欢看书，追求 &lt;code&gt;全栈工程师&lt;/code&gt; 的程序猿。&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+    
+    <summary type="html">
+    
+      记录自己的面试经历与总结
+    
+    </summary>
+    
+      <category term="心得体会" scheme="http://cnt1992.xyz/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/"/>
+    
+    
+      <category term="面试 总结" scheme="http://cnt1992.xyz/tags/%E9%9D%A2%E8%AF%95-%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>前端工程师学习Nginx入门篇</title>
