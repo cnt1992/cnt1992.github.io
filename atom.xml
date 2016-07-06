@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnt1992.xyz/"/>
-  <updated>2016-04-28T03:03:55.000Z</updated>
+  <updated>2016-07-06T13:43:08.000Z</updated>
   <id>http://cnt1992.xyz/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>天猫2017届前端开发实习生内推</title>
+    <link href="http://cnt1992.xyz/2016/07/07/tmall-recruit/"/>
+    <id>http://cnt1992.xyz/2016/07/07/tmall-recruit/</id>
+    <published>2016-07-06T21:33:38.000Z</published>
+    <updated>2016-07-06T13:43:08.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;关于天猫&quot;&gt;&lt;a href=&quot;#关于天猫&quot; class=&quot;headerlink&quot; title=&quot;关于天猫&quot;&gt;&lt;/a&gt;关于天猫&lt;/h2&gt;&lt;p&gt;关于天猫我就不多加以介绍，直接 &lt;a href=&quot;https://www.zhihu.com/question/33589154&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;搬砖&lt;/a&gt;，欢迎有兴趣的同学砸简历给我&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;点击右边发送简历 →_→ &lt;a href=&quot;mailto:cnt19920613@gmail.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;cnt19920613@gmail.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;岗位描述Job-Description&quot;&gt;&lt;a href=&quot;#岗位描述Job-Description&quot; class=&quot;headerlink&quot; title=&quot;岗位描述Job Description&quot;&gt;&lt;/a&gt;岗位描述Job Description&lt;/h2&gt;&lt;p&gt;在这里，你将： &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有机会与视觉设计师一起，美化产品线Web功能的设计， &lt;/li&gt;
+&lt;li&gt;有机会与交互设计师一起，完成产品线Web功能的开发与实现；&lt;/li&gt;
+&lt;li&gt;有机会做全栈式开发,&lt;/li&gt;
+&lt;li&gt;有机会做移动端开发， &lt;/li&gt;
+&lt;li&gt;有机会做性能、架构等方面的改进与优化， &lt;/li&gt;
+&lt;li&gt;还有机会从一个产品的设计到发布由自己亲手打造； &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你还将加入到我们业内最前沿Web技术的研究与开发中。&lt;/p&gt;
+&lt;h2 id=&quot;岗位要求Qualifications&quot;&gt;&lt;a href=&quot;#岗位要求Qualifications&quot; class=&quot;headerlink&quot; title=&quot;岗位要求Qualifications&quot;&gt;&lt;/a&gt;岗位要求Qualifications&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;我们希望你，可以熟练使用各种 Web 前端技术，包括HTML(5)/CSS(3)/Javascript 等，并有相关的项目开发经验或成果； &lt;/li&gt;
+&lt;li&gt;我们希望你，用过git，grunt或gulp等工具，最好有自己的github仓库； &lt;/li&gt;
+&lt;li&gt;我们希望你，有基于Ajax 应用的开发经验，有NodeJS/Java开发经验，或者有移动端开发经验；深刻理解 Web 标准，对可用性、可访问性等相关知识有实际的了解； 对算法、数据结构、建模有一定了解； &lt;/li&gt;
+&lt;li&gt;我们希望你，关注新事物、新技术，有较强的学习能力，喜欢挑战；并且，个性乐观开朗，逻辑性强，善于和各种背景的人合作。 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;工作地点Location&quot;&gt;&lt;a href=&quot;#工作地点Location&quot; class=&quot;headerlink&quot; title=&quot;工作地点Location&quot;&gt;&lt;/a&gt;工作地点Location&lt;/h2&gt;&lt;p&gt;杭州市(Hangzhou),北京市(Beijing)&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      天猫2017届前端开发实习生内推开始啦，欢迎砸简历过来~
+    
+    </summary>
+    
+      <category term="招聘" scheme="http://cnt1992.xyz/categories/%E6%8B%9B%E8%81%98/"/>
+    
+    
+      <category term="天猫 前端开发" scheme="http://cnt1992.xyz/tags/%E5%A4%A9%E7%8C%AB-%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Sublime Text 注册码</title>
