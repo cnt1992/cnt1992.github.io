@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://cnt1992.xyz/"/>
-  <updated>2016-07-06T13:43:08.000Z</updated>
+  <updated>2016-07-06T14:36:40.000Z</updated>
   <id>http://cnt1992.xyz/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://cnt1992.xyz/2016/07/07/tmall-recruit/"/>
     <id>http://cnt1992.xyz/2016/07/07/tmall-recruit/</id>
     <published>2016-07-06T21:33:38.000Z</published>
-    <updated>2016-07-06T13:43:08.000Z</updated>
+    <updated>2016-07-06T14:36:40.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;关于天猫&quot;&gt;&lt;a href=&quot;#关于天猫&quot; class=&quot;headerlink&quot; title=&quot;关于天猫&quot;&gt;&lt;/a&gt;关于天猫&lt;/h2&gt;&lt;p&gt;关于天猫我就不多加以介绍，直接 &lt;a href=&quot;https://www.zhihu.com/question/33589154&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;搬砖&lt;/a&gt;，欢迎有兴趣的同学砸简历给我&lt;/p&gt;
 &lt;blockquote&gt;
@@ -43,6 +43,7 @@
 &lt;li&gt;我们希望你，关注新事物、新技术，有较强的学习能力，喜欢挑战；并且，个性乐观开朗，逻辑性强，善于和各种背景的人合作。 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;工作地点Location&quot;&gt;&lt;a href=&quot;#工作地点Location&quot; class=&quot;headerlink&quot; title=&quot;工作地点Location&quot;&gt;&lt;/a&gt;工作地点Location&lt;/h2&gt;&lt;p&gt;杭州市(Hangzhou),北京市(Beijing)&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 </content>
     
     <summary type="html">
@@ -63,7 +64,7 @@
     <link href="http://cnt1992.xyz/2016/04/28/sublime-license-code/"/>
     <id>http://cnt1992.xyz/2016/04/28/sublime-license-code/</id>
     <published>2016-04-28T10:22:38.000Z</published>
-    <updated>2016-04-28T03:03:55.000Z</updated>
+    <updated>2016-07-06T14:37:40.000Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;请不要举报我，用别人的注册码主要是因为&lt;strong&gt;Qiong&lt;/strong&gt;&lt;/p&gt;
@@ -72,6 +73,7 @@
 &lt;p&gt;截止当前时间最新版本的都适用&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;figure class=&quot;highlight dns&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;—– BEGIN LICENSE —–&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Michael Barnes&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Single User License&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;EA7E-&lt;span class=&quot;number&quot;&gt;821385&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;8A353C41&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;872&lt;/span&gt;A0D5C DF9B2950 AFF6F667&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;C458EA6D &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;EA3C286 &lt;span class=&quot;number&quot;&gt;98D1D650&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;131&lt;/span&gt;A97AB&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;AA919AEC EF20E143 B&lt;span class=&quot;number&quot;&gt;361B1E7&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4C8B7F04&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;B085E65E &lt;span class=&quot;number&quot;&gt;2F5F5360&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;8489D422&lt;/span&gt; FB8FC1AA&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;93&lt;/span&gt;F6323C FD7F7544 &lt;span class=&quot;number&quot;&gt;3F39C318&lt;/span&gt; D95E6480&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;FCCC7561 &lt;span class=&quot;number&quot;&gt;8A4A1741&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;68&lt;/span&gt;FA4223 ADCEDE07&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;200&lt;/span&gt;C25BE DBBC4855 C4CFB774 C5EC138C&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;FEC1CEF D9DCECEC D3A5DAD&lt;span class=&quot;number&quot;&gt;1 01316C36&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;—— END LICENSE ——&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;figure class=&quot;highlight dns&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;—– BEGIN LICENSE —–&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Free Communities Consultoria em Informática Ltda&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Single User License&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;EA7E-&lt;span class=&quot;number&quot;&gt;801302&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;C&lt;span class=&quot;number&quot;&gt;154C122&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;EFA4415 F1AAEBCC &lt;span class=&quot;number&quot;&gt;315&lt;/span&gt;F3A7D&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;2580735&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;7955&lt;/span&gt;AA57 &lt;span class=&quot;number&quot;&gt;850&lt;/span&gt;ABD88 &lt;span class=&quot;number&quot;&gt;72&lt;/span&gt;A1DDD8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;D2CE060 CF980C29 &lt;span class=&quot;number&quot;&gt;890D74F2&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;53131895&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;281&lt;/span&gt;E324E &lt;span class=&quot;number&quot;&gt;98&lt;/span&gt;EA1FEF &lt;span class=&quot;number&quot;&gt;7&lt;/span&gt;FF69A12 &lt;span class=&quot;number&quot;&gt;17&lt;/span&gt;CA7784&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;490862&lt;/span&gt;AF &lt;span class=&quot;number&quot;&gt;833&lt;/span&gt;E133D FD22141D D8C89B94&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;4C10A4D2&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;24693D70&lt;/span&gt; AE37C18F &lt;span class=&quot;number&quot;&gt;72&lt;/span&gt;EF0BE5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;ED60704 &lt;span class=&quot;number&quot;&gt;651&lt;/span&gt;BC71F &lt;span class=&quot;number&quot;&gt;16&lt;/span&gt;CA1B77 &lt;span class=&quot;number&quot;&gt;496A0B19&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;463&lt;/span&gt;EDFF9 &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;BEB1861 CA5BAD96 &lt;span class=&quot;number&quot;&gt;89&lt;/span&gt;D0118E&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;—— END LICENSE ——&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;figure class=&quot;highlight dns&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;—– BEGIN LICENSE —–&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Nicolas Hennion&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Single User License&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;EA7E-&lt;span class=&quot;number&quot;&gt;866075&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;A01AA83 &lt;span class=&quot;number&quot;&gt;1D668D24&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4484&lt;/span&gt;AEBC &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;B04512C&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;827&lt;/span&gt;B0DE5 &lt;span class=&quot;number&quot;&gt;69&lt;/span&gt;E9B07A A39ACCC0 F95F5410&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;729D5639&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;C37CECB B2522FB3 &lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;D37FDC1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;72899363&lt;/span&gt; BBA441AC A5F47F08 &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;CD3B3FE&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;CEFB3783 B2E1BA96 &lt;span class=&quot;number&quot;&gt;71&lt;/span&gt;AAF7B4 AFB61B1D&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;CC513E7 &lt;span class=&quot;number&quot;&gt;52&lt;/span&gt;FF2333 &lt;span class=&quot;number&quot;&gt;9&lt;/span&gt;F726D2C CDE53B4A&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;810&lt;/span&gt;C0D4F E&lt;span class=&quot;number&quot;&gt;1F419A3&lt;/span&gt; CDA0832B &lt;span class=&quot;number&quot;&gt;8440565&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;A&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;number&quot;&gt;35&lt;/span&gt;BF00F6 &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;CA9F869 ED10E245 &lt;span class=&quot;number&quot;&gt;469&lt;/span&gt;C233E&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;—— END LICENSE ——&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h2 id=&quot;Sublime-Text-3-x-Build-309x-之前版本适用&quot;&gt;&lt;a href=&quot;#Sublime-Text-3-x-Build-309x-之前版本适用&quot; class=&quot;headerlink&quot; title=&quot;Sublime Text 3.x(Build 309x 之前版本适用)&quot;&gt;&lt;/a&gt;Sublime Text 3.x(Build 309x 之前版本适用)&lt;/h2&gt;&lt;blockquote&gt;
@@ -98,12 +100,13 @@
     <link href="http://cnt1992.xyz/2016/04/15/a-note-about-postcss-author-share/"/>
     <id>http://cnt1992.xyz/2016/04/15/a-note-about-postcss-author-share/</id>
     <published>2016-04-14T16:27:38.000Z</published>
-    <updated>2016-04-14T09:14:19.000Z</updated>
+    <updated>2016-07-06T14:37:47.000Z</updated>
     
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/postcss/postcss&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PostCSS&lt;/a&gt; 的作者 &lt;code&gt;Andrey Sitnik&lt;/code&gt; 远从俄罗斯来到淘宝城做分享！&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;没听过 &lt;code&gt;PostCSS&lt;/code&gt; ？先简单看看我之前写的 &lt;a href=&quot;http://cnt1992.xyz/2015/12/17/CSS%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%B9%8BPostCss/&quot;&gt;CSS后置处理器之PostCss&lt;/a&gt; 做个入门。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;穿着拖鞋略有点腼腆的小伙子从下面几个方面介绍了&lt;code&gt;PostCSS&lt;/code&gt;：&lt;/p&gt;
 &lt;h2 id=&quot;Why&quot;&gt;&lt;a href=&quot;#Why&quot; class=&quot;headerlink&quot; title=&quot;Why ?&quot;&gt;&lt;/a&gt;Why ?&lt;/h2&gt;&lt;h2 id=&quot;提问环节的一些干货&quot;&gt;&lt;a href=&quot;#提问环节的一些干货&quot; class=&quot;headerlink&quot; title=&quot;提问环节的一些干货&quot;&gt;&lt;/a&gt;提问环节的一些干货&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;Q：请问如何提高个人开源作品的影响力？&lt;br&gt;A：第一点也是很重要的一点，放在 &lt;code&gt;GitHub&lt;/code&gt; 上的 &lt;code&gt;README.md&lt;/code&gt; 请尽量用英文写，其实那些优秀的开源作品的作者不一定都是用英语作为母语，而且别人不会去在意你英文写得好不好，而是在意你开源的作品牛不牛逼；其次，如果觉得自己的作品很不错，可以去 &lt;code&gt;twitter&lt;/code&gt; 上 &lt;strong&gt;[At]&lt;/strong&gt; 那些致力于开源作品的人，他们其实也特别希望有更多的优秀作品开源出来；&lt;/p&gt;
