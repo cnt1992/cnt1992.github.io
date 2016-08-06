@@ -1,6 +1,3 @@
-[submodule "themes/xitu"]
-	path = themes/xitu
-	url = git@github.com:cnt1992/hexo-theme-xitu.git
 [submodule "themes/apollo"]
 	path = themes/apollo
 	url = git@github.com:cnt1992/hexo-theme-apollo.git
