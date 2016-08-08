@@ -81,7 +81,7 @@ export default function safe (target) {
 var a = 666, 
     b = a;
 b = 555;
-console.log(a);  // 555
+console.log(a);  // 666
 
 // 而传址在Javascript中主要指针对引用类型(对象、数组、函数)的值的操作过程
 // 虽然也拷贝了一份存在另一个变量里面，但副本指针指向跟原本同一个位置
