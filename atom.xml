@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://cnt1992.github.io/"/>
-  <updated>2016-12-17T06:09:10.000Z</updated>
+  <updated>2016-12-25T13:31:15.000Z</updated>
   <id>https://cnt1992.github.io/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2016小结</title>
+    <link href="https://cnt1992.github.io/2016/12/25/summary-of-my-2016/"/>
+    <id>https://cnt1992.github.io/2016/12/25/summary-of-my-2016/</id>
+    <published>2016-12-25T15:21:00.000Z</published>
+    <updated>2016-12-25T13:31:15.000Z</updated>
+    
+    <content type="html">&lt;p&gt;12月25日，西方的&lt;strong&gt;过年&lt;/strong&gt;，对东方人们来说距离新的一年&lt;strong&gt;2017&lt;/strong&gt;只剩&lt;strong&gt;5&lt;/strong&gt;天。&lt;/p&gt;
+&lt;p&gt;来天猫已经快10个月，这10个月都在&lt;code&gt;忙 忙 忙&lt;/code&gt;中度过，忙着开各种需求评审会，忙着跟业务方各种&lt;del&gt;撕逼&lt;/del&gt;洽谈，忙着在半夜三更才能安安静静地写代码修bug。但老生常谈的是，这一年还是些许的小结值得写下来，算是给自己这一年的交代，以及给自己未来一年该怎么继续走一个思考。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;h2 id=&quot;技术成长&quot;&gt;&lt;a href=&quot;#技术成长&quot; class=&quot;headerlink&quot; title=&quot;技术成长&quot;&gt;&lt;/a&gt;技术成长&lt;/h2&gt;&lt;p&gt;年初选择从京东跳槽过来天猫，最看重的还是天猫前端的技术，从13年双十一天猫全面切换到&lt;code&gt;Node&lt;/code&gt;技术栈开始，到今年的&lt;code&gt;Weex&lt;/code&gt;在双十一展现出&lt;strong&gt;web与native融合&lt;/strong&gt;的不俗能力，不得不说天猫前端至少在业内还算是一个不错的团队存在。虽然外界看来，阿里系的开源框架都为了&lt;code&gt;KPI&lt;/code&gt;而出现，并且不久后便夭折（当然，我自己也觉得很多东西其实都是为了&lt;code&gt;KPI&lt;/code&gt;而出来的），但是对于&lt;code&gt;前端er&lt;/code&gt;来说，我开始慢慢觉得：与其拒绝，不如从中学到一些东西，然后提取出好的抛弃坏的，让自己得到成长，转化成自己的技能。&lt;/p&gt;
+&lt;p&gt;这一年的&lt;code&gt;React&lt;/code&gt;/&lt;code&gt;Vue&lt;/code&gt;/&lt;code&gt;Angular&lt;/code&gt;三足鼎立，似乎对于这边来说更青睐于&lt;code&gt;React&lt;/code&gt;。比如对于我在的小组负责天猫交易来说，业务情况是需要管理各种状态，而且相对来说比较复杂，这样能选择的当然是&lt;code&gt;React&lt;/code&gt;。经手的多个项目几乎都采用了&lt;code&gt;React&lt;/code&gt;技术栈，用上&lt;code&gt;Flux&lt;/code&gt;/&lt;code&gt;Redux&lt;/code&gt;框架。当然，并不重复性的从&lt;code&gt;搭建脚手架 -&amp;gt; 开发页面 -&amp;gt; 联调&lt;/code&gt;，而是在&lt;code&gt;Redux&lt;/code&gt;框架的基础上封装一套适用于这边的业务场景的SDK&lt;code&gt;Rschema&lt;/code&gt;，这个SDK解放了前端的重复性劳动：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;前端不再关注页面长什么样子（页面模块搭建依赖于JSON数据）&lt;/li&gt;
+&lt;li&gt;前端主要负责模块的研发（基于npm包的形式开发）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;不知道&lt;code&gt;Rschema&lt;/code&gt;哪天是不是也会开源，但我觉得对于我所接触的业务来说是一个非常不错的SDK。（适合各自团队的才是最好的）&lt;/p&gt;
+&lt;p&gt;关于单页面应用，虽然&lt;code&gt;react-router&lt;/code&gt;可以很好的解决浏览器后退的问题，但依然不够完美，一个路由一个&lt;code&gt;component&lt;/code&gt;在理想状态下是对的，但一个&lt;code&gt;component&lt;/code&gt;对应多个&lt;code&gt;status&lt;/code&gt;的时候，&lt;strong&gt;浏览器后退&lt;/strong&gt;似乎又成为了一个无法避免的问题所在，当你有多个&lt;code&gt;status&lt;/code&gt;还需要改成多个&lt;code&gt;component&lt;/code&gt;的时候真的会疯掉。发现&lt;code&gt;Swiper&lt;/code&gt;这货除了手势滑动之后，其实也可以做成&lt;strong&gt;伪单页面应用&lt;/strong&gt;，动态控制&lt;code&gt;Swiper&lt;/code&gt;的页面从而达到新的页面从右侧滑入，左划后退，体验上还不错。但总体而言，对于单页面应用还是保持意见，虽然达到了接近原生的体验，但是首次加载的时间耗费以及如果业务很复杂的时候似乎成本有点高。&lt;/p&gt;
+&lt;h2 id=&quot;为人处世&quot;&gt;&lt;a href=&quot;#为人处世&quot; class=&quot;headerlink&quot; title=&quot;为人处世&quot;&gt;&lt;/a&gt;为人处世&lt;/h2&gt;&lt;p&gt;出来工作两年，脾气似乎没有怎么改。自己坚信的一些东西，始终没能轻易动摇。在公司与人相处，&lt;strong&gt;和善&lt;/strong&gt;是第一。但是也不能一味的退让，毕竟大家都是平等的。在京东也是，在阿里也是，一旦触及自己底线的东西坚决不退让。很多时候为了赶上线，做出来的东西都大大折扣，需求方不满意，自己也没有成就感，这种情况在我看来依然是不允许发生的。所以，能忍让的东西忍让，忍让不了的时候就必须一步不让。&lt;/p&gt;
+&lt;p&gt;一开始的时候，觉得应该做一个&lt;strong&gt;老好人&lt;/strong&gt;，但是时间久了会发现这种对于别人来说成本很低的事情真的是很尴尬的存在。比如今天谁谁谁过来随便找你做个事情，你就满口答应下来做了，过一天谁谁谁又过来找你做东西，你又满口答应了，也是，无穷无尽的加班，只为了做这些事情（但这些事情真的是有意义的么，自己考量过么，更客观点，老大们知道么），这样子久了自己学不到什么不说，让这些找你做事的人觉得这个成本很低，所以我总觉得&lt;strong&gt;老好人&lt;/strong&gt;对于我来说是坚决不会做的。&lt;/p&gt;
+&lt;p&gt;新参与进来的业务，总是被当做一个&lt;code&gt;资源&lt;/code&gt;那样子用。下周要发布了，这周才告知到我这里。一开始毕竟新入这个业务不熟悉，所以就忍让。等到对业务稍微熟悉了，也就把这些问题抛出来要求解决。这对于我来说就是要告诉别人我不愿意被当做一个&lt;code&gt;资源&lt;/code&gt;来使用，也让别人知道也让我随随便便被使唤的成本很高，虽然短期看来是得罪了人，但长远来看，对自己必须是有利的。&lt;/p&gt;
+&lt;h2 id=&quot;未来计划&quot;&gt;&lt;a href=&quot;#未来计划&quot; class=&quot;headerlink&quot; title=&quot;未来计划&quot;&gt;&lt;/a&gt;未来计划&lt;/h2&gt;&lt;p&gt;从&lt;strong&gt;重构&lt;/strong&gt;转型到&lt;strong&gt;大前端&lt;/strong&gt;，虽然不再专注于&lt;code&gt;CSS&lt;/code&gt;，而偏向于&lt;code&gt;JavaScript&lt;/code&gt;，但是依然关注更优雅的写样式代码。未来，依然是倾向于功能实现，毕竟毕业前几年依旧是打怪升级的时间，不过想花更多时间关注所做的东西的性能。同时，也想多思考自己所做的东西，存在的价值及意义。不想只是一味的写代码，做一个码农，而应该花时间思考自己所做的事情的意义。&lt;/p&gt;
+&lt;p&gt;嗯，在接下来的&lt;strong&gt;2017&lt;/strong&gt;年，希望少加班（当然是不可能的了…）&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      恍恍惚惚混迹前端圈两年半，已然是年底尾声，写点东西回顾这一年自己都干了啥，顺便展望一下未来。
+    
+    </summary>
+    
+      <category term="心得体会" scheme="https://cnt1992.github.io/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/"/>
+    
+    
+      <category term="前端 总结" scheme="https://cnt1992.github.io/tags/%E5%89%8D%E7%AB%AF-%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
   
   <entry>
     <title>天猫前端团队招人贴</title>
@@ -358,7 +396,7 @@
     <content type="html">&lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/postcss/postcss&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;PostCSS&lt;/a&gt; 的作者 &lt;code&gt;Andrey Sitnik&lt;/code&gt; 远从俄罗斯来到淘宝城做分享！&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;没听过 &lt;code&gt;PostCSS&lt;/code&gt; ？先简单看看我之前写的 &lt;a href=&quot;http://cnt1992.xyz/2015/12/17/CSS%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%B9%8BPostCss/&quot;&gt;CSS后置处理器之PostCss&lt;/a&gt; 做个入门。&lt;/p&gt;
+&lt;p&gt;没听过 &lt;code&gt;PostCSS&lt;/code&gt; ？先简单看看我之前写的 &lt;a href=&quot;http://cnt1992.xyz/2015/12/17/CSS%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%B9%8BPostCss/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CSS后置处理器之PostCss&lt;/a&gt; 做个入门。&lt;/p&gt;
 &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;穿着拖鞋略有点腼腆的小伙子从下面几个方面介绍了&lt;code&gt;PostCSS&lt;/code&gt;：&lt;/p&gt;
 &lt;h2 id=&quot;Why&quot;&gt;&lt;a href=&quot;#Why&quot; class=&quot;headerlink&quot; title=&quot;Why ?&quot;&gt;&lt;/a&gt;Why ?&lt;/h2&gt;&lt;h2 id=&quot;提问环节的一些干货&quot;&gt;&lt;a href=&quot;#提问环节的一些干货&quot; class=&quot;headerlink&quot; title=&quot;提问环节的一些干货&quot;&gt;&lt;/a&gt;提问环节的一些干货&lt;/h2&gt;&lt;blockquote&gt;
@@ -390,7 +428,7 @@
     <published>2016-04-08T15:41:54.000Z</published>
     <updated>2016-04-11T09:26:55.000Z</updated>
     
-    <content type="html">&lt;h2 id=&quot;科普时间&quot;&gt;&lt;a href=&quot;#科普时间&quot; class=&quot;headerlink&quot; title=&quot;科普时间&quot;&gt;&lt;/a&gt;科普时间&lt;/h2&gt;&lt;p&gt;作为有 &lt;code&gt;全栈工程师&lt;/code&gt; 情节并且 &lt;strong&gt;乐于折腾&lt;/strong&gt; 的我在上一篇 &lt;a href=&quot;http://cnt1992.xyz/2016/03/18/simple-intro-to-nginx/&quot;&gt;前端工程师学习Nginx入门篇&lt;/a&gt; 之后继续捣鼓将 &lt;code&gt;Nginx&lt;/code&gt; 配置支持 &lt;code&gt;HTTP2.0&lt;/code&gt;，这是为了等以后有钱可以买个服务器的时候直接配置服务器体验一把网页&lt;code&gt;秒开&lt;/code&gt;的快感，为啥配置&lt;code&gt;HTTP2.0&lt;/code&gt;可以秒开网页？请静心往下看(图片摘自网络，如有侵略版权内容请联系我删除哈)：&lt;/p&gt;
+    <content type="html">&lt;h2 id=&quot;科普时间&quot;&gt;&lt;a href=&quot;#科普时间&quot; class=&quot;headerlink&quot; title=&quot;科普时间&quot;&gt;&lt;/a&gt;科普时间&lt;/h2&gt;&lt;p&gt;作为有 &lt;code&gt;全栈工程师&lt;/code&gt; 情节并且 &lt;strong&gt;乐于折腾&lt;/strong&gt; 的我在上一篇 &lt;a href=&quot;http://cnt1992.xyz/2016/03/18/simple-intro-to-nginx/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;前端工程师学习Nginx入门篇&lt;/a&gt; 之后继续捣鼓将 &lt;code&gt;Nginx&lt;/code&gt; 配置支持 &lt;code&gt;HTTP2.0&lt;/code&gt;，这是为了等以后有钱可以买个服务器的时候直接配置服务器体验一把网页&lt;code&gt;秒开&lt;/code&gt;的快感，为啥配置&lt;code&gt;HTTP2.0&lt;/code&gt;可以秒开网页？请静心往下看(图片摘自网络，如有侵略版权内容请联系我删除哈)：&lt;/p&gt;
 &lt;h3 id=&quot;HTTP-2-0-带来了哪些新特性-？&quot;&gt;&lt;a href=&quot;#HTTP-2-0-带来了哪些新特性-？&quot; class=&quot;headerlink&quot; title=&quot;HTTP 2.0 带来了哪些新特性 ？&quot;&gt;&lt;/a&gt;&lt;code&gt;HTTP 2.0&lt;/code&gt; 带来了哪些新特性 ？&lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;HTTP 2.0&lt;/code&gt; 带来了很多新的特性，这里不会一一详细介绍，只列举了几项，如有兴趣研究的童鞋请移步 &lt;a href=&quot;https://tools.ietf.org/html/rfc7540&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官方RFC文档&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
