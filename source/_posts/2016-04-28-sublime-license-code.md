@@ -1,4 +1,4 @@
-title: Sublime Text 注册码
+title: Sublime Text 注册码 / Axure rp 8注册码
 date: 2016-04-28 10:22:38
 categories: 备忘
 tags: sublime license
@@ -97,4 +97,14 @@ E1D0AE85 A0BBD039 0E9C8D55 E1B89D5D
 5CDB7036 E56DE1C0 EFCC0840 650CD3A6
 B98FC99C 8FAC73EE D2B95564 DF450523
 —— END LICENSE ——
+```
+
+## Axure rp 8
+
+```
+用户名：axureuser
+注册码：8wFfIX7a8hHq6yAy6T8zCz5R0NBKeVxo9IKu+kgKh79FL6IyPD6lK7G6+tqEV4LG
+
+用户名：aaa
+注册码：2GQrt5XHYY7SBK/4b22Gm4Dh8alaR0/0k3gEN5h7FkVPIn8oG3uphlOeytIajxGU
 ```
