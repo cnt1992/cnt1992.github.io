@@ -6,28 +6,28 @@
 <a id="more"></a>
 <ol>
 <li><p>利用命令行直接安装nvm</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">curl https:<span class="comment">//raw.githubusercontent.com/creationix/nvm/v0.18.0/install.sh | bash</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">curl https:<span class="comment">//raw.githubusercontent.com/creationix/nvm/v0.18.0/install.sh | bash</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>利用nvm安装指定版本（必须是0.11.*以上版本）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">nvm install <span class="number">0.11</span><span class="number">.12</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">nvm install <span class="number">0.11</span><span class="number">.12</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>或者安装node最新版本<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">nvm install latest</span><br></pre></td></tr></table></figure></p>
+<p>或者安装node最新版本<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">nvm install latest</div></pre></td></tr></table></figure></p>
 <ol>
 <li><p>指定使用安装的node 版本</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">nvm use <span class="number">0.11</span><span class="number">.12</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">nvm use <span class="number">0.11</span><span class="number">.12</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>新建app.js文件，录入下面经典的hello world代码</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">var</span> app = koa();</span><br><span class="line"></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span> *(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.body = <span class="string">'Hello World'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</div><div class="line"><span class="keyword">var</span> app = koa();</div><div class="line"></div><div class="line">app.use(<span class="function"><span class="keyword">function</span> *(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.body = <span class="string">'Hello World'</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">app.listen(<span class="number">3000</span>);</div></pre></td></tr></table></figure>
 </li>
 <li><p>进入应用根目录，下载依赖module</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install koa</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">npm install koa</div></pre></td></tr></table></figure>
 </li>
 <li><p>用node的harmony模式启动服务器</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">node --harmony koa</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">node --harmony koa</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>为了以后方便使用，可以将node设置为默认启动harmony模式的别名：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">alias node=<span class="string">'node --harmony'</span></span><br></pre></td></tr></table></figure></p>
+<p>为了以后方便使用，可以将node设置为默认启动harmony模式的别名：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">alias node=<span class="string">'node --harmony'</span></div></pre></td></tr></table></figure></p>
 </div></article></div></section><footer><div class="paginator"><a href="/2014/12/01/gulp自动化脚本/" class="prev">PREV</a><a href="/2014/11/05/grunt自动化脚本/" class="next">NEXT</a></div><div data-thread-key="2014/11/10/koa下一代nodejs框架/" data-title="koa下一代nodejs框架" data-url="https://cnt1992.github.io/2014/11/10/koa下一代nodejs框架/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"cnt1992"};
 (function() {
     var ds = document.createElement('script');
@@ -38,4 +38,4 @@
      || document.getElementsByTagName('body')[0]).appendChild(ds);
 })();
 
-</script><div class="copyright"><p>© 2015 - 2016 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
+</script><div class="copyright"><p>© 2015 - 2017 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

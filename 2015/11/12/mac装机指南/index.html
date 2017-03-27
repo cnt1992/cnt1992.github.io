@@ -8,25 +8,25 @@
 <h3 id="HomeBrew"><a href="#HomeBrew" class="headerlink" title="HomeBrew"></a>HomeBrew</h3><p>HomeBrew是Mac下面的一个包管理器，方便我们安装一些Mac OS没有的UNIX工具。</p>
 <ul>
 <li><p>安装HomeBrew</p>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>确保HomeBrew是否正常安装</p>
 <p>安装好HomeBrew之后，在<code>Terminal</code>执行下面命令确保正常安装：</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>doctor</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>doctor</div></pre></td></tr></table></figure>
 <p>若上面命令执行过程出现 <em>hombrew libevent not link</em> 的错误，执行下面命令即可：</p>
-<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line">sudo chown -R $USER $(brew --prefix)</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><div class="line">sudo chown -R $<span class="keyword">USER</span> <span class="title">$</span>(brew --prefix)</div></pre></td></tr></table></figure>
 <p>确保正常安装之后，可以输入<code>brew -h</code>查看帮助：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"> Example usage:</span><br><span class="line"> brew [info | home | options ] [FORMULA...]</span><br><span class="line"> brew <span class="keyword">install</span> FORMULA...</span><br><span class="line"> brew <span class="keyword">uninstall</span> FORMULA...</span><br><span class="line"> brew <span class="keyword">search</span> [foo]</span><br><span class="line"> brew <span class="keyword">list</span> [FORMULA...]</span><br><span class="line"> brew <span class="keyword">update</span></span><br><span class="line"> brew <span class="keyword">upgrade</span> [FORMULA...]</span><br><span class="line"> brew pin/unpin [FORMULA...]</span><br><span class="line"></span><br><span class="line">Troubleshooting:</span><br><span class="line">  brew doctor</span><br><span class="line">  brew <span class="keyword">install</span> -vd FORMULA</span><br><span class="line">  brew [<span class="comment">--env | config]</span></span><br><span class="line"></span><br><span class="line">Brewing:</span><br><span class="line">  brew <span class="keyword">create</span> [<span class="keyword">URL</span> [<span class="comment">--no-fetch]]</span></span><br><span class="line">  brew edit [FORMULA...]</span><br><span class="line">  https://github.com/Homebrew/homebrew/<span class="built_in">blob</span>/<span class="keyword">master</span>/<span class="keyword">share</span>/doc/homebrew/Formula-Cookbook.md</span><br><span class="line"></span><br><span class="line">Further <span class="keyword">help</span>:</span><br><span class="line">  man brew</span><br><span class="line">  brew home</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><div class="line"> Example usage:</div><div class="line"> brew [info | home | options ] [FORMULA...]</div><div class="line"> brew <span class="keyword">install</span> FORMULA...</div><div class="line"> brew <span class="keyword">uninstall</span> FORMULA...</div><div class="line"> brew <span class="keyword">search</span> [foo]</div><div class="line"> brew <span class="keyword">list</span> [FORMULA...]</div><div class="line"> brew <span class="keyword">update</span></div><div class="line"> brew <span class="keyword">upgrade</span> [FORMULA...]</div><div class="line"> brew pin/unpin [FORMULA...]</div><div class="line"></div><div class="line">Troubleshooting:</div><div class="line">  brew doctor</div><div class="line">  brew <span class="keyword">install</span> -vd FORMULA</div><div class="line">  brew [<span class="comment">--env | config]</span></div><div class="line"></div><div class="line">Brewing:</div><div class="line">  brew <span class="keyword">create</span> [<span class="keyword">URL</span> [<span class="comment">--no-fetch]]</span></div><div class="line">  brew edit [FORMULA...]</div><div class="line">  https://github.com/Homebrew/homebrew/<span class="built_in">blob</span>/<span class="keyword">master</span>/<span class="keyword">share</span>/doc/homebrew/Formula-Cookbook.md</div><div class="line"></div><div class="line">Further <span class="keyword">help</span>:</div><div class="line">  man brew</div><div class="line">  brew home</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用HomeBrew</p>
 <p>搜索一个包，在不确定想要安装的包是否有之前，建议先搜索一下，执行下面命令：</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>search mongod</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>search mongod</div></pre></td></tr></table></figure>
 <p>安装包，在搜索到想要安装的包之后，执行下面命令即可安装：</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>mongod</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>mongod</div></pre></td></tr></table></figure>
 <p>更新HomeBrew在服务端的包结构：</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>update</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>update</div></pre></td></tr></table></figure>
 <p>查看安装过的包列表：</p>
-<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">brew <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><div class="line">brew <span class="built_in">list</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="HomeBrew-Cask"><a href="#HomeBrew-Cask" class="headerlink" title="HomeBrew Cask"></a>HomeBrew Cask</h3><p>由于国内墙的问题，AppStore下载应用速度总是比较慢，而且应用更新速度也是比较慢，而HomeBrew Cask可以第一时间获取到官方最新的应用，并且下载速度杠杠的。</p>
@@ -34,25 +34,25 @@
 <ul>
 <li><p>安装HomeBrew Cask</p>
 <p>HomeBrew Cask依赖于Xcode以及HomeBrew，建议在装这个之前装好前面两个软件，在<code>Terminal</code>执行下面命令进行安装：</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>tap caskroom/cask &amp;&amp; <span class="keyword">brew </span>install <span class="keyword">brew-cask</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>tap caskroom/cask &amp;&amp; <span class="keyword">brew </span>install <span class="keyword">brew-cask</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>使用HomeBrew Cask</p>
 <p>搜索想要安装的软件，在<code>Terminal</code>输入下面命令即可：</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask search qq</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>cask search qq</div></pre></td></tr></table></figure>
 <p>一些推荐安装的程序，一键搞定：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">rew cask <span class="keyword">install</span> alfred cleanmymac cheatsheet dropbox google-chrome sublime-<span class="built_in">text</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">rew cask <span class="keyword">install</span> alfred cleanmymac cheatsheet dropbox google-chrome sublime-<span class="built_in">text</span></div></pre></td></tr></table></figure>
 <p>如果你是一个热衷于<code>Alfred</code>的爱好者（不熟悉这个软件的下面会讲到），默认情况下<code>Alfred</code>是不会搜索到<code>HomeBrew Cask</code>安装的软件的，你需要额外执行下面命令关联起来才行：</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask alfred link</span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>cask alfred link</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac 自带的 Git 版本相对比较旧，执行下面命令安装最新版本的 Git：</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>git</div></pre></td></tr></table></figure>
 <p>由于<code>brew</code>安装的软件软路径在<code>/usr/local/bin</code>下面，而系统自带的软件在<code>/usr/bin</code>下面，为了让<code>brew</code>安装的软件覆盖系统自带的软件，需要在<code>.bashrc/.zshrc</code>的<code>PATH</code>添加下面变量：</p>
-<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">/usr/<span class="keyword">local</span>/bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><div class="line">/usr/<span class="keyword">local</span>/bin</div></pre></td></tr></table></figure>
 <p>改完之后执行下面命令让配置文件生效：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># bash shell</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># zsh shell</span></span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line"><span class="comment"># bash shell</span></div><div class="line"><span class="built_in">source</span> ~/.bashrc</div><div class="line"></div><div class="line"><span class="comment"># zsh shell</span></div><div class="line"><span class="built_in">source</span> ~/.zshrc</div></pre></td></tr></table></figure>
 <h3 id="SVN"><a href="#SVN" class="headerlink" title="SVN"></a>SVN</h3><p>Mac 自带的 SVN 版本也是相对较旧，执行下面命令安装最新版本的 SVN：</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>svn</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>svn</div></pre></td></tr></table></figure>
 <h3 id="iTerm2-zsh-tmux"><a href="#iTerm2-zsh-tmux" class="headerlink" title="iTerm2 + zsh + tmux"></a>iTerm2 + zsh + tmux</h3><p>Mac下面我们大概花费70%的时间在于终端打交道，在<code>OS X El Capitan‎</code>之前，恐怕系统默认的<code>Terminal+bash+screen</code>是无法跟<code>iTerms+zsh+tmux</code>进行匹敌的，当然热爱苹果原生App的童鞋大可不必安装这三个软件，但是作为一名<code>前端爱好者</code>，装上这三个软件会让你爱不释手的。</p>
 <h4 id="iTerm2-替代terminal"><a href="#iTerm2-替代terminal" class="headerlink" title="iTerm2 - 替代terminal"></a>iTerm2 - 替代terminal</h4><ul>
 <li><p>快捷键非常丰富（不一一详细列举，只列了几个目前常用的）</p>
@@ -70,16 +70,16 @@
 </ul>
 <ul>
 <li><p>安装iTerm2</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span>iTerm2</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span>iTerm2</div></pre></td></tr></table></figure>
 </li>
 <li><p>颜色和字体设置</p>
 <p>下载<a href="https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized" target="_blank" rel="external">Solarized dark iterm colors</a>，在Preferences -&gt; Profiles -&gt; Default -&gt; Colors -&gt; Load Presets 将其导入，作为默认颜色。</p>
 </li>
 </ul>
 <h4 id="zsh-号称终极终端神器"><a href="#zsh-号称终极终端神器" class="headerlink" title="zsh - 号称终极终端神器"></a>zsh - 号称终极终端神器</h4><p><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">zsh</a>，也叫oh-my-zsh，Mac是基于UNIX的一套系统，而Shell可以说是UNIX的一个外壳，在Mac里面我们可以在<code>Terminal</code>执行下面命令看看系统有几种shell：</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line">cat <span class="meta-keyword">/etc/</span>shells</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><div class="line">cat <span class="regexp">/etc/</span>shells</div></pre></td></tr></table></figure>
 <p>不出意外的话显示如下：</p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="meta-keyword">/bin/</span>bash</span><br><span class="line"><span class="meta-keyword">/bin/</span>csh</span><br><span class="line"><span class="meta-keyword">/bin/</span>ksh</span><br><span class="line"><span class="meta-keyword">/bin/</span>sh</span><br><span class="line"><span class="meta-keyword">/bin/</span>tcsh</span><br><span class="line"><span class="meta-keyword">/bin/</span>zsh</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><div class="line"><span class="regexp">/bin/</span>bash</div><div class="line"><span class="regexp">/bin/</span>csh</div><div class="line"><span class="regexp">/bin/</span>ksh</div><div class="line"><span class="regexp">/bin/</span>sh</div><div class="line"><span class="regexp">/bin/</span>tcsh</div><div class="line"><span class="regexp">/bin/</span>zsh</div></pre></td></tr></table></figure>
 <p>Mac默认使用的是<code>bash</code>这个shell，英文26个字母当中<code>z</code>排在最后，这足以说明<code>zsh</code>是有多强大的（当然了这是我瞎掰的），不过<code>zsh</code>说是<code>终极Shell</code>应该是一点都不过分的，列举几个优势让你看看有多强大 <strong>下面优势摘自MacTalk</strong>：</p>
 <ul>
 <li>强大的历史纪录功能，输入 grep 然后用上下箭头可以翻阅你执行的所有 grep 命令</li>
@@ -91,10 +91,10 @@
 <p>下面介绍<code>zsh</code>的安装跟使用：</p>
 <ul>
 <li><p>安装</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>设置zsh为你的默认shell</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">chsh <span class="_">-s</span> /bin/zsh</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><div class="line">chsh -s <span class="regexp">/bin/</span>zsh</div></pre></td></tr></table></figure>
 </li>
 <li><p>更多关于<code>zsh</code>的使用请移步<a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">这里</a></p>
 </li>
@@ -114,7 +114,7 @@
 <p>下面介绍<code>tmux</code>的安装跟简单使用：</p>
 <ul>
 <li><p>安装</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>tmux</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span><span class="keyword">install </span>tmux</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用</p>
 <p>Prefix-Command前置操作：所有下面介绍的快捷键，都必须以前置操作开始。tmux默认的前置操作是CTRL+b。例如，我们想要新建一个窗体，就需要先在键盘上摁下CTRL+b，松开后再摁下n键。</p>
@@ -211,17 +211,17 @@
 <li>和vim更相近的快捷键</li>
 </ul>
 <p>安装方式如下：</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">cd</span><br><span class="line">rm -rf <span class="selector-class">.tmux</span></span><br><span class="line">git clone https:<span class="comment">//github.com/gpakosz/.tmux.git</span></span><br><span class="line">ln -s .tmux/<span class="selector-class">.tmux</span><span class="selector-class">.conf</span></span><br><span class="line">cp .tmux/<span class="selector-class">.tmux</span><span class="selector-class">.conf</span><span class="selector-class">.local</span> .</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">cd</div><div class="line">rm -rf <span class="selector-class">.tmux</span></div><div class="line">git clone https:<span class="comment">//github.com/gpakosz/.tmux.git</span></div><div class="line">ln -s .tmux/<span class="selector-class">.tmux</span><span class="selector-class">.conf</span></div><div class="line">cp .tmux/<span class="selector-class">.tmux</span><span class="selector-class">.conf</span><span class="selector-class">.local</span> .</div></pre></td></tr></table></figure>
 </li>
 <li><p>了解更多<code>tmux</code>可以点击<a href="http://foocoder.com/blog/zhong-duan-huan-jing-zhi-tmux.html/" target="_blank" rel="external">这里</a></p>
 </li>
 </ul>
 <h3 id="终端里临时设置代理"><a href="#终端里临时设置代理" class="headerlink" title="终端里临时设置代理"></a>终端里临时设置代理</h3><p>有时候使用终端命令例如 brew 需要设置代理以便FQ。</p>
 <p>举个例子，利用brew-cask安装macdown:</p>
-<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span>macdown</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><div class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span>macdown</div></pre></td></tr></table></figure>
 <p>因为macdown的安装源托管在amazonaws，不幸的是aws被Q，</p>
 <p>这时候我们可以设置终端代理为蓝灯代理，让brew-cask的相关命令顺利FQ:</p>
-<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">ALL_PROXY=<span class="string">http:</span><span class="comment">//127.0.0.1:8787 brew cask install macdown</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><div class="line"></div><div class="line">ALL_PROXY=<span class="string">http:</span><span class="comment">//127.0.0.1:8787 brew cask install macdown</span></div></pre></td></tr></table></figure>
 </div></article></div></section><footer><div class="paginator"><a href="/2015/12/09/an-introduction-to-sass-maps/" class="prev">PREV</a><a href="/2015/09/04/微信公众号开发记录/" class="next">NEXT</a></div><div data-thread-key="2015/11/12/mac装机指南/" data-title="mac装机指南" data-url="https://cnt1992.github.io/2015/11/12/mac装机指南/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"cnt1992"};
 (function() {
     var ds = document.createElement('script');
@@ -232,4 +232,4 @@
      || document.getElementsByTagName('body')[0]).appendChild(ds);
 })();
 
-</script><div class="copyright"><p>© 2015 - 2016 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
+</script><div class="copyright"><p>© 2015 - 2017 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
