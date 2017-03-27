@@ -1,19 +1,19 @@
-title: ¡¾Òë¡¿ES½¨Òé£ºasyncº¯Êı
+title: ã€è¯‘ã€‘ESå»ºè®®ï¼šasyncå‡½æ•°
 date: 2017-03-27 17:16:56
-categories: ·­Òë
+categories: ç¿»è¯‘
 tags: ES7 async await
-description: ¼òÒª½éÉÜÁËÒì²½º¯Êı½ø»¯Ê·£¬Í¬Ê±ÍÆ¼öES7µÄasyncº¯Êı£¬±Ï¾¹ES6µÄgenerator¸úyieldÖ»ÊÇÒ»¸ö¹ı¶É
+description: ç®€è¦ä»‹ç»äº†å¼‚æ­¥å‡½æ•°è¿›åŒ–å²ï¼ŒåŒæ—¶æ¨èES7çš„asyncå‡½æ•°ï¼Œæ¯•ç«ŸES6çš„generatorè·Ÿyieldåªæ˜¯ä¸€ä¸ªè¿‡æ¸¡
 ---
 
-`Async`º¯ÊıÊÇ`Brian Terlson`Ìá³öµÄ`ECMAScriptÌá°¸`£¬Ä¿Ç°´¦ÓÚ`stage 3(candidate ºòÑ¡)`½×¶Î¡£
+`Async`å‡½æ•°æ˜¯`Brian Terlson`æå‡ºçš„`ECMAScriptææ¡ˆ`ï¼Œç›®å‰å¤„äº`stage 3(candidate å€™é€‰)`é˜¶æ®µã€‚
 
-| ÒëÕß×¢£ºECMAScriptÌá°¸·ÖÈı¸ö½×¶Î£º²İÍ¼(Sketch) -> Ìá°¸(Proposal) -> ¹æ·¶(Standard)£¬ËùÒÔ`Async`ºÜ´óµÄÏ£ÍûÄÜ³ÉÎª¹æ·¶.
+| è¯‘è€…æ³¨ï¼šECMAScriptææ¡ˆåˆ†ä¸‰ä¸ªé˜¶æ®µï¼šè‰å›¾(Sketch) -> ææ¡ˆ(Proposal) -> è§„èŒƒ(Standard)ï¼Œæ‰€ä»¥`Async`å¾ˆå¤§çš„å¸Œæœ›èƒ½æˆä¸ºè§„èŒƒ.
 
-ÔÚ¿ªÊ¼½âÊÍ`async`º¯ÊıÖ®Ç°£¬ÎÒÏëÏÈ½²Ò»ÏÂÈçºÎÍ¨¹ı×éºÏ`Promises`ºÍ`generators`ÓÃ**¿´ÆğÀ´Í¬²½µÄ´úÂë**À´¿ØÖÆÒì²½²Ù×÷¡£
+åœ¨å¼€å§‹è§£é‡Š`async`å‡½æ•°ä¹‹å‰ï¼Œæˆ‘æƒ³å…ˆè®²ä¸€ä¸‹å¦‚ä½•é€šè¿‡ç»„åˆ`Promises`å’Œ`generators`ç”¨**çœ‹èµ·æ¥åŒæ­¥çš„ä»£ç **æ¥æ§åˆ¶å¼‚æ­¥æ“ä½œã€‚
 
-## Í¨¹ı Promises ºÍ generators Ğ´Òì²½´úÂë
+## é€šè¿‡ Promises å’Œ generators å†™å¼‚æ­¥ä»£ç 
 
-ÔÚÖÚ¶àµÄÄÜÓÃÓÚÒì²½µÄº¯ÊıÖĞ£¬`Promises`£¬×÷Îª`ES6`µÄÒ»²¿·Ö£¬±äµÃÔ½À´Ô½ÊÜ»¶Ó­¡£Ò»¸öÀı×Ó¾ÍÊÇ¿Í»§¶ËµÄ`fetch API`£¬ÓÃÀ´·¢ËÍÇëÇó»ñÈ¡Êı¾İ´Ó¶øÌæ´ú`XMLHttpRequest`¡£Ê¹ÓÃ`fetch`¿´ÆğÀ´ÏñÏÂÃæÕâÑù£º
+åœ¨ä¼—å¤šçš„èƒ½ç”¨äºå¼‚æ­¥çš„å‡½æ•°ä¸­ï¼Œ`Promises`ï¼Œä½œä¸º`ES6`çš„ä¸€éƒ¨åˆ†ï¼Œå˜å¾—è¶Šæ¥è¶Šå—æ¬¢è¿ã€‚ä¸€ä¸ªä¾‹å­å°±æ˜¯å®¢æˆ·ç«¯çš„`fetch API`ï¼Œç”¨æ¥å‘é€è¯·æ±‚è·å–æ•°æ®ä»è€Œæ›¿ä»£`XMLHttpRequest`ã€‚ä½¿ç”¨`fetch`çœ‹èµ·æ¥åƒä¸‹é¢è¿™æ ·ï¼š
 
 ```javascript
 function fetchJson(url) {
@@ -29,7 +29,7 @@ function fetchJson(url) {
 fetchJson('http://example.com/some_file.json').then(obj => console.log(obj));
 ```
 
-[co](https://github.com/tj/co)¿âÍ¨¹ıÊ¹ÓÃ`Promises`ºÍ`generators`ÄÜÈÃ´úÂë¿´ÆğÀ´¸üÍ¬²½£¬ÉÏÃæµÄÀı×ÓÓÃ`co`À´Ğ´¾ÍÊÇÏÂÃæÕâÑù×Ó£º
+[co](https://github.com/tj/co)åº“é€šè¿‡ä½¿ç”¨`Promises`å’Œ`generators`èƒ½è®©ä»£ç çœ‹èµ·æ¥æ›´åŒæ­¥ï¼Œä¸Šé¢çš„ä¾‹å­ç”¨`co`æ¥å†™å°±æ˜¯ä¸‹é¢è¿™æ ·å­ï¼š
 
 ```javascript
 const fetchJson = co.wrap(function* (url) {
@@ -45,11 +45,11 @@ const fetchJson = co.wrap(function* (url) {
 fetchJson('http://example.com/some_file.json').then(obj => console.log(obj));
 ```
 
-Ã¿Ò»´Î»Øµ÷(Ò»¸ö`generator`º¯Êı)¶¼»á´«µİÒ»¸ö`Promises`¸øµ½`co`£¬È»ºó»Øµ÷½øÈëÔİÍ£×´Ì¬¡£Ò»µ©`Promise`Ö´ĞĞÍê±Ï£¬`co`¾Í»á´¥·¢»Øµ÷£ºÈç¹û`Promise`·µ»Ø`fulfilled(³É¹¦)`£¬`yield`·µ»Ø³É¹¦×´Ì¬µÄÖµ£¬Èç¹û·µ»Ø`rejected(Ê§°Ü)`£¬`yield`¾Í»áÅ×³öÊ§°ÜµÄ´íÎó¡£ÁíÍâ£¬`co`»á½«·µ»ØµÄ»Øµ÷°ü×°³ÉÒ»¸ö`Promise`(¸ú`then()`µÄÓÃÍ¾Ò»Ñù)¡£
+æ¯ä¸€æ¬¡å›è°ƒ(ä¸€ä¸ª`generator`å‡½æ•°)éƒ½ä¼šä¼ é€’ä¸€ä¸ª`Promises`ç»™åˆ°`co`ï¼Œç„¶åå›è°ƒè¿›å…¥æš‚åœçŠ¶æ€ã€‚ä¸€æ—¦`Promise`æ‰§è¡Œå®Œæ¯•ï¼Œ`co`å°±ä¼šè§¦å‘å›è°ƒï¼šå¦‚æœ`Promise`è¿”å›`fulfilled(æˆåŠŸ)`ï¼Œ`yield`è¿”å›æˆåŠŸçŠ¶æ€çš„å€¼ï¼Œå¦‚æœè¿”å›`rejected(å¤±è´¥)`ï¼Œ`yield`å°±ä¼šæŠ›å‡ºå¤±è´¥çš„é”™è¯¯ã€‚å¦å¤–ï¼Œ`co`ä¼šå°†è¿”å›çš„å›è°ƒåŒ…è£…æˆä¸€ä¸ª`Promise`(è·Ÿ`then()`çš„ç”¨é€”ä¸€æ ·)ã€‚
 
-## Async º¯Êı
+## Async å‡½æ•°
 
-ÉÏÃæµÄÀı×ÓÓÃ`Async`º¯ÊıµÄ»ù±¾ÓÃ·¨ÊµÏÖÈçÏÂ£º
+ä¸Šé¢çš„ä¾‹å­ç”¨`Async`å‡½æ•°çš„åŸºæœ¬ç”¨æ³•å®ç°å¦‚ä¸‹ï¼š
 
 ```javascript
 async function fetchJson(url) {
@@ -65,20 +65,20 @@ async function fetchJson(url) {
 fetchJson('http://example.com/some_file.json').then(obj => console.log(obj));
 ```
 
-ÔÚÊµÏÖÉÏ£¬`async`º¯Êı¸üÏñ`generators`£¬µ«ÊÇ²»»á×ª»»³É`generatos`º¯Êı.
+åœ¨å®ç°ä¸Šï¼Œ`async`å‡½æ•°æ›´åƒ`generators`ï¼Œä½†æ˜¯ä¸ä¼šè½¬æ¢æˆ`generatos`å‡½æ•°.
 
 Internally, async functions work much like generators, but they are not translated to generator functions.
 
-### Async º¯ÊıÆäËûµÄÒ»Ğ©ÓÃ·¨
+### Async å‡½æ•°å…¶ä»–çš„ä¸€äº›ç”¨æ³•
 
-ÏÖÔÚ´æÔÚÈçÏÂµÄ`async`º¯ÊıµÄ±äÌå£º
+ç°åœ¨å­˜åœ¨å¦‚ä¸‹çš„`async`å‡½æ•°çš„å˜ä½“ï¼š
 
-- Async º¯ÊıÉùÃ÷£º `async function foo() {}`
-- Async º¯Êı±í´ïÊ½£º `const foo = async function() {}`
-- Async ·½·¨¶¨Òå£º `let obj = { async foo() {} }`
-- Async ¼ıÍ·º¯Êı£º`const foo = async () => {};`
+- Async å‡½æ•°å£°æ˜ï¼š `async function foo() {}`
+- Async å‡½æ•°è¡¨è¾¾å¼ï¼š `const foo = async function() {}`
+- Async æ–¹æ³•å®šä¹‰ï¼š `let obj = { async foo() {} }`
+- Async ç®­å¤´å‡½æ•°ï¼š`const foo = async () => {};`
 
-## ÉîÈëÔÄ¶Á
+## æ·±å…¥é˜…è¯»
 
 [Async Functions](https://github.com/tc39/ecmascript-asyncawait)(Brian Terlson)
-[Simplifying asynchronous computations via generators](http://exploringjs.com/es6/ch_generators.html#sec_co-library)(¡°Exploring ES6¡±µÄÕÂ½Ú)
+[Simplifying asynchronous computations via generators](http://exploringjs.com/es6/ch_generators.html#sec_co-library)(â€œExploring ES6â€çš„ç« èŠ‚)
