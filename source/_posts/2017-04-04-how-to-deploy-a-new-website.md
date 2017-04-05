@@ -34,6 +34,8 @@ $ ssh 账号@服务器IP
 
 一切准备就绪，<del>撸</del>搞起来。
 
+> 我们所有操作的基础路径在`/usr/local/src`，也就是下载的二进制包都会放在这里统一管理，请先进入该目录，若不想用这个目录下面有些路径需要对应调整
+
 ## 安装Nginx
 
 其实我们完全可以不用**Nginx**，无非就是**Node**应用起来之后在访问的时候需要多一个端口号而已。但为了不暴露我们实际应用的端口号，用**Nginx**来做反向代理是非常有必要的，**Nginx**的介绍可以翻看我一年前写的文章：[传送门1](http://cnt1992.xyz/2016/03/18/simple-intro-to-nginx/)/[传送门2](http://cnt1992.xyz/2016/04/08/upgrade-nginx-to-http2/)。在安装**Nginx**之前得先安装一些必要的编译工具及库文件：
@@ -152,7 +154,7 @@ mv  mongodb-linux-x86_64-3.0.6/ /usr/local/mongodb
 **Mongodb**可执行的命令放在`/usr/local/mongodb/bin/`下面，为了方便不带这么长的前缀，可以将路径添加到**PATH**里面：
 
 ```shell
-export PATH=/usr/local/mongodb/bin:$PATH
+echo "export PATH=/usr/local/mongodb/bin:$PATH" >> ~/.bashrc && source ~/.bashrc
 ```
 
 紧接着创建数据库目录，执行下面命令：
