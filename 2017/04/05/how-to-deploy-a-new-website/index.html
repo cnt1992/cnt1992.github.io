@@ -14,6 +14,9 @@
 </ul>
 <p>值得一提的一点是，我们不可能记住所有命令提供的参数，这时候要么网上搜索，要么直接就用Linux自带的<code>man</code>命令（当然全英的，英文也是程序员必备技能）。</p>
 <p>一切准备就绪，<del>撸</del>搞起来。</p>
+<blockquote>
+<p>我们所有操作的基础路径在<code>/usr/local/src</code>，也就是下载的二进制包都会放在这里统一管理，请先进入该目录，若不想用这个目录下面有些路径需要对应调整</p>
+</blockquote>
 <h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><p>其实我们完全可以不用<strong>Nginx</strong>，无非就是<strong>Node</strong>应用起来之后在访问的时候需要多一个端口号而已。但为了不暴露我们实际应用的端口号，用<strong>Nginx</strong>来做反向代理是非常有必要的，<strong>Nginx</strong>的介绍可以翻看我一年前写的文章：<a href="http://cnt1992.xyz/2016/03/18/simple-intro-to-nginx/" target="_blank" rel="external">传送门1</a>/<a href="http://cnt1992.xyz/2016/04/08/upgrade-nginx-to-http2/" target="_blank" rel="external">传送门2</a>。在安装<strong>Nginx</strong>之前得先安装一些必要的编译工具及库文件：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel</div></pre></td></tr></table></figure>
 <blockquote>
