@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://cnt1992.github.io/"/>
-  <updated>2017-04-05T01:41:37.000Z</updated>
+  <updated>2017-04-05T03:43:45.000Z</updated>
   <id>https://cnt1992.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://cnt1992.github.io/2017/04/05/how-to-deploy-a-new-website/"/>
     <id>https://cnt1992.github.io/2017/04/05/how-to-deploy-a-new-website/</id>
     <published>2017-04-04T16:00:07.000Z</published>
-    <updated>2017-04-05T01:41:37.000Z</updated>
+    <updated>2017-04-05T03:43:45.000Z</updated>
     
     <content type="html"><![CDATA[<p>又是一年清明雨上，去年写<a href="http://cnt1992.xyz/2016/04/08/upgrade-nginx-to-http2/" target="_blank" rel="external">前端工程师学习Nginx实践配置HTTP2.0篇</a>的时候心想着有钱能买个服务器，一年过去了，我终于有了一个腾讯云的服务器！！！（虽然只有一个月免费试用期… ）。</p>
 <p>这篇文章想要偏向实践兼顾理论地系统性介绍如何在一个全新的Linux服务器上部署一个Node应用，我们知道Node依然很火，同时也越来越多全栈情怀的工程师诞生，这篇文章以<code>Nginx + Node + Mongodb</code>的技术架构来介绍如何从0开始一步步部署一个应用。</p>
@@ -67,7 +67,7 @@
 <h2 id="安装Mongodb"><a href="#安装Mongodb" class="headerlink" title="安装Mongodb"></a>安装Mongodb</h2><p>听说用<strong>Node</strong>的都很喜欢用<strong>Mongodb</strong>数据库？那么我们这个例子也安装一下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">## 下载二进制包</div><div class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz</div><div class="line"></div><div class="line">## 解压</div><div class="line">tar -zxvf mongodb-linux-x86_64-3.0.6.tgz </div><div class="line"></div><div class="line">## 直接将解压包移动到指定目录</div><div class="line">mv  mongodb-linux-x86_64-3.0.6/ /usr/local/mongodb</div></pre></td></tr></table></figure>
 <p><strong>Mongodb</strong>可执行的命令放在<code>/usr/local/mongodb/bin/</code>下面，为了方便不带这么长的前缀，可以将路径添加到<strong>PATH</strong>里面：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">export PATH=/usr/local/mongodb/bin:$PATH</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;export PATH=/usr/local/mongodb/bin:$PATH&quot; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc</div></pre></td></tr></table></figure>
 <p>紧接着创建数据库目录，执行下面命令：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mkdir -p /data/db</div></pre></td></tr></table></figure>
 <blockquote>
