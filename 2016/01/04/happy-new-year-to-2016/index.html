@@ -12,14 +12,31 @@
 <h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>我也不知道该怎么扯了，非常扯淡的算法如下：</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">spiltYear</span>(<span class="params"> year </span>)</span>&#123;</div><div class="line">    <span class="comment">// 将year显式转为数字，避免传入字符串报错</span></div><div class="line">    year = <span class="built_in">parseInt</span>( year, <span class="number">10</span> );    </div><div class="line">    <span class="keyword">if</span>( year &lt; <span class="number">1000</span> )&#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;                </div><div class="line">    <span class="keyword">var</span> baseArr = [<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</div><div class="line">    baseArr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params"> base, i </span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> result = [];</div><div class="line">        <span class="keyword">var</span> val1 = base + <span class="number">10</span> * base,                <span class="comment">// 十位数</span></div><div class="line">            val2 = base + <span class="number">10</span> * base + <span class="number">100</span> * base;   <span class="comment">// 百位数</span></div><div class="line">        <span class="keyword">var</span> num2 = <span class="built_in">Math</span>.floor( year / val2 ),</div><div class="line">            num1 = <span class="built_in">Math</span>.floor( ( year - num2 * val2 ) / val1 ),</div><div class="line">            numBase = ( year - num2 * val2 - num1 * val1 ) / base,</div><div class="line">            flag = numBase == <span class="built_in">Math</span>.floor( numBase ) ? <span class="literal">true</span> : <span class="literal">false</span>;</div><div class="line">        <span class="keyword">if</span>( !flag )&#123;</div><div class="line">            <span class="built_in">console</span>.error(<span class="string">'当前年份不符合条件'</span>);</div><div class="line">            <span class="keyword">return</span> ;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>( num2 )&#123;</div><div class="line">            result.push(val2);</div><div class="line">            num2--;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>( num1 )&#123;</div><div class="line">            result.push(val1);</div><div class="line">            num1--;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>( numBase )&#123;</div><div class="line">            result.push(base);</div><div class="line">            numBase--;</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'2016=%s'</span>,result.join(<span class="string">'+'</span>));</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line">spiltYear(<span class="number">2016</span>);</div></pre></td></tr></table></figure>
 <h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>2016年本想写一篇长长的总结2015年，然而下笔却发现写不了啥东西，2016年希望所有人都666！</p>
-</div></article></div></section><footer><div class="paginator"><a href="/2016/03/18/simple-intro-to-nginx/" class="prev">PREV</a><a href="/2015/12/17/CSS后置处理器之PostCss/" class="next">NEXT</a></div><div data-thread-key="2016/01/04/happy-new-year-to-2016/" data-title="从程序猿角度来看2016年为啥那么6" data-url="https://cnt1992.github.io/2016/01/04/happy-new-year-to-2016/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"cnt1992"};
-(function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-     || document.getElementsByTagName('body')[0]).appendChild(ds);
-})();
-
-</script><div class="copyright"><p>© 2015 - 2018 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
+</div></article></div></section><footer><div class="paginator"><a href="/2016/03/18/simple-intro-to-nginx/" class="prev">PREV</a><a href="/2015/12/17/CSS后置处理器之PostCss/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2018 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
