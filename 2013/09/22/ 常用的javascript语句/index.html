@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 常用的javascript语句 · Web前端爱好者</title><meta name="description" content="常用的javascript语句 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">常用的javascript语句</h1><div class="post-time">2013年9月22日</div><div class="post-content"><blockquote>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 常用的javascript语句 · Web前端爱好者</title><meta name="description" content="常用的javascript语句 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/cnt1992" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li></ul></header><section class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">常用的javascript语句</h1><div class="post-time">2013年9月22日</div><div class="post-content"><blockquote>
 <p>我只是大自然的搬运工…</p>
 </blockquote>
 <a id="more"></a>
+
 <ol>
 <li>document.write(“”); 输出语句</li>
 <li>JS中的注释为//</li>
@@ -37,14 +38,11 @@ for (var i = 0; i &lt; form.elements.length;i ){
     if (form.elements.type == &quot;text&quot;){
         form.elements.value = &quot;&quot;;
     }
-}
-</code></pre></li>
-<li>复选按钮在JS中判断是否选中:<br>document.forms[0].checkThis.checked<pre><code>(checked属性代表为是否选中返回TRUE或FALSE)
-</code></pre></li>
+}</code></pre></li>
+<li>复选按钮在JS中判断是否选中:<br>document.forms[0].checkThis.checked<pre><code>(checked属性代表为是否选中返回TRUE或FALSE)</code></pre></li>
 <li>单选按钮组(单选按钮的名称必须相同):<br>取单选按钮组的长度document.forms[0].groupName.length</li>
 <li>单选按钮组判断是否被选中也是用checked.</li>
-<li>下拉列表框的值:<br>document.forms[0].selectName.options[n].value <pre><code>(n有时用下拉列表框名称加上.selectedIndex来确定被选中的值)
-</code></pre></li>
+<li>下拉列表框的值:<br>document.forms[0].selectName.options[n].value <pre><code>(n有时用下拉列表框名称加上.selectedIndex来确定被选中的值)</code></pre></li>
 <li>字符串的定义:<br>var myString = new String(“This is lightsword”);</li>
 <li>字符串转成大写:<br>string.toUpperCase(); 字符串转成小写:string.toLowerCase();</li>
 <li>返回字符串2在字符串1中出现的位置:<br>String1.indexOf(“String2”)!=-1则说明没找到.</li>
@@ -81,7 +79,7 @@ this.outerHeight=screen.availHeight;}window.maximize=fullScreen;</script></li>
 <li>取出该元素在页面中出现的数量:<br>document.all.tags(“div(或其它HTML标记符)”).length</li>
 <li>JS中分为两种窗体输出:模态和非模态.<br>window.showModaldialog(),window.showModeless()</li>
 <li>状态栏文字的设置:<br>window.status=’文字’,默认的状态栏文字设置:window.defaultStatus = ‘文字.’;</li>
-<li>添加到收藏夹:<br>external.AddFavorite(“<a href="http://meil.cnblogs.com&quot;;,&quot;jaskdlf" target="_blank" rel="external">http://meil.cnblogs.com&quot;;,&quot;jaskdlf</a>“);</li>
+<li>添加到收藏夹:<br>external.AddFavorite(“<a href="http://meil.cnblogs.com&quot;;,&quot;jaskdlf&quot;" target="_blank" rel="noopener">http://meil.cnblogs.com&quot;;,&quot;jaskdlf&quot;</a>);</li>
 <li>JS中遇到脚本错误时不做任何操作:<br>window.onerror = doNothing; 指定错误句柄的语法为:window.onerror = handleError;</li>
 <li>JS中指定当前打开窗口的父窗口:<br>window.opener,支持opener.opener…的多重继续.</li>
 <li>JS中的self指的是当前的窗口</li>
@@ -89,7 +87,7 @@ this.outerHeight=screen.availHeight;}window.maximize=fullScreen;</script></li>
 <li>JS中的top指的是框架集中最顶层的框架</li>
 <li>JS中关闭当前的窗口:window.close();</li>
 <li>JS中提出是否确认的框:if(confirm(“Are you sure?”)){alert(“ok”);}else{alert(“Not Ok”);}</li>
-<li>JS中的窗口重定向:window.navigate(“<a href="http://meil.cnblogs.com" target="_blank" rel="external">http://meil.cnblogs.com</a>“;);</li>
+<li>JS中的窗口重定向:window.navigate(“<a href="http://meil.cnblogs.com&quot;" target="_blank" rel="noopener">http://meil.cnblogs.com&quot;</a>;);</li>
 <li>JS中的打印:window.print()</li>
 <li>JS中的提示输入框:window.prompt(“message”,”defaultReply”);</li>
 <li>JS中的窗口滚动条:window.scroll(x,y)</li>
@@ -99,7 +97,7 @@ this.outerHeight=screen.availHeight;}window.maximize=fullScreen;</script></li>
 <li>JS中的退出之前使用的句柄:<br>function verifyClose(){event.returnValue=”we really like you and hope you will stay longer.”;}} window.=verifyClose;</li>
 <li>当窗体第一次调用时使用的文件句柄:onload()</li>
 <li>当窗体关闭时调用的文件句柄:onunload()</li>
-<li>window.location的属性:<br>protocol(http:),hostname(www.example.com),port(80),host(www.example.com:80),<br>pathname(“/a/a.html”),hash(“#giantGizmo”,指跳转到相应的锚记),href(全部的信息)</li>
+<li>window.location的属性:<br>protocol(http:),hostname(<a href="http://www.example.com),port(80),host(www.example.com:80)" target="_blank" rel="noopener">www.example.com),port(80),host(www.example.com:80)</a>,<br>pathname(“/a/a.html”),hash(“#giantGizmo”,指跳转到相应的锚记),href(全部的信息)</li>
 <li>window.location.reload()刷新当前页面.</li>
 <li>window.history.back()返回上一页,window.history.forward()返回下一页,<br>window.history.go(返回第几页,也可以使用访问过的URL)</li>
 <li>document.write()不换行的输出,document.writeln()换行输出</li>
@@ -120,31 +118,14 @@ this.outerHeight=screen.availHeight;}window.maximize=fullScreen;</script></li>
 <li>isNaN(变量):测试是否为数值型.</li>
 <li>定义常量的关键字:const,定义变量的关键字:var</li>
 </ol>
-</div></article></div></section><footer><div class="paginator"><a href="/2013/10/26/数组去重算法/" class="prev">PREV</a><a href="/2013/09/22/兼容IE6~IE9的CSS Hack/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
-    render(state, instance) {
-        const container = document.createElement('div');
-        container.lang = "en-US";
-        container.className = 'gitment-container gitment-root-container';
-        container.appendChild(instance.renderHeader(state, instance));
-        container.appendChild(instance.renderEditor(state, instance));
-        container.appendChild(instance.renderComments(state, instance));
-        container.appendChild(instance.renderFooter(state, instance));
-        return container;
-    }
-}
-function showGitment() {
-    document.querySelector('#gitment_title').style.display = 'none';
-    document.querySelector('#J_commentContainer').style.display = 'block';
-    document.querySelector('#J_commentContainer').classList.add('gitment_container');
-    var gitment = new Gitment({
-        id: window.location.pathname,
-        theme: myTheme,
-        owner: 'cnt1992',
-        repo: 'cnt1992.github.io',
-        oauth: {
-            client_id: '09b981847c8a38e58a62',
-            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
-        }
-    });
-    gitment.render('J_commentContainer');
-}</script><div class="copyright"><p>© 2015 - 2018 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
+</div></article></div></section><footer><div class="paginator"><a href="/2013/10/26/数组去重算法/" class="prev">PREV</a><a href="/2013/09/22/兼容IE6~IE9的CSS Hack/" class="next">NEXT</a></div><div data-thread-key="2013/09/22/ 常用的javascript语句/" data-title="常用的javascript语句" data-url="https://cnt1992.github.io/2013/09/22/ 常用的javascript语句/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"cnt1992"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div class="copyright"><p>© 2015 - 2019 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

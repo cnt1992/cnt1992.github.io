@@ -1,6 +1,7 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 2016小结 · Web前端爱好者</title><meta name="description" content="2016小结 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">2016小结</h1><div class="post-time">2016年12月25日</div><div class="post-content"><p>12月25日，西方的<strong>过年</strong>，对东方人们来说距离新的一年<strong>2017</strong>只剩<strong>5</strong>天。</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 2016小结 · Web前端爱好者</title><meta name="description" content="2016小结 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"></head><body><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/cnt1992" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li></ul></header><section class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">2016小结</h1><div class="post-time">2016年12月25日</div><div class="post-content"><p>12月25日，西方的<strong>过年</strong>，对东方人们来说距离新的一年<strong>2017</strong>只剩<strong>5</strong>天。</p>
 <p>来天猫已经快10个月，这10个月都在<code>忙 忙 忙</code>中度过，忙着开各种需求评审会，忙着跟业务方各种<del>撕逼</del>洽谈，忙着在半夜三更才能安安静静地写代码修bug。但老生常谈的是，这一年还是些许的小结值得写下来，算是给自己这一年的交代，以及给自己未来一年该怎么继续走一个思考。</p>
 <a id="more"></a>
+
 <h2 id="技术成长"><a href="#技术成长" class="headerlink" title="技术成长"></a>技术成长</h2><p>年初选择从京东跳槽过来天猫，最看重的还是天猫前端的技术，从13年双十一天猫全面切换到<code>Node</code>技术栈开始，到今年的<code>Weex</code>在双十一展现出<strong>web与native融合</strong>的不俗能力，不得不说天猫前端至少在业内还算是一个不错的团队存在。虽然外界看来，阿里系的开源框架都为了<code>KPI</code>而出现，并且不久后便夭折（当然，我自己也觉得很多东西其实都是为了<code>KPI</code>而出来的），但是对于<code>前端er</code>来说，我开始慢慢觉得：与其拒绝，不如从中学到一些东西，然后提取出好的抛弃坏的，让自己得到成长，转化成自己的技能。</p>
 <p>这一年的<code>React</code>/<code>Vue</code>/<code>Angular</code>三足鼎立，似乎对于这边来说更青睐于<code>React</code>。比如对于我在的小组负责天猫交易来说，业务情况是需要管理各种状态，而且相对来说比较复杂，这样能选择的当然是<code>React</code>。经手的多个项目几乎都采用了<code>React</code>技术栈，用上<code>Flux</code>/<code>Redux</code>框架。当然，并不重复性的从<code>搭建脚手架 -&gt; 开发页面 -&gt; 联调</code>，而是在<code>Redux</code>框架的基础上封装一套适用于这边的业务场景的SDK<code>Rschema</code>，这个SDK解放了前端的重复性劳动：</p>
 <ol>
@@ -14,31 +15,14 @@
 <p>新参与进来的业务，总是被当做一个<code>资源</code>那样子用。下周要发布了，这周才告知到我这里。一开始毕竟新入这个业务不熟悉，所以就忍让。等到对业务稍微熟悉了，也就把这些问题抛出来要求解决。这对于我来说就是要告诉别人我不愿意被当做一个<code>资源</code>来使用，也让别人知道也让我随随便便被使唤的成本很高，虽然短期看来是得罪了人，但长远来看，对自己必须是有利的。</p>
 <h2 id="未来计划"><a href="#未来计划" class="headerlink" title="未来计划"></a>未来计划</h2><p>从<strong>重构</strong>转型到<strong>大前端</strong>，虽然不再专注于<code>CSS</code>，而偏向于<code>JavaScript</code>，但是依然关注更优雅的写样式代码。未来，依然是倾向于功能实现，毕竟毕业前几年依旧是打怪升级的时间，不过想花更多时间关注所做的东西的性能。同时，也想多思考自己所做的东西，存在的价值及意义。不想只是一味的写代码，做一个码农，而应该花时间思考自己所做的事情的意义。</p>
 <p>嗯，在接下来的<strong>2017</strong>年，希望少加班（当然是不可能的了…）</p>
-</div></article></div></section><footer><div class="paginator"><a href="/2017/01/20/A-Complete-Guide-to-Grid/" class="prev">PREV</a><a href="/2016/12/17/tmall-recruit/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
-    render(state, instance) {
-        const container = document.createElement('div');
-        container.lang = "en-US";
-        container.className = 'gitment-container gitment-root-container';
-        container.appendChild(instance.renderHeader(state, instance));
-        container.appendChild(instance.renderEditor(state, instance));
-        container.appendChild(instance.renderComments(state, instance));
-        container.appendChild(instance.renderFooter(state, instance));
-        return container;
-    }
-}
-function showGitment() {
-    document.querySelector('#gitment_title').style.display = 'none';
-    document.querySelector('#J_commentContainer').style.display = 'block';
-    document.querySelector('#J_commentContainer').classList.add('gitment_container');
-    var gitment = new Gitment({
-        id: window.location.pathname,
-        theme: myTheme,
-        owner: 'cnt1992',
-        repo: 'cnt1992.github.io',
-        oauth: {
-            client_id: '09b981847c8a38e58a62',
-            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
-        }
-    });
-    gitment.render('J_commentContainer');
-}</script><div class="copyright"><p>© 2015 - 2018 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
+</div></article></div></section><footer><div class="paginator"><a href="/2017/01/20/A-Complete-Guide-to-Grid/" class="prev">PREV</a><a href="/2016/12/17/tmall-recruit/" class="next">NEXT</a></div><div data-thread-key="2016/12/25/summary-of-my-2016/" data-title="2016小结" data-url="https://cnt1992.github.io/2016/12/25/summary-of-my-2016/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"cnt1992"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div class="copyright"><p>© 2015 - 2019 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
