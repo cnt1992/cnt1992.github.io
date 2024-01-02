@@ -1,20 +1,87 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 迟来的面试总结 · Web前端爱好者</title><meta name="description" content="迟来的面试总结 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">迟来的面试总结</h1><div class="post-info">2016年4月4日</div><div class="post-content"><p>今天 <code>清明节</code>，已然是第 <em>4</em> 个年头没有回家祭祖，现在坐在工位上，刚将手头上的工作做好，装逼范儿先来诗一首：</p>
+<blockquote>
+<p>清明时节雨纷纷，路上行人欲断魂；<br>借问酒家何处有，牧童遥指杏花村。</p>
+</blockquote>
+<p>PIA! 装逼结束，下面开始正题！</p>
+<h2 id="谈谈最近"><a href="#谈谈最近" class="headerlink" title="谈谈最近"></a>谈谈最近</h2><p>来<code>天猫</code>已经有一个星期，从 <code>京东</code> 的 <a href="http://aotu.io/">凹凸实验室</a> 团队的 <strong>老人</strong> 一下子变成了 <code>天猫</code> 的 <strong>新人</strong> ，重新认识周边的同事，申请各种权限再熟悉开发环境，还好脸皮比以前厚了很多，各种不懂的东西到处找人问，总算是进入了开发状态。</p>
+<p>从过年回来就不断进行 <code>天猫</code> 的电话面试到交叉面，再到最后的HRG面，以及Leader视频面，感觉身心摧残呀…</p>
+<p>每次面试都那么累（说得好像面试了很多次一样o(╯□╰)o），但其实也总算是把国内 <code>JBAT</code> 都面了一下：</p>
+<ul>
+<li><p>去年9月， <code>腾讯</code> 的一位08级的师兄打电话给我问我有没有意愿去 <code>腾讯应用宝</code> 试试，于是就去试试了，结果聊的全部都是HTTP的东西，没看书华丽挂掉。</p>
+</li>
+<li><p>去年10月面了 <code>百度</code> 的 <code>凤巢团队</code>，顺利通过了一面、二面、三面，然而却在三面当天收到了 <strong>百度停止社招</strong> 的消息，然后就是漫长的冻结期，等到我最后直接放弃了！</p>
+</li>
+<li><p>年前 <code>天猫</code> 的同事找到我问有没有意愿加入天猫，抱着试一试的心态，结果一路顺畅就通过了。</p>
+</li>
+</ul>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
+<h2 id="面试总结"><a href="#面试总结" class="headerlink" title="面试总结"></a>面试总结</h2><p>之所以想写面试总结，最大的目的还是想写给自己看，毕竟面试作为你能力的最真实的表现，能否做足准备并将最好的一面表现出来那是一门学问。</p>
+<p>我想按照面试时间的顺序来写我的总结，因为<code>前车之鉴后事之师</code>，每次经历过的面试都能让自己清楚地知道自己擅长啥，哪些地方不足需要弥补。</p>
+<h3 id="腾讯面试"><a href="#腾讯面试" class="headerlink" title="腾讯面试"></a>腾讯面试</h3><blockquote>
+<p>更多地注重理论知识，扎实的专业理论</p>
+</blockquote>
+<p>首先谈谈 <code>腾讯</code> 的面试，感觉腾讯很注重<code>最基础的东西</code>，当然这最基础的东西大多是理论的，我们出来工作之后大多时间都是在写码，更多侧重于<code>应用实践</code>，而越来越少的时间花在了<code>基础理论</code>上面。</p>
+<p>比如：我们已经习惯了用 <code>htmlspecial</code> 方法去处理特殊的 <code>HTML</code> 字符，也知道这是用来防止 <code>XSS</code> 攻击的，然而当被问到 <code>XSS</code> 与 <code>CSRF</code> 的实现原理以及这两者之间的区别是啥？相信很多人一时半会想不起来。</p>
+<p>再比如：我们已经习惯于顺手拈来 <code>Ajax</code> 方法来写各种请求，当然也知道 <code>GET</code> 和 <code>POST</code> 等请求的区别，但是你是否知道 <code>Ajax</code> 的实现原理呢？大多数人知道这是基于 <code>Promise</code> 来实现的，但是再深入一点问一下 <code>ES6</code> 的 <code>Promise</code> 的实现原理？ <code>POST</code> 请求如何实现跨域？</p>
+<p>保持学习最新的东西是作为一名 <code>合格</code> 程序员的最低要求，那作为合格程序员应该都会去了解一下 <code>HTTP 2.0</code> 的相关知识了吧，什么 <code>首部压缩</code>、<code>优先级处理</code>、<code>双向字节流的请求与相应</code> 都应该了解过了，但当时我被面的时候人家根本不按常理出牌，就问：在一次 <code>POST</code> 请求中一般会带有什么头部过去？ 咳咳，反正在那之后我是乖乖的去买 <code>《HTTP权威指南》</code>恶补了。</p>
+<p>当然那次面试还问 <code>缓存的实现机制</code>、<code>闭包的实现</code>等，这些就都是常规的面试题了，总结自己没有通过的原因：在写码的时候会利用各种奇淫技巧去解决问题，但很少去关注背后的一些原理。</p>
+<h3 id="百度面试"><a href="#百度面试" class="headerlink" title="百度面试"></a>百度面试</h3><blockquote>
+<p>偏向算法以及逻辑思考能力</p>
+</blockquote>
+<p>这可能跟我面试的团队有关，听面试官介绍他们团队主要负责百度搜索推荐算法的，部门里面基本都是研究生，所以疯狂抛算法的题目给我。</p>
+<p>一面的时候还算是比较客气的，让我手写实现 <code>函数继承</code> ，以及考了一下 <code>如何判断一个变量是否为数组</code>，基本大家都能够跟我一样答出下面的答案：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">isArray</span>(<span class="params"> o </span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Array</span>.<span class="title function_">isArray</span>( o ) || <span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>( o ) === <span class="string">&#x27;[object Array]&#x27;</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<p>如果你能答出上面的答案，相比你应该读过 <code>jQuery</code> 或者 <code>Underscore</code> 之类的源码？于是面试官让我打开电脑定位到源码，然后问一些方法是用来干嘛的之类的，所以平常看看一些开源的库或者框架的源码很有必要，一来去看优秀的库是如何实现，培养自己架构的能力，二来方便面试（PIA，赶紧跑~~）</p>
+<p>然后二面的时候一上来就让实现 <code>排序算法</code> 的所有我能讲出来的方法，什么 <code>冒泡</code>、<code>二分法</code>等，但我犯了一个错误，那就是我知道有哪些方法可以实现，但我并不知道所有的方法具体是如何实现，这就是 <code>挖坑给自己跳</code> ，然后继续考算法，考 <code>动态规划</code> 的实现与原理等。因为在面试之前特地买了一本书 <a href="http://item.jd.com/11615451.html">《算法问题实战策略》</a> 来看，所以这些算法基本都考不到我了，最后面试官很疑惑的问我怎么会知道这些多算法的问题，我就说我刚好看了算法的书，于是面试官笑呵呵让我过了。</p>
+<p>前面两面是技术面，第三面好像并没有考特别细的技术细节，就单纯让我拿一个觉得最厉害的项目跟他聊聊，其实就考自己在项目中扮演着什么角色，在项目中具体做了什么，整体的技术能力以及综合能力差不多就出来了，这里想给<a href="http://aotu.io/">凹凸实验室</a>打个广告 – 我们在大公司基本都扮演着螺丝钉的角色，基本专注到很小的模块然后修修补补，很少有机会让你站在全局上面一路参与一个项目，但我在<code>凹凸实验室</code>团队拿到了很多自己去主导的项目，也正如此才让我离 <code>全栈工程师</code> 更仅一步。也正因为有了自己主导的项目，三面面试官很满意。</p>
+<p>虽然很多人在说百度的各种不好，像什么<code>贴吧事件</code>，但百度的技术依然还是不可否认很厉害，虽然社招被冻结，没能如愿进去，但也促使自己学习了更多的东西。</p>
+<h3 id="天猫面试"><a href="#天猫面试" class="headerlink" title="天猫面试"></a>天猫面试</h3><blockquote>
+<p>偏向项目实战能力</p>
+</blockquote>
+<p>其实在百度冻结社招之后，自己并没有想换工作的打算，一来是老大对我的重视，把很多福利都争取给了我，二来是女朋友在同一层楼工作，每天一起下班而不是单身狗…</p>
+<p>但由于各种原因，当天猫找到我的时候，也并没有拒绝，而是抱着试一试的心态去面，完全没想到就直接过了，搞得我匆匆忙忙离开深圳奔赴杭州，整个平静的生活算是变化特别大了。</p>
+<p>来阿里也许是注定的，大三的时候曾经面淘宝UED并且已经拿到了实习的offer，但考虑杭州太远而且学校很多事情要忙放弃掉，辗转几年又回到天猫。</p>
+<p>谈谈一面吧，关于 <code>CSS</code> 好像就问了我两道题：</p>
+<ul>
+<li><p>列举出所有能够让一个元素看不见的CSS属性</p>
+</li>
+<li><p>列举出所有能够让不定宽元素垂直居中的方法</p>
+</li>
+</ul>
+<p>考 <code>重构</code> 的题目我很拿手，毕竟在京东的前大半年还是专注于重构能力的，面试官很满意我的回答，于是考了 <code>性能优化</code> 的一些东西，以及 <code>Gulp</code>跟 <code>Grunt</code> 两个工具的区别等，感觉都答得很不错，但面试官觉得我工作经验不够（因为毕业才1年多），然后我反驳了，我笑了笑说我虽然工作一年多但我实际做的项目已经比很多工作一年多的人要多得多，可能没有我这句话就直接因为经验不足被干掉了…</p>
+<p>后面的面试全部围绕 <code>你觉得你最牛逼的项目</code> 来展开，考察了 <code>Angular</code>、<code>Vue</code>这些框架在我项目中的使用，考察了<code>ES7</code>新增加的东西（感觉ES6才出来就要去学习ES7的节奏，伤不起），还是那句话，其实还是想知道你在整个项目中的综合能力。</p>
+<p>就酱紫入坑 <code>天猫</code> ，不过杭州阿里巴巴西溪园区真心不错，😄有种重回大学的感觉！</p>
+<h2 id="继续碎碎念"><a href="#继续碎碎念" class="headerlink" title="继续碎碎念"></a>继续碎碎念</h2><p><code>Node</code>的崛起让<code>JS</code>大展拳脚，前端各种库跟框架层出不穷，社区各种争论喋喋不休，像前几天看到的，现在的学生 <code>JS</code> 能力是越来越强了，但最基本的 <code>HTML</code> 跟 <code>CSS</code> 能力却很弱，基本上都知道了 <code>ECMA 2016</code>,然而却没几个能关注 <code>HTTP 2.0</code> 的东西。前端圈子还是有点浮躁，过来天猫给自己的定位还是全栈工程师，做一个重构能力很强的开发，如果可以给自己一句话总结，那便是：</p>
+<blockquote>
+<p>懂设计（PS&#x2F;Sketch），会视频制作（AE&#x2F;PR），能写后端脚本（PHP&#x2F;SHELL），喜欢看书，追求 <code>全栈工程师</code> 的程序猿。</p>
+</blockquote>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/04/08/upgrade-nginx-to-http2/" class="prev">PREV</a><a href="/2016/03/18/simple-intro-to-nginx/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

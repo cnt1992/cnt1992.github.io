@@ -1,20 +1,137 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Javascript版排序算法 · Web前端爱好者</title><meta name="description" content="Javascript版排序算法 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">Javascript版排序算法</h1><div class="post-info">2015年6月11日</div><div class="post-content"><h3 id="必备知识点"><a href="#必备知识点" class="headerlink" title="必备知识点"></a>必备知识点</h3><ul>
+<li><a href="http://bonsaiden.github.io/JavaScript-Garden/zh/#object.prototype">JS原型</a></li>
+<li>排序中的有序区和无序区<br>简单来说，有序区就是在一组数据中已经排好序的部分，无序区就是该组数据中还没排好序的部分。</li>
+<li><a href="https://zh.wikipedia.org/zh/%E4%BA%8C%E5%8F%89%E6%A0%91">二叉树的基本知识</a></li>
+</ul>
+<h3 id="封装原型方法"><a href="#封装原型方法" class="headerlink" title="封装原型方法"></a>封装原型方法</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">			</span><br><span class="line"><span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">method</span> = <span class="keyword">function</span> (<span class="params"> name, func </span>) &#123;</span><br><span class="line">       <span class="variable language_">this</span>.<span class="property"><span class="keyword">prototype</span></span>[ name ] = func;</span><br><span class="line">       <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">   &#125;      </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block site_title
-    != page.title + " · " + config.title
+<span id="more"></span>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<h3 id="算法思路及复杂度对比"><a href="#算法思路及复杂度对比" class="headerlink" title="算法思路及复杂度对比"></a>算法思路及复杂度对比</h3><table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">数据对象</th>
+<th align="center">时间复杂度</th>
+<th align="center">空间复杂度</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">冒泡排序</td>
+<td align="center">数组</td>
+<td align="center">O(n²)</td>
+<td align="center">O(1)</td>
+<td align="center">(无序区，有序区) 通过在无序区的相邻元素的比较和替换，使较小的元素浮到最上面</td>
+</tr>
+<tr>
+<td align="center">选择排序</td>
+<td align="center">数组、链表</td>
+<td align="center">O(n²)</td>
+<td align="center">O(1)</td>
+<td align="center">(有序区，无序区)</td>
+</tr>
+<tr>
+<td align="center">在无序区里找一个最小的元素跟在有序区的后面。对数组：比较得多，换得少</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">插入排序</td>
+<td align="center">数组、链表</td>
+<td align="center">O(n²)</td>
+<td align="center">O(1)</td>
+<td align="center">(有序区，无序区) 把无序区的第一个元素插入到有序区的合适的位置。对数组：比较得少，换得多</td>
+</tr>
+<tr>
+<td align="center">堆排序</td>
+<td align="center">数组</td>
+<td align="center">O(nlogn)</td>
+<td align="center">O(1)</td>
+<td align="center">(有序区，无序区) 在无序区里找一个最小的元素跟在有序区的后面。对数组：比较得多，换得少</td>
+</tr>
+<tr>
+<td align="center">归并排序</td>
+<td align="center">数组、链表</td>
+<td align="center">O(nlogn)</td>
+<td align="center"></td>
+<td align="center">(最大堆，有序区) 从堆顶把根卸下来放在有序区之前，再恢复堆</td>
+</tr>
+<tr>
+<td align="center">快速排序</td>
+<td align="center">数组</td>
+<td align="center">O(nlogn)~O(n²)</td>
+<td align="center">O(logn)，O(n)</td>
+<td align="center">（小数，枢纽元，大数）</td>
+</tr>
+<tr>
+<td align="center">希尔排序</td>
+<td align="center">数组</td>
+<td align="center">O(nlog²n)~O(n²)</td>
+<td align="center">O(1)</td>
+<td align="center">每一轮按照事先决定的间隔进行插入排序，间隔会依次缩小，最后依次一定要是1</td>
+</tr>
+</tbody></table>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p>1.冒泡排序</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;bubbleSort&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="variable language_">this</span>.<span class="property">length</span>,</span><br><span class="line">        i, j, tmp;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; len; i++ ) &#123;</span><br><span class="line">        <span class="keyword">for</span> ( j = len - <span class="number">1</span>; j &gt; i; j-- ) &#123;</span><br><span class="line">            <span class="keyword">if</span> ( <span class="variable language_">this</span>[j] &lt; <span class="variable language_">this</span>[j-<span class="number">1</span>] ) &#123;</span><br><span class="line">                tmp = <span class="variable language_">this</span>[j-<span class="number">1</span>];</span><br><span class="line">                <span class="variable language_">this</span>[j-<span class="number">1</span>] = <span class="variable language_">this</span>[j];</span><br><span class="line">                <span class="variable language_">this</span>[j] = tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
+<p><code>改进冒泡排序</code>:如果在某次排序中没有出现交换的情况，那么说明在无序的元素现在已经是有序了，可以直接返回。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;rBubbleSort&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="variable language_">this</span>.<span class="property">length</span>,</span><br><span class="line">        i, j, tmp, exchange;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; len; i++ ) &#123;</span><br><span class="line">        exchange = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> ( j = len - <span class="number">1</span>; j &gt; i; j-- ) &#123;</span><br><span class="line">            <span class="keyword">if</span> ( <span class="variable language_">this</span>[j] &lt; <span class="variable language_">this</span>[j-<span class="number">1</span>] ) &#123;</span><br><span class="line">                tmp = <span class="variable language_">this</span>[j-<span class="number">1</span>];</span><br><span class="line">                <span class="variable language_">this</span>[j-<span class="number">1</span>] = <span class="variable language_">this</span>[j];</span><br><span class="line">                <span class="variable language_">this</span>[j] = tmp;</span><br><span class="line">                exchange = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ( !exchange ) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+<p>2.选择排序</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;selectSort&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="variable language_">this</span>.<span class="property">length</span>,</span><br><span class="line">        i, j, k, tmp;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; len; i++ ) &#123;</span><br><span class="line">        k = i;</span><br><span class="line">        <span class="keyword">for</span> ( j = i + <span class="number">1</span>; j &lt; len; j++ ) &#123;</span><br><span class="line">            <span class="keyword">if</span> ( <span class="variable language_">this</span>[j] &lt; <span class="variable language_">this</span>[k] ) &#123;</span><br><span class="line">                k = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ( k!=i ) &#123;</span><br><span class="line">            tmp = <span class="variable language_">this</span>[k];</span><br><span class="line">            <span class="variable language_">this</span>[k] = <span class="variable language_">this</span>[i];</span><br><span class="line">            <span class="variable language_">this</span>[i] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block copyright
-    include partial/copyright
+<p>3.插入排序</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;insertSort&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="variable language_">this</span>.<span class="property">length</span>,</span><br><span class="line">        i, j, k, tmp;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">1</span>; i &lt; len; i++ ) &#123;</span><br><span class="line">        tmp = <span class="variable language_">this</span>[i];</span><br><span class="line">        j = i - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> ( j&gt;=<span class="number">0</span> &amp;&amp; tmp &lt; <span class="variable language_">this</span>[j] ) &#123;</span><br><span class="line">            <span class="variable language_">this</span>[j+<span class="number">1</span>] = <span class="variable language_">this</span>[j];</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">this</span>[j+<span class="number">1</span>] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>4.堆排序</p>
+<pre><code>堆排序是一种树形选择排序方法(注意下标是从1开始的，也就是R[1...n])。
+堆排序思路：
+1) 初始堆：
+将原始数组调整成大根堆的方法——筛选算法：
+比较R[2i]、R[2i+1]和R[i]，将最大者放在R[i]的位置上(递归调用此方法到结束)
+2) 堆排序：
+每次将堆顶元素与数组最后面的且没有被置换的元素互换。
+</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;createHeap&#x27;</span>, <span class="keyword">function</span>(<span class="params">low, high</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> i=low, j=<span class="number">2</span>*i, tmp=<span class="variable language_">this</span>[i];</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=high)&#123;</span><br><span class="line">        <span class="comment">// 从左右子节点中选出较大的节点</span></span><br><span class="line">        <span class="keyword">if</span>(j&lt; high &amp;&amp; <span class="variable language_">this</span>[j]&lt;<span class="variable language_">this</span>[j+<span class="number">1</span>]) j++;</span><br><span class="line">        <span class="keyword">if</span>(tmp &lt; <span class="variable language_">this</span>[j])&#123;                    </span><br><span class="line">            <span class="comment">//根节点(tmp)&lt;较大的节点</span></span><br><span class="line">            <span class="variable language_">this</span>[i] = <span class="variable language_">this</span>[j];</span><br><span class="line">            i = j;</span><br><span class="line">            j = <span class="number">2</span>*i;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//被筛选的元素放在最终的位置上</span></span><br><span class="line">    <span class="variable language_">this</span>[i] = tmp;                            </span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;heapSort&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> i, tmp, len=<span class="variable language_">this</span>.<span class="property">length</span>-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="built_in">parseInt</span>(len/<span class="number">2</span>); i&gt;=<span class="number">1</span>; i--) <span class="variable language_">this</span>.<span class="title function_">createHeap</span>(i, len);</span><br><span class="line">    <span class="keyword">for</span>(i=len; i&gt;=<span class="number">2</span>; i--)&#123;</span><br><span class="line">        tmp = <span class="variable language_">this</span>[<span class="number">1</span>];</span><br><span class="line">        <span class="variable language_">this</span>[<span class="number">1</span>] = <span class="variable language_">this</span>[i];</span><br><span class="line">        <span class="variable language_">this</span>[i] = tmp;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">createHeap</span>(<span class="number">1</span>, i-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>5.归并排序<br>    归并排序思路：<br>    1) 归并<br>    从两个有序表R[low…mid]和R[mid+1…high]，每次从左边依次取出一个数进行比较，将较小者放入tmp数组中，最后将两段中剩下的部分直接复制到tmp中。<br>    这样tmp是一个有序表，再将它复制加R中。(其中要考虑最后一个子表的长度不足length的情况)<br>    2) 排序<br>    自底向上的归并，第一回：length&#x3D;1；第二回：length&#x3D;2*length …</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;createHeap&#x27;</span>, <span class="keyword">function</span>(<span class="params">low, high</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> i=low, j=<span class="number">2</span>*i, tmp=<span class="variable language_">this</span>[i];</span><br><span class="line">    <span class="keyword">while</span>(j&lt;=high)&#123;</span><br><span class="line">        <span class="comment">// 从左右子节点中选出较大的节点</span></span><br><span class="line">        <span class="keyword">if</span>(j&lt; high &amp;&amp; <span class="variable language_">this</span>[j]&lt;<span class="variable language_">this</span>[j+<span class="number">1</span>]) j++;</span><br><span class="line">        <span class="keyword">if</span>(tmp &lt; <span class="variable language_">this</span>[j])&#123;                    </span><br><span class="line">            <span class="comment">//根节点(tmp)&lt;较大的节点</span></span><br><span class="line">            <span class="variable language_">this</span>[i] = <span class="variable language_">this</span>[j];</span><br><span class="line">            i = j;</span><br><span class="line">            j = <span class="number">2</span>*i;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//被筛选的元素放在最终的位置上</span></span><br><span class="line">    <span class="variable language_">this</span>[i] = tmp;                            </span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;heapSort&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> i, tmp, len=<span class="variable language_">this</span>.<span class="property">length</span>-<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="built_in">parseInt</span>(len/<span class="number">2</span>); i&gt;=<span class="number">1</span>; i--) <span class="variable language_">this</span>.<span class="title function_">createHeap</span>(i, len);</span><br><span class="line">    <span class="keyword">for</span>(i=len; i&gt;=<span class="number">2</span>; i--)&#123;</span><br><span class="line">        tmp = <span class="variable language_">this</span>[<span class="number">1</span>];</span><br><span class="line">        <span class="variable language_">this</span>[<span class="number">1</span>] = <span class="variable language_">this</span>[i];</span><br><span class="line">        <span class="variable language_">this</span>[i] = tmp;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">createHeap</span>(<span class="number">1</span>, i-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>6.快速排序<br>    快速排序思路：<br>    1) 假设第一个元素为基准元素<br>    2) 把所有比基准元素小的记录放置在前一部分，把所有比基准元素大的记录放置在后一部分，并把基准元素放在这两部分的中间(i&#x3D;j的位置)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;quickSort&#x27;</span>, <span class="keyword">function</span>(<span class="params">s, t</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> i=s, j=t,</span><br><span class="line">        tmp;</span><br><span class="line">    <span class="keyword">if</span>(s &lt; t)&#123;</span><br><span class="line">        tmp = <span class="variable language_">this</span>[s];</span><br><span class="line">        <span class="keyword">while</span>(i!=j)&#123;</span><br><span class="line">            <span class="keyword">while</span>(j&gt;i &amp;&amp; <span class="variable language_">this</span>[j]&gt;tmp) j--;<span class="comment">//右—&gt;左</span></span><br><span class="line">            R[i] = R[j];</span><br><span class="line">            <span class="keyword">while</span>(i&lt;j &amp;&amp; <span class="variable language_">this</span>[j]&lt;tmp) i++;<span class="comment">//左—&gt;右</span></span><br><span class="line">            R[j] = R[i]; </span><br><span class="line">        &#125;</span><br><span class="line">        R[i] = tmp;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">quickSort</span>(s, i-<span class="number">1</span>);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">quickSort</span>(i+<span class="number">1</span>, t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>7.希尔排序</p>
+<pre><code>希尔排序思路:
+我们在第 i 次时取gap = n/(2的i次方)，然后将数组分为gap组(从下标0开始，每相邻的gap个元素为一组)，接下来我们对每一组进行直接插入排序。
+</code></pre>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">method</span>(<span class="string">&#x27;shellSort&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="variable language_">this</span>.<span class="property">length</span>, gap = <span class="built_in">parseInt</span>(len/<span class="number">2</span>), </span><br><span class="line">        i, j, tmp;</span><br><span class="line">    <span class="keyword">while</span>(gap &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(i=gap; i&lt;len; i++)&#123;</span><br><span class="line">            tmp = <span class="variable language_">this</span>[i];</span><br><span class="line">            j = i - gap;</span><br><span class="line">            <span class="keyword">while</span>(j&gt;=<span class="number">0</span> &amp;&amp; tmp &lt; <span class="variable language_">this</span>[j])&#123;</span><br><span class="line">                <span class="variable language_">this</span>[j+gap] = <span class="variable language_">this</span>[j];</span><br><span class="line">                j = j - gap;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="variable language_">this</span>[j + gap] = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        gap = <span class="built_in">parseInt</span>(gap/<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></article></div></main><footer><div class="paginator"><a href="/2015/07/29/%E6%B5%85%E8%B0%88webpack/" class="prev">PREV</a><a href="/2015/04/21/%E6%95%B0%E7%BB%84%E6%B4%97%E7%89%8C%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

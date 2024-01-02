@@ -1,20 +1,139 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> CSS后置处理器之PostCss · Web前端爱好者</title><meta name="description" content="CSS后置处理器之PostCss - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">CSS后置处理器之PostCss</h1><div class="post-info">2015年12月16日</div><div class="post-content"><h2 id="初识PostCSS"><a href="#初识PostCSS" class="headerlink" title="初识PostCSS"></a>初识PostCSS</h2><p>如果你第一次听说<code>PostCSS</code>这个东西，那么请看下面摘自官方<code>Github</code>的介绍：</p>
+<blockquote>
+<p>PostCSS is a tool for transforming CSS with JS Plugins. These plugins can support variables and mixins, transpile future CSS syntax, inline images, and more</p>
+</blockquote>
+<p>翻译成中文的意思如下：</p>
+<blockquote>
+<p>PostCSS 是一套利用JS插件实现的用来改变CSS的工具.这些插件能够支持变量和混合语法，转换未来CSS语法，内联图片，还有更多</p>
+</blockquote>
+<p>我们用过<code>Less</code>、<code>SASS</code>等工具来对CSS做<code>预处理</code>操作，按照它们约定的语法来书写并且最终转换成可用的样式，这付出的代价是<strong>必须先熟悉这个工具的书写语法</strong>。 </p>
+<p>随着近几年 <a href="http://gruntjs.cn/">Grunt</a>、<a href="http://gulpjs.com/">Gulp</a>、<a href="http://webpack.github.io/docs/">Webpack</a> 等自动化工具的兴起，<code>组合式应用</code>变得非常的热门，那<code>PostCSS</code>存在的意义是什么呢？答案是：<strong>CSS生态系统</strong></p>
+<p><code>PostCSS</code>拥有非常多的插件，诸如自动为CSS添加浏览器前缀的插件<code>autoprefixer</code>、当前移动端最常用的<code>px</code>转<code>rem</code>插件<code>px2rem</code>，还有支持尚未成为CSS标准但特定可用的插件<code>cssnext</code>，还有很多很多。就连著名的<code>Bootstrap</code>在下一个版本<code>Bootstrap 5</code>也将使用<code>PostCSS</code>作为样式的基础。</p>
+<p>一句话来概括PostCSS：<strong>CSS编译器能够做到的事情，它也可以做到，而且能够做得更好</strong></p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
+<h2 id="快速使用PostCSS"><a href="#快速使用PostCSS" class="headerlink" title="快速使用PostCSS"></a>快速使用PostCSS</h2><p>上面大致介绍了<code>PostCSS</code>，也许我们并没有在头脑里形成对它的认知，那下面我们就通过一个简单地实例来看看如何使用<code>PostCSS</code>。</p>
+<p><code>PostCSS</code>得益于插件，支持Grunt,Gulp,webpack,Broccoli,Brunch还有ENB，这里我们将以<code>Gulp</code>作为实例来讲。</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><p>创建并进入我们的实例目录</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> postcss-demo &amp;&amp; <span class="built_in">cd</span> postcss-demo</span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<p>然后快速生成<code>package.json</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># --yes 参数能够帮助我们快速生成默认的package.json</span></span><br><span class="line">npm init --<span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
+<p>将上面创建的<code>package.json</code>文件的<code>main</code>参数改为<code>gulpfile.js</code>，然后安装我们所需的依赖</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># gulp跟gulp-postcss是必须的，后面两个插件为了演示用途</span></span><br><span class="line">npm i gulp gulp-postcss autoprefixer autoprefixer-core cssnext --save-dev -d</span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+<p>创建<code>gulpfile.js</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 这里用命令行进行创建，你也可以手动新建</span></span><br><span class="line"><span class="built_in">touch</span> gulpfile.js</span><br></pre></td></tr></table></figure>
 
-block copyright
-    include partial/copyright
+<h3 id="修改gulpfile-js"><a href="#修改gulpfile-js" class="headerlink" title="修改gulpfile.js"></a>修改gulpfile.js</h3><p>将下面代码贴进<code>gulpfile.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> autoprefixer = <span class="built_in">require</span>(<span class="string">&#x27;autoprefixer&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> cssnext = <span class="built_in">require</span>(<span class="string">&#x27;cssnext&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义css任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;css&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="comment">//定义postcss任务流数组</span></span><br><span class="line">  <span class="keyword">var</span> processors = [</span><br><span class="line">    <span class="title function_">autoprefixer</span>(&#123;</span><br><span class="line">      <span class="attr">browsers</span>:[<span class="string">&#x27;last 3 version&#x27;</span>],</span><br><span class="line">      <span class="attr">cascade</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">remove</span>: <span class="literal">false</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="title function_">cssnext</span>()</span><br><span class="line">  ];</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./src/css/*.css&#x27;</span>)</span><br><span class="line">             .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(processors))</span><br><span class="line">             .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./dist&#x27;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建示例样式"><a href="#创建示例样式" class="headerlink" title="创建示例样式"></a>创建示例样式</h3><p>在项目根目录下创建src目录，再在src目录下面创建css目录，然后创建style.css文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 这里用命令创建，你也可以手动创建</span></span><br><span class="line"><span class="built_in">mkdir</span> -p src/css &amp;&amp; <span class="built_in">touch</span> style.css</span><br></pre></td></tr></table></figure>
+
+<p>编辑样式如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>:flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line"><span class="attr">--fontSize</span>: <span class="number">1rem</span>;</span><br><span class="line"><span class="attr">--mainColor</span>: <span class="number">#12345678</span>;</span><br><span class="line"><span class="attr">--highlightColor</span>: <span class="built_in">hwb</span>(<span class="number">190</span>, <span class="number">35%</span>, <span class="number">20%</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line"><span class="attribute">color</span>: <span class="built_in">var</span>(--mainColor);</span><br><span class="line"></span><br><span class="line"><span class="attribute">font-size</span>: <span class="built_in">var</span>(--fontSize);</span><br><span class="line"><span class="attribute">line-height</span>: <span class="built_in">calc</span>(<span class="built_in">var</span>(--fontSize) * <span class="number">1.5</span>);</span><br><span class="line"><span class="attribute">padding</span>: <span class="built_in">calc</span>((<span class="built_in">var</span>(--fontSize) / <span class="number">2</span>) + <span class="number">1px</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="运行实例"><a href="#运行实例" class="headerlink" title="运行实例"></a>运行实例</h3><p>一切准备就绪之后可以在项目根目录下执行刚才我们定义的任务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gulp css</span><br></pre></td></tr></table></figure>
+
+<p>如果不出什么意外的话就会在根目录下面生成一个<code>dist</code>文件夹，里面有一个样式文件，内容如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>:-webkit-flex;</span><br><span class="line">  <span class="attribute">display</span>:-ms-flexbox;</span><br><span class="line">  <span class="attribute">display</span>:-webkit-box;</span><br><span class="line">  <span class="attribute">display</span>:flex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line"><span class="attribute">color</span>:<span class="number">#123456</span>;</span><br><span class="line"><span class="attribute">color</span>:<span class="built_in">rgba</span>(<span class="number">18</span>, <span class="number">52</span>, <span class="number">86</span>, <span class="number">0.47059</span>);</span><br><span class="line"></span><br><span class="line"><span class="attribute">font-size</span>:<span class="number">16px</span>;</span><br><span class="line"><span class="attribute">font-size</span>:<span class="number">1rem</span>;</span><br><span class="line"><span class="attribute">line-height</span>:<span class="number">24px</span>;</span><br><span class="line"><span class="attribute">line-height</span>:<span class="number">1.5rem</span>;</span><br><span class="line"><span class="attribute">padding</span>:<span class="built_in">calc</span>(<span class="number">0.5rem</span> + <span class="number">1px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看到我们写的样式自动添加了浏览器前缀，并且一些未来CSS语法也被转换了。</p>
+<h2 id="了解PostCSS"><a href="#了解PostCSS" class="headerlink" title="了解PostCSS"></a>了解PostCSS</h2><p>通过上面的实例我们应该知道<code>PostCSS</code>的使用方法，此时让我们先回想一下<code>CSS预处理器</code>的使用历程：</p>
+<ol>
+<li>学习该CSS预处理器的语法特性，诸如：变量定义、嵌套、继承</li>
+<li>在特定后缀名(.less&#x2F;.scss等)的文件按照上面的语法进行编写</li>
+<li>通过Gulp&#x2F;Grunt&#x2F;Webpack等自动化工具或者手动编译成CSS样式</li>
+</ol>
+<p>而<code>PostCSS</code>的使用历程：</p>
+<ol>
+<li>直接按照CSS标准语法来书写CSS样式文件</li>
+<li>通过Gulp&#x2F;Grunt&#x2F;Webpack等自动化工具加载PostCSS插件转换输出</li>
+</ol>
+<p>通过对比我们类比一个结论：<em>CSS预处理器好比给你一个工具箱，工具箱里面有什么东西该怎么拿已经跟你约定好，你必须按照这个规则来拿；而PostCSS好比给你一个盒子，你可以从旁边选择自己需要的工具放进盒子打包拿走，如果还不够用你可以自己造一个工具</em></p>
+<h2 id="深入PostCSS"><a href="#深入PostCSS" class="headerlink" title="深入PostCSS"></a>深入PostCSS</h2><p><code>PostCSS</code>自身只包括了<code>CSS分析器</code>，<code>CSS节点树API</code>，<code>source map生成器</code>，<code>CSS节点拼接器</code>，而基于<code>PostCSS</code>的插件都是使用了<code>CSS节点树API</code>来实现的。</p>
+<p>我们都知道CSS的组成如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">element &#123;</span><br><span class="line">  prop1 : rule1 rule2 ...;</span><br><span class="line">  prop2 : rule1 rule2 ...;</span><br><span class="line">  prop2 : rule1 rule2 ...;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也就是一条一条的样式规则组成，每一条样式规则包含一个或多个属性跟值。所以<code>PostCSS</code>的执行过程大致如下：</p>
+<ol>
+<li><p>Parser<br> 利用<code>CSS分析器</code>读取CSS字符内容，得到一个完整的<code>节点树</code></p>
+</li>
+<li><p>Plugin<br> 对上面拿到的<code>节点树</code>利用<code>CSS节点树API</code>进行一系列的转换操作</p>
+</li>
+<li><p>Plugin<br> 利用<code>CSS节点拼接器</code>将上面转换之后的节点树重新组成CSS字符</p>
+</li>
+<li><p>Stringifier<br> 在上面转换期间可利用<code>source map生成器</code>表明转换前后字符的对应关系</p>
+</li>
+</ol>
+<h3 id="PostCSS性能"><a href="#PostCSS性能" class="headerlink" title="PostCSS性能"></a>PostCSS性能</h3><p>在PostCSS官方推特上看到，由JavaScript编写的PostCSS比C++编写的libsass还要快3倍.</p>
+<p>如果你对上面的性能截图有疑问，可以亲自来<a href="https://github.com/postcss/benchmark">这里</a>测试看看。</p>
+<h3 id="开始编写自己的PostCSS插件"><a href="#开始编写自己的PostCSS插件" class="headerlink" title="开始编写自己的PostCSS插件"></a>开始编写自己的PostCSS插件</h3><p><code>PostCSS</code>在自己的<a href="https://github.com/postcss/postcss#plugins">Github</a>上放了一些常用的插件，更多的插件可以在<a href="http://postcss.parts/">postcss.parts</a>进行搜索。</p>
+<p>但有时候已有的插件不满足我们的需求，这个时候需要编写自己的PostCSS插件，下面我们将一步步创建一个简单的插件，这个插件功能非常简单，如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">  文件位置：src/css/style.css</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;\5FAE\8F6F\96C5\9ED1&quot;</span>,<span class="built_in">fontstack</span>(<span class="string">&#x27;Arial&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当输入上面的样式时，会生成下面的样式：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  文件位置：dist/style.css</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: <span class="string">&quot;\5FAE\8F6F\96C5\9ED1&quot;</span>,tahoma,arial;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="环境准备-1"><a href="#环境准备-1" class="headerlink" title="环境准备"></a>环境准备</h3><p>我们将以<code>Gulp</code>作为基础来实现我们的插件，首先创建项目文件夹</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> postcss-plugin &amp;&amp; <span class="built_in">cd</span> postcss-plugin</span><br></pre></td></tr></table></figure>
+
+<p>然后快速创建<code>package.json</code>文件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm init --<span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<p>紧接着先安装必备的包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i gulp postcss gulp-postcss --save-dev -d</span><br></pre></td></tr></table></figure>
+
+<p>再创建<code>gulpfile.js</code>并且输入下面内容:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br><span class="line"></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;css&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> processors = [</span><br><span class="line">  ];</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./src/css/*.css&#x27;</span>)</span><br><span class="line">             .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(processors))</span><br><span class="line">             .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./dist&#x27;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建插件文件夹"><a href="#创建插件文件夹" class="headerlink" title="创建插件文件夹"></a>创建插件文件夹</h3><p>我们在执行<code>npm install</code>安装的包都放置在<code>node_modules</code>文件夹下面，这里我们创建PostCSS的插件文件夹，注意：<strong>PostCSS的插件命名格式为：postcss-插件名字</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 这里采用命令新建文件夹，你也可以手动创建</span></span><br><span class="line"><span class="built_in">mkdir</span> node_modules/postcss-fontstack</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建插件入口文件"><a href="#创建插件入口文件" class="headerlink" title="创建插件入口文件"></a>创建插件入口文件</h3><p>现在我们可以在<code>postcss-fontstack</code>文件夹创建入口文件<code>index.js</code>，<code>PostCSS</code>创建插件的方式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;postcss&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = postcss.<span class="title function_">plugin</span>(<span class="string">&#x27;插件名字&#x27;</span>, <span class="keyword">function</span> 插件名字(选项)&#123;</span><br><span class="line">  <span class="comment">//这里写插件代码</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>那我们可以在<code>index.js</code>里面贴入下面代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;postcss&#x27;</span>);</span><br><span class="line"></span><br><span class="line">modules.<span class="property">exports</span> = postcss.<span class="title function_">plugin</span>(<span class="string">&#x27;fontstack&#x27;</span>, <span class="keyword">function</span> <span class="title function_">fontstack</span>(<span class="params"> options </span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"> css </span>)&#123;</span><br><span class="line">    options = options || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> fontstack_config = &#123;</span><br><span class="line">      <span class="string">&#x27;Arial&#x27;</span>: <span class="string">&#x27;tahoma,arial&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;Times New Roman&#x27;</span>: <span class="string">&#x27;TimesNewRoman, &quot;Times New Roman&quot;, Times, Baskerville, Georgia, serif&#x27;</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">toTitleCase</span>(<span class="params"> str </span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> str.<span class="title function_">replace</span>(<span class="regexp">/\w\S*/g</span>,<span class="keyword">function</span>(<span class="params"> txt </span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> txt.<span class="title function_">charAt</span>(<span class="number">0</span>).<span class="title function_">toUpperCase</span>() + txt.<span class="title function_">substr</span>(<span class="number">1</span>).<span class="title function_">toLowerCase</span>();</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// css.walkRules方法用来遍历每一条css规则</span></span><br><span class="line">    css.<span class="title function_">walkRules</span>( <span class="keyword">function</span>(<span class="params"> rule </span>)&#123;</span><br><span class="line">        <span class="comment">// walkDecls方法用来解析属性跟值</span></span><br><span class="line">        rule.<span class="title function_">walkDecls</span>( <span class="keyword">function</span>(<span class="params"> decl, i </span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> value = decl.<span class="property">value</span>;</span><br><span class="line">            <span class="keyword">if</span>( value.<span class="title function_">indexOf</span>(<span class="params"> <span class="string">&#x27;fontstack(&#x27;</span> </span>) !== -<span class="number">1</span> )&#123;</span><br><span class="line">                <span class="keyword">var</span> fontstack_requested = value.<span class="title function_">match</span>(<span class="regexp">/\(([^)]+)\)/</span>)[<span class="number">1</span>].<span class="title function_">replace</span>(<span class="regexp">/[&quot;&#x27;]/g</span>,<span class="string">&quot;&quot;</span>);</span><br><span class="line">                fontstack_requested = <span class="title function_">toTitleCase</span>( fontstack_requested );</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> fontstack = fontstack_config[ fontstack_requested ];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> firstFont = value.<span class="title function_">substr</span>( <span class="number">0</span>, value.<span class="title function_">indexOf</span>(<span class="string">&#x27;fontstack(&#x27;</span>) );</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> newValue = firstFont + fontstack;</span><br><span class="line"></span><br><span class="line">                decl.<span class="property">value</span> = newValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在<code>gulpfile.js</code>引入上面的插件，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&#x27;gulp&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> postcss = <span class="built_in">require</span>(<span class="string">&#x27;gulp-postcss&#x27;</span>);</span><br><span class="line"></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;css&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">var</span> processors = [</span><br><span class="line">  ];</span><br><span class="line">  <span class="keyword">return</span> gulp.<span class="title function_">src</span>(<span class="string">&#x27;./src/css/*.css&#x27;</span>)</span><br><span class="line">             .<span class="title function_">pipe</span>(<span class="title function_">postcss</span>(processors))</span><br><span class="line">             .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(<span class="string">&#x27;./dist&#x27;</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="运行实例-1"><a href="#运行实例-1" class="headerlink" title="运行实例"></a>运行实例</h3><p>在项目根目录下运行实例，最终实现我们的效果</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gulp css</span><br></pre></td></tr></table></figure>
+
+<h2 id="再谈PostCSS"><a href="#再谈PostCSS" class="headerlink" title="再谈PostCSS"></a>再谈PostCSS</h2><p>基于<code>PostCSS</code>能够做到很多<code>CSS预处理器</code>做不到的事情，未来发展前景还是挺不错的，而且最新的<code>Atom</code>编辑器也可以下载插件来支持<code>PostCSS</code>这种语法。</p>
+<p>但这就意味着<code>CSS预处理器</code>过时了么？不会。<code>PostCSS</code>的出现并不是为了替换掉之前的技术，只是提供多一种思路让我们去考虑，就比如Sass编译后再加<code>autoprefixer</code>自动补齐浏览器前缀这种做法当前还是比较流行的。</p>
+<p>再回到文章最开始说的，<code>PostCSS</code>其实是在打造一个改变CSS开发方式的生态系统。也许暂时我们还是保持传统的开发方式，但未来对于<code>PostCSS</code>我还是保持关注，它是值得期待的。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/01/04/happy-new-year-to-2016/" class="prev">PREV</a><a href="/2015/12/09/an-introduction-to-sass-maps/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

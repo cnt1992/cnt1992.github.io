@@ -1,20 +1,52 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 写在职业生涯4年 · Web前端爱好者</title><meta name="description" content="写在职业生涯4年 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">写在职业生涯4年</h1><div class="post-info">2018年2月13日</div><div class="post-content"><p>明天是个特别的日子，明天是情人节，明天也是回家过年的日子。</p>
+<p>来阿里近两年，职业生涯也近四年，忽然感到时光的飞逝，在阿里的时间太”忙”以至于今天兴致起来想小结一番。</p>
+<p>想从<code>技术成长、为人处世</code>两个方面来写。</p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<h2 id="关于自己"><a href="#关于自己" class="headerlink" title="关于自己"></a>关于自己</h2><ul>
+<li>13年在广州环球市场集团实习近1年，主要搞<code>Node.js</code>，初入电商搞了无线版的飞飞商城</li>
+<li>14年经同事推荐开始在京东深圳用户体验设计部，也就是现在的<a href="https://aotu.io/">凹凸实验室</a>待了1年半，搞搞<code>重构</code>，主要负责拍拍网的频道页、首页改版，到后来拍拍关闭加上自身觉得<del>世界那么大，我想去见识一下BAT的技术</del><strong>心委屈了</strong>就离开了京东</li>
+<li>16年3月只身一人跑到杭州天猫，搞了半年多的交易、半年多的协同供应链平台，技术栈偏向用<code>React</code>多一些，后来业务变动到了现在的<code>新零售供应链平台事业部</code>，目前搞搞线下终端一些好玩的东西。</li>
+</ul>
+<h2 id="技术成长"><a href="#技术成长" class="headerlink" title="技术成长"></a>技术成长</h2><blockquote>
+<p>技术成长的前提是你热爱技术，关注你领域以及周边的技术社区有什么新的东西，而不是一成不变的在已有知识范围里不断<code>repeat your code</code></p>
+</blockquote>
+<p>跟很多人一样，踏入前端领域完全靠自学，入门的第一本书是一本绿色封面的HTML标准教程，然后看了CSS权威指南，当然也是边看边敲代码（想想也是傻，跟着书本用记事本来写代码，还强迫症的按空格键来保持代码的对齐），当时并没有去学习JavaScript，因为当时想成为重构小能手。</p>
+<p><code>因为兴趣而学习</code>跟<code>用技术当生存技能</code>中间隔了一道鸿沟，大三找实习时发现很多企业并不招纯粹的重构，所以买了一本JavaScript权威指南开始学习，后来学到差不多的时候想找项目练手，那就搞个人博客网站，也就是那个时候知道了<code>Node.js</code>的存在，发现用它能直接跑一个服务器也就是前端可以完成前后端的东西好像很厉害的样子。搞<code>Node.js</code>之后，才发现需要扩展的知识很多很多，于是才开始折腾<code>Nginx</code>、<code>Mysql</code>等。</p>
+<p>实习的那一年是技术面扩展非常快的一年，但<code>不深入</code>。</p>
+<blockquote>
+<p>技术分享、转正&#x2F;晋升答辩、面试等机会也是一次查漏补缺的绝佳时机</p>
+</blockquote>
+<p>在公司里面很大部分的时间都是在coding，在过程中碰到的很多问题虽然通过网上或者找同事解决了，但如果不去了解问题的本质原因后面再次碰到类似的问题还是不知道怎么解，所以适当的总结是很有必要的。对于感兴趣的技术分享几乎都会参加，看看别人在项目中的沉淀再对比自己，就能找到自己缺乏的技术点进一步加深理解。</p>
+<p>面试我认为是最直接有效的提高技术的方式（当然我不建议通过面试这种方式来提高技术，因为你跟企业其实都很累）。比如现在面试官经常会问的问题：假设你熟悉React技术栈体系，那么让你讲redux的实现原理、react-redux的connect如何实现；假设你还熟悉Vue技术体系，那么让你对比React跟Vue的实现区别。这需要你能知道对应的技术栈的实现原理，所以养成看优秀框架的源码习惯是很有必要的。因为平时经常在写代码很少会去看框架的源码，但是你不抽空研究，那只会用框架其实技术成长就很小。</p>
+<h2 id="为人处世"><a href="#为人处世" class="headerlink" title="为人处世"></a>为人处世</h2><p>我算是一个“脾气火爆”的人，有时候在跟后端的联调中经常就会闹得很不愉快，多次老大提醒。现在也找到了比较好的处世方法：在发脾气之前深吸一口气，我对于接下来也说的话或者要做的事需要付出什么样的代价？ 然后你会发现其实很多事情只要好好沟通就不会产生无畏的争吵，而且多一个朋友总比多一个敌人好。</p>
+<p>经常逛“脉脉”匿名区，发现戾气其实有点重，抱怨公司抱怨同事，我之前也经常这样子，跟朋友去抱怨一些东西。但其实不能帮助到你什么，反倒而让自己一直不开心。</p>
+<p>在职业中，不能像以前那样子随性，那样子就不算是“职业人”。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/08/28/pre-render-practise-on-visual-building/" class="prev">PREV</a><a href="/2017/04/05/how-to-deploy-a-new-website/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

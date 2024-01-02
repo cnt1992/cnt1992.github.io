@@ -1,20 +1,264 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> mac装机指南 · Web前端爱好者</title><meta name="description" content="mac装机指南 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">mac装机指南</h1><div class="post-info">2015年11月11日</div><div class="post-content"><blockquote>
+<p>本文已整合进 [<a href="http://aotu.io/mac]">http://aotu.io/mac]</a> ，欢迎指正~</p>
+</blockquote>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
+<p>作为折腾了Mac一年多的菜鸟，虽然谈不上是Mac高手，但是有些使用的技巧个人总结分享一下，权当给新入手Mac的童鞋一个参考。</p>
+<p><strong>目前更新了软件篇及系统应用篇</strong></p>
+<h3 id="Xcode-Command-Line-Tools"><a href="#Xcode-Command-Line-Tools" class="headerlink" title="Xcode Command Line Tools"></a>Xcode Command Line Tools</h3><p>在Mac下面的很多软件安装都会涉及到<code>编译</code>，依赖于<code>Xcode Command Line Tools</code>这个工具，Mac下面的Xcode自带了这个工具，我们可以在<code>Terminal</code>输入<code>gcc</code>或者<code>make</code>,然后弹出一个选项会让你安装。为了避免其它关于编译的错误，建议去<code>AppStore</code>下载一个<code>Xcode</code></p>
+<h3 id="HomeBrew"><a href="#HomeBrew" class="headerlink" title="HomeBrew"></a>HomeBrew</h3><p>HomeBrew是Mac下面的一个包管理器，方便我们安装一些Mac OS没有的UNIX工具。</p>
+<ul>
+<li><p>安装HomeBrew</p>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ruby -e <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>确保HomeBrew是否正常安装</p>
+<p>安装好HomeBrew之后，在<code>Terminal</code>执行下面命令确保正常安装：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">brew doctor</span></span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<p>若上面命令执行过程出现 <em>hombrew libevent not link</em> 的错误，执行下面命令即可：</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">sudo chown -R $<span class="keyword">USER</span> <span class="title">$</span>(brew --prefix)</span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
+<p>确保正常安装之后，可以输入<code>brew -h</code>查看帮助：</p>
+<figure class="highlight prolog"><table><tr><td class="code"><pre><span class="line"> <span class="symbol">Example</span> usage:</span><br><span class="line"> brew [info | home | options ] [<span class="symbol">FORMULA</span>...]</span><br><span class="line"> brew install <span class="symbol">FORMULA</span>...</span><br><span class="line"> brew uninstall <span class="symbol">FORMULA</span>...</span><br><span class="line"> brew search [foo]</span><br><span class="line"> brew list [<span class="symbol">FORMULA</span>...]</span><br><span class="line"> brew update</span><br><span class="line"> brew upgrade [<span class="symbol">FORMULA</span>...]</span><br><span class="line"> brew pin/unpin [<span class="symbol">FORMULA</span>...]</span><br><span class="line"></span><br><span class="line"><span class="symbol">Troubleshooting</span>:</span><br><span class="line">  brew doctor</span><br><span class="line">  brew install -vd <span class="symbol">FORMULA</span></span><br><span class="line">  brew [--env | config]</span><br><span class="line"></span><br><span class="line"><span class="symbol">Brewing</span>:</span><br><span class="line">  brew create [<span class="symbol">URL</span> [--no-fetch]]</span><br><span class="line">  brew edit [<span class="symbol">FORMULA</span>...]</span><br><span class="line">  https://github.com/<span class="symbol">Homebrew</span>/homebrew/blob/master/share/doc/homebrew/<span class="symbol">Formula</span>-<span class="symbol">Cookbook</span>.md</span><br><span class="line"></span><br><span class="line"><span class="symbol">Further</span> help:</span><br><span class="line">  man brew</span><br><span class="line">  brew home</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用HomeBrew</p>
+<p>搜索一个包，在不确定想要安装的包是否有之前，建议先搜索一下，执行下面命令：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">brew search mongod</span></span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+<p>安装包，在搜索到想要安装的包之后，执行下面命令即可安装：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>mongod</span><br></pre></td></tr></table></figure>
 
-block copyright
-    include partial/copyright
+<p>更新HomeBrew在服务端的包结构：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">brew update</span></span><br></pre></td></tr></table></figure>
+
+<p>查看安装过的包列表：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">brew list</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="HomeBrew-Cask"><a href="#HomeBrew-Cask" class="headerlink" title="HomeBrew Cask"></a>HomeBrew Cask</h3><p>由于国内墙的问题，AppStore下载应用速度总是比较慢，而且应用更新速度也是比较慢，而HomeBrew Cask可以第一时间获取到官方最新的应用，并且下载速度杠杠的。</p>
+<p>另外，Homebrew Cask可以优雅、简单、快速的安装和管理 OS X 图形界面程序。</p>
+<ul>
+<li><p>安装HomeBrew Cask</p>
+<p>HomeBrew Cask依赖于Xcode以及HomeBrew，建议在装这个之前装好前面两个软件，在<code>Terminal</code>执行下面命令进行安装：</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">brew tap caskroom/cask <span class="meta">&amp;&amp; brew install brew-cask</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用HomeBrew Cask</p>
+<p>搜索想要安装的软件，在<code>Terminal</code>输入下面命令即可：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">brew cask search qq</span></span><br></pre></td></tr></table></figure>
+
+<p>一些推荐安装的程序，一键搞定：</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">rew cask install alfred cleanmymac cheatsheet dropbox google-chrome sublime-<span class="built_in">text</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你是一个热衷于<code>Alfred</code>的爱好者（不熟悉这个软件的下面会讲到），默认情况下<code>Alfred</code>是不会搜索到<code>HomeBrew Cask</code>安装的软件的，你需要额外执行下面命令关联起来才行：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew cask alfred <span class="built_in">link</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>Mac 自带的 Git 版本相对比较旧，执行下面命令安装最新版本的 Git：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>git</span><br></pre></td></tr></table></figure>
+
+<p>由于<code>brew</code>安装的软件软路径在<code>/usr/local/bin</code>下面，而系统自带的软件在<code>/usr/bin</code>下面，为了让<code>brew</code>安装的软件覆盖系统自带的软件，需要在<code>.bashrc/.zshrc</code>的<code>PATH</code>添加下面变量：</p>
+<figure class="highlight applescript"><table><tr><td class="code"><pre><span class="line">/usr/<span class="keyword">local</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p>改完之后执行下面命令让配置文件生效：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># bash shell</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># zsh shell</span></span><br><span class="line"><span class="built_in">source</span> ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="SVN"><a href="#SVN" class="headerlink" title="SVN"></a>SVN</h3><p>Mac 自带的 SVN 版本也是相对较旧，执行下面命令安装最新版本的 SVN：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>svn</span><br></pre></td></tr></table></figure>
+
+<h3 id="iTerm2-zsh-tmux"><a href="#iTerm2-zsh-tmux" class="headerlink" title="iTerm2 + zsh + tmux"></a>iTerm2 + zsh + tmux</h3><p>Mac下面我们大概花费70%的时间在于终端打交道，在<code>OS X El Capitan‎</code>之前，恐怕系统默认的<code>Terminal+bash+screen</code>是无法跟<code>iTerms+zsh+tmux</code>进行匹敌的，当然热爱苹果原生App的童鞋大可不必安装这三个软件，但是作为一名<code>前端爱好者</code>，装上这三个软件会让你爱不释手的。</p>
+<h4 id="iTerm2-替代terminal"><a href="#iTerm2-替代terminal" class="headerlink" title="iTerm2 - 替代terminal"></a>iTerm2 - 替代terminal</h4><ul>
+<li><p>快捷键非常丰富（不一一详细列举，只列了几个目前常用的）</p>
+<ul>
+<li><code>⌘ + 数字</code>: 切换标签页，<code>⌘ + 方向键</code> 按方向切换标签页</li>
+<li><code>⌘ + enter</code>: 切换全屏</li>
+<li><code>⌘ + d</code>: 垂直分屏，<code>⌘ + shift + d</code>: 水平分屏。使用<code>⌘ + ]</code>和<code>⌘ + [</code>在最近使用的分屏直接切换.而<code>⌘ + opt + 方向键</code>切换到指定位置的分屏。</li>
+<li><code>⌘ + t</code> :新的标签页</li>
+<li><code>⌘ + r</code>:清屏</li>
+</ul>
+</li>
+<li><p>兼容性好</p>
+<p>这一点在远程连接服务器的时候才可以体验到，默认的系统终端有时候会出现乱码问题。</p>
+</li>
+</ul>
+<ul>
+<li><p>安装iTerm2</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span>iTerm2</span><br></pre></td></tr></table></figure></li>
+<li><p>颜色和字体设置</p>
+<p>下载<a href="https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized">Solarized dark iterm colors</a>，在Preferences -&gt; Profiles -&gt; Default -&gt; Colors -&gt; Load Presets 将其导入，作为默认颜色。</p>
+</li>
+</ul>
+<h4 id="zsh-号称终极终端神器"><a href="#zsh-号称终极终端神器" class="headerlink" title="zsh - 号称终极终端神器"></a>zsh - 号称终极终端神器</h4><p><a href="https://github.com/robbyrussell/oh-my-zsh">zsh</a>，也叫oh-my-zsh，Mac是基于UNIX的一套系统，而Shell可以说是UNIX的一个外壳，在Mac里面我们可以在<code>Terminal</code>执行下面命令看看系统有几种shell：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/shells</span><br></pre></td></tr></table></figure>
+
+<p>不出意外的话显示如下：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="regexp">/bin/</span>bash</span><br><span class="line"><span class="regexp">/bin/</span>csh</span><br><span class="line"><span class="regexp">/bin/</span>ksh</span><br><span class="line"><span class="regexp">/bin/</span>sh</span><br><span class="line"><span class="regexp">/bin/</span>tcsh</span><br><span class="line"><span class="regexp">/bin/</span>zsh</span><br></pre></td></tr></table></figure>
+
+<p>Mac默认使用的是<code>bash</code>这个shell，英文26个字母当中<code>z</code>排在最后，这足以说明<code>zsh</code>是有多强大的（当然了这是我瞎掰的），不过<code>zsh</code>说是<code>终极Shell</code>应该是一点都不过分的，列举几个优势让你看看有多强大 <strong>下面优势摘自MacTalk</strong>：</p>
+<ul>
+<li>强大的历史纪录功能，输入 grep 然后用上下箭头可以翻阅你执行的所有 grep 命令</li>
+<li>智能拼写纠正，输入gtep mactalk * -R，系统会提示：zsh: correct ‘gtep’ to ‘grep’ [nyae]? 比妹纸贴心吧，她们向来都是让你猜的……</li>
+<li>各种补全：路径补全、命令补全，命令参数补全，插件内容补全等等。触发补全只需要按一下或两下 tab 键，补全项可以使用 ctrl+n&#x2F;p&#x2F;f&#x2F;b上下左右切换。比如你想杀掉 java 的进程，只需要输入 kill java + tab键，如果只有一个 java 进程，zsh 会自动替换为进程的 pid，如果有多个则会出现选择项供你选择。ssh + 空格 + 两个tab键，zsh会列出所有访问过的主机和用户名进行补全</li>
+<li>智能跳转，安装了autojump之后，zsh 会自动记录你访问过的目录，通过 j + 目录名 可以直接进行目录跳转，而且目录名支持模糊匹配和自动补全，例如你访问过hadoop-1.0.0目录，输入j hado 即可正确跳转。j –stat 可以看你的历史路径库</li>
+<li>目录浏览和跳转：输入 d，即可列出你在这个会话里访问的目录列表，输入列表前的序号，即可直接跳转。</li>
+</ul>
+<p>下面介绍<code>zsh</code>的安装跟使用：</p>
+<ul>
+<li><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置zsh为你的默认shell</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">chsh -s <span class="regexp">/bin/</span>zsh</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更多关于<code>zsh</code>的使用请移步<a href="https://github.com/robbyrussell/oh-my-zsh">这里</a></p>
+</li>
+</ul>
+<h4 id="tmux-优秀的终端复用软件"><a href="#tmux-优秀的终端复用软件" class="headerlink" title="tmux - 优秀的终端复用软件"></a>tmux - 优秀的终端复用软件</h4><p>你是否<code>ssh</code>远程到服务器之后因为一不小心网络中断而得重新<code>ssh</code>上去？</p>
+<p>你是否在你的编译还没结束的时候想要暂停下来，然后关掉电脑回家之后再继续编译但最后结果却是需要重新进行编译？</p>
+<p>又或者你想过自己在终端开了一大堆的窗口但是关闭终端之后还想你的服务继续运行？</p>
+<p>如果你上面的问题都没想过，那么你可以跳过这个软件了，等你哪一天有需要的时候再回来看看。</p>
+<p>如果你跟我一样想过上面的其中某个问题，那么<code>tmux</code>强烈建议你安装。</p>
+<ul>
+<li>window，pane的概念可以很好地进行多窗口切换，窗口分割。</li>
+<li>状态行配置很容易。</li>
+<li>vi 模式</li>
+<li>复制粘贴缓冲区</li>
+<li>脚本化.通过脚本可以自动化窗口布局。</li>
+</ul>
+<p>下面介绍<code>tmux</code>的安装跟简单使用：</p>
+<ul>
+<li><p>安装</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span><span class="keyword">install </span>tmux</span><br></pre></td></tr></table></figure></li>
+<li><p>使用</p>
+<p>Prefix-Command前置操作：所有下面介绍的快捷键，都必须以前置操作开始。tmux默认的前置操作是CTRL+b。例如，我们想要新建一个窗体，就需要先在键盘上摁下CTRL+b，松开后再摁下n键。</p>
+</li>
+</ul>
+<p>Session相关操作</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">查看&#x2F;切换session</td>
+<td align="left">prefix s</td>
+</tr>
+<tr>
+<td align="left">离开Session</td>
+<td align="left">prefix d</td>
+</tr>
+<tr>
+<td align="left">重命名当前Session</td>
+<td align="left">prefix $</td>
+</tr>
+</tbody></table>
+<p>Window相关操作</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">新建窗口</td>
+<td align="left">prefix c</td>
+</tr>
+<tr>
+<td align="left">切换到上一个活动的窗口</td>
+<td align="left">prefix space</td>
+</tr>
+<tr>
+<td align="left">关闭一个窗口</td>
+<td align="left">prefix &amp;</td>
+</tr>
+<tr>
+<td align="left">使用窗口号切换</td>
+<td align="left">prefix 窗口号</td>
+</tr>
+</tbody></table>
+<p>Pane相关操作</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="left">快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">切换到下一个窗格</td>
+<td align="left">prefix o</td>
+</tr>
+<tr>
+<td align="left">查看所有窗格的编号</td>
+<td align="left">prefix q</td>
+</tr>
+<tr>
+<td align="left">垂直拆分出一个新窗格</td>
+<td align="left">prefix “</td>
+</tr>
+<tr>
+<td align="left">水平拆分出一个新窗格</td>
+<td align="left">prefix %</td>
+</tr>
+<tr>
+<td align="left">暂时把一个窗体放到最大</td>
+<td align="left">prefix z</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>个性化定制tmux</p>
+<p>默认情况下的<code>tmux</code>风格比较简陋，推荐使用<a href="https://github.com/gpakosz/.tmux">gpakoz的tmux配置</a>，实现了如下功能：</p>
+<ul>
+<li>基于powerline的美化</li>
+<li>显示笔记本电池电量</li>
+<li>和Mac互通的剪切板</li>
+<li>和vim更相近的快捷键</li>
+</ul>
+<p>安装方式如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span></span><br><span class="line"><span class="built_in">rm</span> -rf .tmux</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/gpakosz/.tmux.git</span><br><span class="line"><span class="built_in">ln</span> -s .tmux/.tmux.conf</span><br><span class="line"><span class="built_in">cp</span> .tmux/.tmux.conf.local .</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>了解更多<code>tmux</code>可以点击<a href="http://foocoder.com/blog/zhong-duan-huan-jing-zhi-tmux.html/">这里</a></p>
+</li>
+</ul>
+<h3 id="终端里临时设置代理"><a href="#终端里临时设置代理" class="headerlink" title="终端里临时设置代理"></a>终端里临时设置代理</h3><p>有时候使用终端命令例如 brew 需要设置代理以便FQ。</p>
+<p>举个例子，利用brew-cask安装macdown:</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">brew </span>cask <span class="keyword">install </span>macdown</span><br></pre></td></tr></table></figure>
+
+<p>因为macdown的安装源托管在amazonaws，不幸的是aws被Q，</p>
+<p>这时候我们可以设置终端代理为蓝灯代理，让brew-cask的相关命令顺利FQ:</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">ALL_PROXY=http:<span class="comment">//127.0.0.1:8787 brew cask install macdown</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+</div></article></div></main><footer><div class="paginator"><a href="/2015/12/09/an-introduction-to-sass-maps/" class="prev">PREV</a><a href="/2015/09/04/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E5%BC%80%E5%8F%91%E8%AE%B0%E5%BD%95/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

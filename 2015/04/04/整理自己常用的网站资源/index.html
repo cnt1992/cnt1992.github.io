@@ -1,20 +1,69 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 整理自己常用的网站资源 · Web前端爱好者</title><meta name="description" content="整理自己常用的网站资源 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">整理自己常用的网站资源</h1><div class="post-info">2015年4月3日</div><div class="post-content"><blockquote>
+<p>整理一下自己常用的网站资源，主要web前端为主。</p>
+</blockquote>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<h3 id="web标准文档"><a href="#web标准文档" class="headerlink" title="web标准文档"></a>web标准文档</h3><ol>
+<li><a href="http://dev.w3.org/csswg/css2/">css 2.1官方文档</a></li>
+<li><a href="http://www.ecma-international.org/ecma-262/5.1/">ECMA 5.1官方文档</a></li>
+</ol>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><ol>
+<li><a href="http://web.memect.com/">web技术日报</a> <em>每天更新</em></li>
+<li><a href="http://newsletter.csdn.net/module/news/newsletter/index/1">CSDN 移动周刊</a> <em>每周更新</em></li>
+<li><a href="http://www.zaoduke.net/">前端早读课</a> <em>不定时更新</em></li>
+</ol>
+<h3 id="技术博客"><a href="#技术博客" class="headerlink" title="技术博客"></a>技术博客</h3><ol>
+<li><a href="http://blog.cssforest.org/">CSS森林</a> <em>鬼哥的博客</em></li>
+<li><a href="http://hikejun.com/blog/">张克军博客</a> <em>无更新状态，不过文章挺经典</em></li>
+<li><a href="http://ued.taobao.org/blog/">淘宝UED博客</a></li>
+<li><a href="http://www.alloyteam.com/">AlloyTeam博客</a> <em>腾讯全端AlloyTeam团队Blog</em></li>
+</ol>
+<h3 id="在线学习"><a href="#在线学习" class="headerlink" title="在线学习"></a>在线学习</h3><ol>
+<li><a href="http://www.codecademy.com/">codecademy</a>  <em>问答式的学习平台</em></li>
+<li><a href="http://www.w3cplus.com/">w3c plus</a></li>
+<li><a href="http://www.w3school.com.cn/">w3c school</a> <em>入门级别的教程</em></li>
+</ol>
+<h3 id="流程自动化"><a href="#流程自动化" class="headerlink" title="流程自动化"></a>流程自动化</h3><ol>
+<li><a href="http://gulpjs.com/">gulpjs</a> <em>基于流的自动化</em></li>
+<li><a href="http://gruntjs.com/getting-started">grunt</a></li>
+</ol>
+<h3 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h3><ol>
+<li><a href="http://kindeditor.net/demo.php">在线HTML编辑器</a> <em>针对一大篇幅word文档内容直接转换成html比较有效</em></li>
+<li><a href="http://www.bejson.com/index.php">在线JSON校验格式化工具</a></li>
+<li><a href="http://validator.w3.org/">w3c HTML验证服务</a> <em>刚入门HTML的建议写好代码放这上面测试看通过不通过</em></li>
+<li><a href="http://jigsaw.w3.org/css-validator/#validate_by_upload">w3c CSS验证服务</a> <em>检查自己写的CSS有没有错误</em></li>
+<li><a href="http://www.img2ico.net/">图标转换工具</a> <em>将jpg、png、gif的图片转换成ico格式</em></li>
+<li><a href="http://www.pjhome.net/web/html5/encodeDataUrl.htm">在线文件转换成base64编码</a></li>
+</ol>
+<h3 id="代码试验场"><a href="#代码试验场" class="headerlink" title="代码试验场"></a>代码试验场</h3><ol>
+<li><a href="http://jsfiddle.net/">JSFiddle</a> <em>可以在这里写代码看效果，也可以分享给他人</em></li>
+<li><a href="http://codepen.io/">codepen</a> <em>可以看别人学的一些好的代码demo</em></li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/04/21/%E6%95%B0%E7%BB%84%E6%B4%97%E7%89%8C%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="prev">PREV</a><a href="/2014/12/01/gulp%E8%87%AA%E5%8A%A8%E5%8C%96%E8%84%9A%E6%9C%AC/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

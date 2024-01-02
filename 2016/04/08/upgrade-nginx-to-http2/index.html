@@ -1,20 +1,121 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 前端工程师学习Nginx实践配置HTTP2.0篇 · Web前端爱好者</title><meta name="description" content="前端工程师学习Nginx实践配置HTTP2.0篇 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">前端工程师学习Nginx实践配置HTTP2.0篇</h1><div class="post-info">2016年4月8日</div><div class="post-content"><h2 id="科普时间"><a href="#科普时间" class="headerlink" title="科普时间"></a>科普时间</h2><p>作为有 <code>全栈工程师</code> 情节并且 <strong>乐于折腾</strong> 的我在上一篇 <a href="http://cnt1992.xyz/2016/03/18/simple-intro-to-nginx/">前端工程师学习Nginx入门篇</a> 之后继续捣鼓将 <code>Nginx</code> 配置支持 <code>HTTP2.0</code>，这是为了等以后有钱可以买个服务器的时候直接配置服务器体验一把网页<code>秒开</code>的快感，为啥配置<code>HTTP2.0</code>可以秒开网页？请静心往下看(图片摘自网络，如有侵略版权内容请联系我删除哈)：</p>
+<h3 id="HTTP-2-0-带来了哪些新特性-？"><a href="#HTTP-2-0-带来了哪些新特性-？" class="headerlink" title="HTTP 2.0 带来了哪些新特性 ？"></a><code>HTTP 2.0</code> 带来了哪些新特性 ？</h3><blockquote>
+<p><code>HTTP 2.0</code> 带来了很多新的特性，这里不会一一详细介绍，只列举了几项，如有兴趣研究的童鞋请移步 <a href="https://tools.ietf.org/html/rfc7540">官方RFC文档</a>。</p>
+</blockquote>
+<p>1.<strong>增加</strong>二进制分帧</p>
+<p><code>HTTP</code>协议从<code>0.9</code>版本开始不断增加新的功能特性，但长远来看都是 <code>向前兼容</code> 的，<code>HTTP 2.0</code> 在 <code>应用层</code> 跟 <code>传输层</code> 之间增加了一个 <code>二进制分帧层</code>，从而能够达到 “在不改动HTTP的语义、HTTP方法、状态码、URI及首部字段的情况下，突破HTTP 1.1的性能限制，改进传输性能，实现低延迟和高吞吐量。”</p>
+<p><img src="/img/nginx-http/binary.png" alt="HTTP 2.0二进制分帧层"></p>
+<p>如上图所示，在 <code>二进制分帧层</code> 上， <code>HTTP 2.0</code> 会将所有传输的信息分割为更小的消息和帧，并对它们采用二进制格式的编码，其中 <code>HTTP 1.1</code> 的首部信息会被封装到 <code>Headers</code> 帧，而 <code>request body</code> 被封装到 <code>Data</code> 帧里面。</p>
+<p>2.压缩头部</p>
+<p>如下图所示：<code>HTTP 2.0</code> 在 <code>客户端</code> 和 <code>服务端</code> 使用 <strong>首部表</strong> 来跟踪和存储之间发送的 <code>键-值</code> 对，对相同请求而言不需要再次发送请求和相应发送，通信期间几乎不会改变的通用 <code>键-值</code> （如：用户代理、可接受的媒体类型）只需发送一次。</p>
+<ul>
+<li>如果请求不包含首部（如：对同一资源的轮询请求），那首部开销为零字节</li>
+<li>如果首部发生变化，那只需发送变化的数据在 <code>Headers</code> 帧里面，新增或修改的 <code>首部帧</code> 会被追加到 <strong>首部表</strong></li>
+</ul>
+<p><img src="/img/nginx-http/header.png" alt="HTTP 2.0头部压缩"></p>
+<p>3.多路复用</p>
+<p>记得大学 <code>计算机网络</code> 跟 <code>计算机组成原理</code> 这两门课都讲到了 <code>多路复用</code> 这个概念，当时一知半解（可能是老师讲得太抽象了o(╯□╰)o）。相比一个入了门的前端开发在谈到 <code>性能优化</code> 的方法时都可以轻轻松松列举如下几点：</p>
+<ul>
+<li>CSS雪碧图合并 - 减少请求</li>
+<li>合并压缩CSS跟JavaScript代码 - 减少请求</li>
+<li>CSS代码放在header头部里面，JavaScript代码放到body结束之前 - 因为JavaScript代码执行会阻塞</li>
+</ul>
+<p>然后我们可以自豪地晒出下面的代码片段：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">HTML</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;xxx.cdn.com/??a.css,b.css&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;xxx.cdn.com/??a.js,b.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-block site_title
-    != page.title + " · " + config.title
+<p>但 <code>HTTP 2.0</code> 的 <code>多路复用</code> 让我们回到了最原始最自然的写码状态，先看下图：</p>
+<p><img src="/img/nginx-http/multiplexing.png" alt="HTTP 2.0 多路复用"></p>
+<p>对 <code>HTTP 1.1</code> 而言，浏览器通常有链接的限制，即使开启多个链接，也需要付出相应的代码，而 <code>多路复用</code> 允许同时通过单一的 <code>HTTP 2.0</code> 连接发起多重的 <code>请求-相应</code> 消息。</p>
+<p>这意味着 <code>HTTP 2.0</code> 的通信都在一个连接上完成了，这个连接可以承载任意数量的 <strong>双向数据流</strong> ，直观来说，就是我们又可以开开心心写出下面代码：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">HTML</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;a.css&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;b.css&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;a.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;b.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<span id="more"></span>
 
-block container
-    include mixins/post
-    +post(page)
+<p>4.请求优先级</p>
+<p>既然所有资源都可以并行交错发送，会不会导致下面这种情况呢？</p>
+<blockquote>
+<p>浏览器： 服务器，请给我需要的CSS文件<br>服务器： Biu，发送图片中…<br>浏览器： 服务器，请给我需要的JS文件<br>服务器： Biu，发送图片中…<br>浏览器： 服务器，你TM的倒是给我发送我需要的CSS文件跟JS文件呀！</p>
+</blockquote>
+<p>这个时候 <code>HTTP 2.0</code> 的 <code>请求优先级</code> 特性出场了，在每个 <code>HTTP 2.0</code> 的 <code>流</code> 里面有个 <strong>优先值</strong> ，这个 <strong>优先值</strong> 确定着客户端跟服务器处理不同的 <code>流</code> 采取不同的 <strong>优先级策略</strong> ，高优先级的应该优先发送，但这不会绝对的（绝对等待会导致 <code>首队阻塞</code> 问题）。在分配处理资源和客户端与服务器间的宽带，不同优先级的混合都是必须的。</p>
+<p>5.服务器提示</p>
+<p>一般情况下，客户端需要请求啥东西告诉服务器，然后服务器返回对应资源回到客户端，这也是请求很慢的原因之一。<code>HTTP 2.0</code> 新增加 <code>服务器提示</code> ，可以先于客户端检测到将要请求的资源，提前通知客户端，服务器不发送所有资源的实体，只发送资源的 <code>URL</code>。客户端接到提示后会进行验证缓存，如果发现需要这些资源，则正式发起请求。</p>
+<p>这个技术跟我们常用的 <code>预加载</code> 技术实现差不多，但 <code>服务器提示</code> 是通过 <code>HTTP Link Header</code> 和 <code>Link Prefetching</code> 语义重叠的部分来实现的。</p>
+<h3 id="Nginx-如何实现-HTTP-2-0"><a href="#Nginx-如何实现-HTTP-2-0" class="headerlink" title="Nginx 如何实现 HTTP 2.0 ?"></a>Nginx 如何实现 HTTP 2.0 ?</h3><p>打开 <a href="http://nginx.org/">Nginx官网</a> 可以看到其中有一条新闻如下：</p>
+<p><img src="/img/nginx-http/nginx-release-http2.0.png" alt="Nginx的HTTP 2.0模块"></p>
+<p>显然，<code>Nginx</code> 是已经有了一个 <code>ngx_http_v2_module</code> 模块用来支持 <code>HTTP 2.0</code> 的，但是还不是稳定版，所以想要尝鲜那就需要 <strong>手动升级Nginx</strong> 。</p>
+<p>科普时间到此结束，下面就让我们正式进入今天的主题： <code>一步步实现Nginx配置HTTP 2.0</code>。</p>
+<h2 id="Nginx配置HTTP-2-0正式起航"><a href="#Nginx配置HTTP-2-0正式起航" class="headerlink" title="Nginx配置HTTP 2.0正式起航"></a>Nginx配置HTTP 2.0正式起航</h2><blockquote>
+<p>下面内容有条件的同学请对比实践操作，体会更深。</p>
+</blockquote>
+<p>我将从下面几步来介绍：</p>
+<ul>
+<li>准备工作</li>
+<li>源码安装升级 Nginx 到最新版（当前是1.9.14）</li>
+<li>生成 <code>SSL/TLS</code> 安全证书</li>
+<li>修改Nginx配置</li>
+</ul>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>在开始我们的任务之前，请先下载 <a href="https://www.openssl.org/source/openssl-1.0.2g.tar.gz">OpenSSL</a>，<a href="http://downloads.sourceforge.net/project/pcre/pcre/8.38/pcre-8.38.tar.gz?r=https://sourceforge.net/projects/pcre/files/pcre/8.38/&ts=1459928198&use_mirror=liquidtelecom">pcre</a>，<a href="http://zlib.net/zlib-1.2.8.tar.gz">Zlib</a> 跟 <a href="http://nginx.org/download/nginx-1.9.14.tar.gz">Nginx源码</a> ，并且全部解压到同一个目录，假设为 <code>nginx-build</code>，这时候的代码结构如下：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">nginx</span>-build</span><br><span class="line">  <span class="attribute">nginx</span>-<span class="number">1</span>.<span class="number">9</span>.<span class="number">14</span></span><br><span class="line">  <span class="attribute">pcre</span>-<span class="number">8</span>.<span class="number">38</span></span><br><span class="line">  <span class="attribute">openssl</span>-<span class="number">1</span>.<span class="number">0</span>.<span class="number">2</span>g</span><br><span class="line">  <span class="attribute">zlib</span>-<span class="number">1</span>.<span class="number">2</span>.<span class="number">8</span></span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+<h3 id="源码安装升级-Nginx-到最新版（当前是1-9-14）"><a href="#源码安装升级-Nginx-到最新版（当前是1-9-14）" class="headerlink" title="源码安装升级 Nginx 到最新版（当前是1.9.14）"></a>源码安装升级 Nginx 到最新版（当前是1.9.14）</h3><blockquote>
+<p>若之前用 <code>brew</code> 安装过 <code>Nginx</code> ，请先执行 <code>brew uninstall nginx</code> 卸载。 </p>
+</blockquote>
+<p>准备工作做好之后，打开 <code>Terminal</code> 切换到上面的 <code>nginx-build</code> 目录，然后执行下面命令编译Nginx：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 先进入nginx源码目录</span></span><br><span class="line"><span class="keyword">cd</span> nginx-1.9.14</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置Nginx源码</span></span><br><span class="line"><span class="comment"># --prefix：配置nginx最终安装目录，可以修改为你想要的目录</span></span><br><span class="line"><span class="comment"># --with-http_ssl_module 跟 --with-http_v2_module 必带，因为 HTTP 2.0 采用 HTTPS ，HTTPS 基于 SSL/TLS</span></span><br><span class="line">sudo <span class="string">./configure</span> <span class="params">--prefix=/usr/local/nginx</span> <span class="params">--with-http_ssl_module</span> <span class="params">--with-pcre=</span><span class="string">../pcre-8.38</span> <span class="params">--with-openssl=</span><span class="string">../openssl-1.0.2g</span> <span class="params">--with-zlib=</span><span class="string">../zlib-1.2.8</span> <span class="params">--with-http_v2_module</span></span><br><span class="line">&gt; 输入管理员密码然后回车</span><br></pre></td></tr></table></figure>
 
-block copyright
-    include partial/copyright
+<p>配置源码成功之后，为了避免 <code>make</code> 失败，因为我失败了（可能是人品不好…），反正我 <code>make</code> 的时候报了下面的错误：</p>
+<p><img src="/img/nginx-http/make-error.png" alt="Nginx make 出错"></p>
+<p>所以建议大家跟我一样先修改一个配置文件，如下命令(相对于<code>nginx-build</code>目录)：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd nginx-1.9.14/objs</span><br><span class="line">sudo vi Makefile</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">输入管理员密码然后回车</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 vi 模式下输入 <span class="string">&#x27;/&#x27;</span> ，然后输入./config --prefix定位到类似我下面的片段：</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&amp;&amp; ./config --prefix=/Users/cainengtian/Downloads/software/nginx-1.8.0/../openssl-1.0.2d/.openssl no-shared  \</span></span><br><span class="line"><span class="language-bash"><span class="comment"># 将前面的 ./config 改为 ./Congigure darwin64-x86_64-cc ，其他的不要改动， 然后保存即可</span></span></span><br></pre></td></tr></table></figure>
+
+<p>接着回到<code>nginx-build</code>目录，然后执行下面命令编译：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">cd</span> nginx-<span class="number">1</span>.<span class="number">9</span>.<span class="number">14</span></span><br><span class="line"><span class="attribute">sudo</span> make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>如果没有报错那就编译成功，在终端试试 <code>sudo nginx</code> 启动，然后打开 <a href="http://localhost/">http://localhost</a> 能看到欢迎页，然后在终端输入 <code>nginx -v</code> 看到 <code>nginx version: nginx/1.9.14</code>。</p>
+<h3 id="生成-SSL-TLS-安全证书"><a href="#生成-SSL-TLS-安全证书" class="headerlink" title="生成 SSL/TLS 安全证书"></a>生成 <code>SSL/TLS</code> 安全证书</h3><p>要配置 <code>HTTP 2.0</code> 就需要启动 <code>HTTPS</code>，那就需要生成一个 <code>SSL/TLS</code> 证书，而 <code>OpenSSL</code> 正好可以做这件事情，买不起证书但自己造一个来临时用还是可以的，直接执行下面命令：</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"># 切换到nginx的根目录（我这里是/usr/<span class="keyword">local</span>/nginx，请根据上一步编译时候指定的<span class="comment">--prefix对应修改）</span></span><br><span class="line">cd /usr/<span class="keyword">local</span>/nginx</span><br><span class="line">cd conf</span><br><span class="line"></span><br><span class="line"># 利用openssl命令生成公钥跟密钥</span><br><span class="line">openssl genrsa -des3 -passout pass:x -<span class="keyword">out</span> cert.pass.key <span class="number">2048</span></span><br><span class="line">openssl rsa -passin pass:x -<span class="keyword">in</span> cert.pass.key -<span class="keyword">out</span> cert.key</span><br><span class="line">openssl req -<span class="built_in">new</span> -key cert.key -<span class="keyword">out</span> cert.csr</span><br><span class="line">openssl x509 -req -days <span class="number">365</span> -<span class="keyword">in</span> cert.csr -signkey <span class="keyword">server</span>.key -<span class="keyword">out</span> cert.crt</span><br><span class="line"></span><br><span class="line"># 将crt跟key合并生成pem文件</span><br><span class="line">cat <span class="keyword">server</span>.crt <span class="keyword">server</span>.key &gt; <span class="keyword">server</span>.pem</span><br><span class="line"></span><br><span class="line"># 删除掉我们不需要用到的文件</span><br><span class="line">rm -rf cert.crt cert.csr</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改Nginx配置"><a href="#修改Nginx配置" class="headerlink" title="修改Nginx配置"></a>修改Nginx配置</h3><p>离成功之后一步之遥了，接下来就是最重要的一步，配置Nginx支持HTTP 2.0，修改Nginx配置文件<code>/usr/local/nginx/conf/nginx.conf</code>： </p>
+<p>1.将所有HTTP请求重定向到HTTPS请求</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">location</span> / &#123;</span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$host</span><span class="variable">$remote_port</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>2.配置HTTPS server</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl http2 default_server;</span><br><span class="line">        <span class="attribute">server_name</span>  localhost;</span><br><span class="line">        <span class="attribute">ssl_certificate</span>      cert.pem;</span><br><span class="line">        <span class="attribute">ssl_certificate_key</span>  cert.key;</span><br><span class="line">        <span class="attribute">ssl_session_cache</span>    shared:SSL:<span class="number">1m</span>;</span><br><span class="line">        <span class="attribute">ssl_session_timeout</span>  <span class="number">5m</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 我用原始的下面这段启动报错了，所以注释掉改用了后面那段</span></span><br><span class="line">        <span class="comment">#ssl_ciphers  HIGH:!aNULL:!MD5;</span></span><br><span class="line">        <span class="attribute">ssl_ciphers</span> <span class="string">&#x27;CHACHA20:EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH:ECDHE-RSA-AES128-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA128:DHE-RSA-AES128-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES128-GCM-SHA128:ECDHE-RSA-AES128-SHA384:ECDHE-RSA-AES128-SHA128:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA128:DHE-RSA-AES128-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA384:AES128-GCM-SHA128:AES128-SHA128:AES128-SHA128:AES128-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4;&#x27;</span>;</span><br><span class="line">        <span class="attribute">ssl_prefer_server_ciphers</span>  <span class="literal">on</span>;</span><br><span class="line"></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">root</span>   html;</span><br><span class="line">            <span class="attribute">index</span>  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以注意到上面 <code>HTTPS</code> 的配置比之前多了一个 <code>http2</code> ，这就是 <code>ngx_http_v2_module</code> 模块，若没有安装该模块启动一样会报错。</p>
+<p>3.重启服务器</p>
+<p>配置完成之后，重新启动服务器即可：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">sudo nginx -s reload</span></span><br></pre></td></tr></table></figure>
+
+<p>4.预览</p>
+<p>打开 <a href="http://localhost/">http://localhost</a> ，自动跳转到 <a href="https://localhost/">https://localhost</a> ，Done！</p>
+<h2 id="一点思考"><a href="#一点思考" class="headerlink" title="一点思考"></a>一点思考</h2><p>虽然 <code>HTTP 2.0</code> 也已经不算是非常新的东西，要普及确实也需要很长一段时间，希望不久将来有钱买个服务器部署到自己网站上。</p>
+<p>只有动手实践才知道看起来简单的东西实际上还是会碰到很多坑，anyway，一直在成长的路上~</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/04/15/a-note-about-postcss-author-share/" class="prev">PREV</a><a href="/2016/04/05/%E8%BF%9F%E6%9D%A5%E7%9A%84%E9%9D%A2%E7%BB%8F/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

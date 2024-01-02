@@ -1,20 +1,57 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 项目是检验前端是否合格的标准 · Web前端爱好者</title><meta name="description" content="项目是检验前端是否合格的标准 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">项目是检验前端是否合格的标准</h1><div class="post-info">2016年8月25日</div><div class="post-content"><p><em>友情提示：这不是一篇技术文章，几乎都是文字没有代码，适合刚入门前端亦或者是跟我一样觉得前端还有很多东西需要去学的童鞋</em></p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<blockquote>
+<p>入门前端2年多，算上各种加班的话应该是3年，一直标榜自己“全栈工程师”。然而从近一次持续了三个月的项目中感受很深，方知前端合格很难，更别谈优秀，这条路还有很多东西需要去“品”。</p>
+</blockquote>
+<h2 id="谈谈自己前端历程"><a href="#谈谈自己前端历程" class="headerlink" title="谈谈自己前端历程"></a>谈谈自己前端历程</h2><p>我要谈的前端，严格意义上是大前端。因为在腾讯一些公司是有<code>重构</code>岗位(现在改成<code>UI</code>部门，其实都差不多，就是负责页面的<code>HTML</code>跟<code>CSS</code>视觉效果还原)以及<code>JavaScript开发</code>岗位(负责产品的数据以及交互层次的研发)的。我之前的工作岗位是<code>前端设计师</code>，也就是<code>重构</code>，每天重复着<code>切图仔</code>的角色感觉有点厌烦了(现在挺怀念当时的日子~)，于是开始接手写一些<code>JS</code>效果，但还是比较简单的，比如轮播、导航这一类简单的交互效果。</p>
+<p>再后来，折腾<code>Node</code>，玩<code>Nginx</code>，搞<code>Mysql</code>&#x2F;<code>Mongo</code>，一项新的技术出来赶紧学，什么<code>Angular</code>&#x2F;<code>Vue</code>&#x2F;<code>React</code>统统学一遍，然后，开始标榜自己为<strong>全栈工程师</strong>。</p>
+<p>就这样，现在成为了<strong>大前端</strong>的一员，我不确定这是否是未来的一种趋势，但就这样子一直在路上。直到最近这次持续了3个月的项目，多人协作下才深刻感受到：别谈优秀，合格都很难。</p>
+<h2 id="一一论证"><a href="#一一论证" class="headerlink" title="一一论证"></a>一一论证</h2><p>下面我将在我所有感受的方面来一个个的<del>吐槽</del>讨论，基本上谈到的例子都是我项目中真实的例子。</p>
+<p>在开始之前得先介绍一下技术背景：基于<code>React</code>的<code>Redux</code>封装的一套自己的<code>SDK</code>的基础上，写各种<code>React</code>组件然后封装到内部的<code>npm</code>模块，最终将这些模块堆砌输出到页面，目前共输入100多个组件。</p>
+<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>抛开<code>结构</code>、<code>表现</code>、<code>行为</code>分离，<code>JSX</code>也就是在<code>React</code>盛行之下才活得下来。那么写组件的时候也是在写<code>结构</code>、<code>表现</code>以及<code>行为</code>，只是把这些都放在了一个<code>.jsx</code>文件里面。然后有一次看到一个小伙伴写的组件，一套结构下来全部都是<code>div</code>&#x2F;<code>span</code>，没有任何其他的标签了；还有一次有个小伙伴让我改一下我的组件，其中我用了<code>h2</code>的标签说不要加粗让改成<code>p</code>标签。</p>
+<p>我们先不考虑<code>SEO</code>，一段语义化的代码就直接映射一个前端的思维。你在路边看到一排树脑海里想到<code>ul</code>，你在房间看到挂在墙上的一幅画脑海里想到<code>margin</code>&#x2F;<code>padding</code>&#x2F;<code>width</code>&#x2F;<code>height</code>，你在看文章的时候能想到<code>h1</code>&#x2F;<code>h2</code>&#x2F;<code>section</code>&#x2F;<code>article</code>，而不是看到任何事物都是一个<code>div</code>以言之。告别了<code>table</code>时代，迎来了<code>div</code>时代？别！</p>
+<p>然后，讲完了<code>结构</code>，来讲讲<code>表现</code>，也就是<code>CSS</code>，一个好的<code>重构工程师</code>能够以最小颗粒度的<code>CSS</code>写出最优雅的样式，那么在协同的情况下，各种违和的命名就出来了，我们都知道<code>姓氏命名法</code>、<code>BEM命名法</code>，但在项目紧急的情况下就失去了这个原则？然后各种随手写出来的命名就这样子出现在代码上了，比如：<code>.right</code>、<code>.weixuanzhong</code>，恩，后面的表示未选中，还好我拼音学得好。</p>
+<p>最后一点，跟百度的同学也了解过，自己之前的团队也一样，写<code>CSS</code>属性的时候都会有一套先后顺序约定，虽然要求有点高了，但是对以后代码的维护以及浏览器加速渲染CSS都很有帮助：</p>
+<ol>
+<li>display&#x2F;position&#x2F;top&#x2F;left&#x2F;margin&#x2F;padding&#x2F; 最外层属性</li>
+<li>width&#x2F;height 元素自身属性</li>
+<li>font族属性&#x2F;color&#x2F;background 元素外观属性（color跟background总是成对出现）</li>
+<li>z-index等属性</li>
+</ol>
+<p>UI是给用户看的，但代码是我们自己写并且需要维护的，写“好”的代码很重要。</p>
+<h3 id="UI交互"><a href="#UI交互" class="headerlink" title="UI交互"></a>UI交互</h3><p>无线大行天下的时代，细腻的UI给用户的感知是最明显的，当<code>ios8</code>出来的时候就伴随着<code>0.5px</code>的边框出现，而到现在为止有多少个项目能够真的把这考虑进去，最后自己在周末花了几个小时的时间给所有的组件都加上了<code>0.5px</code>的边框，当然了我只是用<code>JS</code>去判断是否<code>ios8</code>设备及以上然后打入类到html里面，安卓用户对不起了。</p>
+<p>触摸屏的出现就会有触摸态的UI交互。一个按钮手指按下去的时候用户知道了么？我们作为开发习惯了在<code>chrome模拟器</code>下进行页面的开发，更看重于逻辑是否正常，忽略了这些感官最强的UI交互，一个简单的<code>:active</code>类加上去体验还是差很远。</p>
+<p>学过了<code>CSS3</code>的<code>transition</code>之后，各种需要“动起来”的东西我们都很喜欢用<code>transition</code>来实现，比如底部弹出层，从<code>bottom:-100%</code>到<code>bottom:0</code>的效果加上<code>transition</code>就会有过渡上来的效果。但是，直接用<code>top</code>&#x2F;<code>bottom</code>&#x2F;<code>left</code>&#x2F;<code>right</code>这一类的属性加上<code>transition</code>在手机上是很卡顿的，毕竟性能瓶颈在那里。所以一般动效都用<code>transform</code>的<code>translate3d</code>等属性去实现，什么<code>GPU</code>加速能用上的都用上，再碰到坑继续折腾。</p>
+<h3 id="自测"><a href="#自测" class="headerlink" title="自测"></a>自测</h3><p>有多少写<code>H5</code>页面的童鞋能够用真机来进行测试的？当测试给你提页面乱位的bug的时候，第一反应打开<code>chrome模拟器</code>然后跟他截个图说没问题呀，然后心里骂道：傻逼测试。sorry，我有一次这么干了，但当我突然想起我忘记在真机上测试的时候就非常对不起测试同学。</p>
+<p>自测是对自己负责任的最基本要求，你不能要求测试帮你测所有的东西，虽然测试就是在干这么一件事情。但你自己做的东西自己至少测试没问题，测试帮你发现你没有发现的问题，那才是最美好的事情。</p>
+<h2 id="未完待续"><a href="#未完待续" class="headerlink" title="未完待续"></a>未完待续</h2><p>洋洋洒洒废话了一大堆，也许大家看到的时候会不屑，但这真的就出现了这些问题，作为一个<strong>合格的前端</strong>这些是最基本基本的要求，这是入门就必须要做到的。</p>
+<p>由于肚子饿的关系，今天先写到这里，还有几个方面等有空继续写，当然了，都是非技术难题的方面，纯粹就最基本的要求但却最容易被忽略了的。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/09/28/problem-based-to-learn-mock-data/" class="prev">PREV</a><a href="/2016/08/10/replace-highlevel-function-width-mixins-in-react/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

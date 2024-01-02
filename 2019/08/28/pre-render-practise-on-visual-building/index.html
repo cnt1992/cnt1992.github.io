@@ -1,20 +1,80 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 服务端预渲染在可视化搭建业务的实践 · Web前端爱好者</title><meta name="description" content="服务端预渲染在可视化搭建业务的实践 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">服务端预渲染在可视化搭建业务的实践</h1><div class="post-info">2019年8月28日</div><div class="post-content"><p>最近在做<code>可视化搭建</code>的业务，为了追求页面的极致渲染，对比了<code>SSR</code>等服务端渲染方案之后，决定用比较轻量的<code>预渲染</code>来加速页面渲染速度，期间碰到的一些坑记录下。</p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
+<p>关于 <code>CSR</code> &#x2F; <code>SSR</code> &#x2F; <code>同构</code> &#x2F; <code>预渲染</code> 这几种渲染方式都有各自的优缺点，在我做的<code>可视化搭建</code>业务里面，<code>SSR</code>太“重”不适合，<code>同构</code>Node容易成为瓶颈，所以比较适合的是<code>预渲染</code>，这是以最小的代价达到相对比较好的收益。</p>
+<h3 id="如何预渲染"><a href="#如何预渲染" class="headerlink" title="如何预渲染"></a>如何预渲染</h3><p>预渲染有各种手段可以实现，一般都用现成的谷歌维护的<code>Puppeteer</code>启动隐身浏览器去提前访问页面生成一份“快照”，真实用户访问时会直接将“快照”从服务端返回去，加快了<code>FCP</code>帧的时间。</p>
+<p>拿我自己的例子来说，在页面发布阶段，通过<code>无头浏览器</code>提前访问页面拿到需要的<code>DOM</code>&#x2F;<code>STYLE</code>数据发布到<code>OSS</code>去，渲染时从<code>OSS</code>取好数据放到模板里面返回，这样子渲染的<code>HTML</code>就不再是只有空的一个 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code> ，而是有一份完整的 <code>DOM</code>，具体时序图如下：</p>
+<p><img src="https://gw.alicdn.com/tfs/TB16_hYeAT2gK0jSZPcXXcKkpXa-1732-1426.png" alt="预渲染时序图"></p>
+<h3 id="预渲染-无预渲染-对比图"><a href="#预渲染-无预渲染-对比图" class="headerlink" title="预渲染&#x2F;无预渲染 对比图"></a>预渲染&#x2F;无预渲染 对比图</h3><blockquote>
+<p>todo: 待大量数据压测，目前只是直观数据</p>
+</blockquote>
+<h4 id="无预渲染"><a href="#无预渲染" class="headerlink" title="无预渲染"></a>无预渲染</h4><p>FCP时间：1226.6ms，可以看到中间有一段“白屏”</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1N.VQepT7gK0jSZFpXXaTkpXa-2956-1594.png" alt="无预渲染.png"></p>
+<h4 id="有预渲染"><a href="#有预渲染" class="headerlink" title="有预渲染"></a>有预渲染</h4><p>FCP时间: 567.9ms，基本没有“白屏”</p>
+<p><img src="https://gw.alicdn.com/tfs/TB1PWphep67gK0jSZPfXXahhFXa-2952-1632.png" alt="预渲染.png"></p>
+<h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><h4 id="部署到服务器之后提示chromium启动失败"><a href="#部署到服务器之后提示chromium启动失败" class="headerlink" title="部署到服务器之后提示chromium启动失败"></a>部署到服务器之后提示chromium启动失败</h4><figure class="highlight stata"><table><tr><td class="code"><pre><span class="line">&quot;Failed to launch chrome!</span><br><span class="line">/<span class="variable">$&#123;app_path&#125;</span>/node_modules/_puppeteer@1.18.1@puppeteer/.<span class="keyword">local</span>-chromium/linux-672088/chrome-linux/chrome: <span class="keyword">error</span> <span class="keyword">while</span> loading shared libraries: libX11.<span class="keyword">so</span>.6: cannot <span class="keyword">open</span> shared object <span class="keyword">file</span>: <span class="keyword">No</span> such <span class="keyword">file</span> or directory</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TROUBLESHOOTING: https:<span class="comment">//github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md</span></span><br><span class="line">&quot;</span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<p><strong>原因：linux机器chromium缺少动态依赖库导致（不像mac&#x2F;windows，linux服务器无UI）</strong></p>
+<p>解法：</p>
+<p>1、[可选，也可以直接执行第二步安装所有依赖]上服务器执行下面的命令查看缺少哪一些动态依赖库，关于<strong>ldd</strong>命令介绍可戳<a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/ldd.html">这里</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 下面的appName替换成自己的应用名称，或者直接从错误日志里面直接复制也行</span></span><br><span class="line"><span class="built_in">cd</span> /home/admin/<span class="variable">$&#123;appName&#125;</span>/target/<span class="variable">$&#123;appName&#125;</span></span><br><span class="line">ldd ./node_modules/_puppeteer@1.18.1@puppeteer/.local-chromium/linux-672088/chrome-linux/chrome | grep not</span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
+<p>2、根据缺少的依赖库利用 <strong>yum</strong> 进行安装，将安装的命令写到 <code>config/docker/Dockerfile</code> (本应用采用了egg框架，其他类型应用自行修改) ，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># linux下puppeteer依赖库安装</span></span><br><span class="line">RUN yum -y install libX11 libXcomposite libXcursor libXdamage libXext libXi libXtst cups-libs libXScrnSaver libXrandr alsa-lib pango atk at-spi2-atk gtk3 </span><br><span class="line">RUN yum -y install ipa-gothic-fonts xorg-x11-fonts-100dpi xorg-x11-fonts-75dpi xorg-x11-utils xorg-x11-fonts-cyrillic xorg-x11-fonts-Type1 xorg-x11-fonts-misc</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+<p>3、提交代码重新部署即可</p>
+<h4 id="本地跟部署之后的结果不一致"><a href="#本地跟部署之后的结果不一致" class="headerlink" title="本地跟部署之后的结果不一致"></a>本地跟部署之后的结果不一致</h4><p>现象：本地调试时根据<code>puppeteer</code>获取到的<code>html</code>内容符合期望，但是部署到服务器之后只能获取到原始的<code>html</code>而非异步渲染完成之后的<code>html</code></p>
+<p>原因排查思路：</p>
+<p>1、是否mac跟linux的chromium导致异步渲染问题？经过demo测试排除了环境差异<br>2、服务器无hosts绑定，是否服务器请求异常？利用<code>puppeteer</code>的劫持测试发现本地发起的请求数量跟服务端发起的请求数量确实不一致，而且服务端少了关键的数据请求。进一步直接在服务器测试是否所有请求链接都是通的，发现其中有一个域名是不通的，这时候基本定位出原因了：服务端的机器跟日常的域名是不通的导致了请求的资源挂了所以没有走到最后数据渲染那一步</p>
+<p>解法思路：</p>
+<p>利用<code>puppeteer</code>的劫持重定向，下面是解法代码片段</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 绕过CSP，同时设置劫持</span></span><br><span class="line"><span class="keyword">await</span> page.<span class="title function_">setBypassCSP</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="keyword">await</span> page.<span class="title function_">setRequestInterception</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">page.<span class="title function_">on</span>(<span class="string">&#x27;request&#x27;</span>, <span class="function"><span class="params">interceptedRequest</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> reqUrl = interceptedRequest.<span class="title function_">url</span>();</span><br><span class="line">  <span class="comment">// 为了隐藏业务信息，下面的 error-host-cdn / correct-host-cdn 只是替代了需要重定向的cdn地址</span></span><br><span class="line">  <span class="keyword">if</span> (reqUrl.<span class="title function_">includes</span>(<span class="string">&#x27;error-host-cdn&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">const</span> newReqUrl = reqUrl.<span class="title function_">replace</span>(</span><br><span class="line">      <span class="string">&#x27;error-host-cdn&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;correct-host-cdn&#x27;</span></span><br><span class="line">    );</span><br><span class="line">    interceptedRequest.<span class="title function_">continue</span>(&#123;</span><br><span class="line">      <span class="attr">url</span>: newReqUrl,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 其他请求继续走</span></span><br><span class="line">    interceptedRequest.<span class="title function_">continue</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
-block copyright
-    include partial/copyright
+<h4 id="劫持接口数据如何返回？"><a href="#劫持接口数据如何返回？" class="headerlink" title="劫持接口数据如何返回？"></a>劫持接口数据如何返回？</h4><p>由于预渲染好的<code>DOM</code>是不能带有任何跟用户相关信息，所以接口的返回数据也需要屏蔽掉数据，所以对<code>XHR/FETCH</code>请求做了一层劫持如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">page.<span class="title function_">on</span>(<span class="string">&#x27;request&#x27;</span>, <span class="function"><span class="params">interceptedRequest</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> reqUrl = interceptedRequest.<span class="title function_">url</span>();</span><br><span class="line">  <span class="keyword">if</span> (reqUrl.<span class="title function_">includes</span>(<span class="string">&#x27;error-host-cdn&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">const</span> newReqUrl = reqUrl.<span class="title function_">replace</span>(</span><br><span class="line">      <span class="string">&#x27;error-host-cdn&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;correct-host-cdn&#x27;</span></span><br><span class="line">    );</span><br><span class="line">    interceptedRequest.<span class="title function_">continue</span>(&#123;</span><br><span class="line">      <span class="attr">url</span>: newReqUrl,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (resourceType === <span class="string">&#x27;fetch&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 判断是fetch请求之后返回统一的数据格式</span></span><br><span class="line">    <span class="keyword">return</span> interceptedRequest.<span class="title function_">respond</span>(&#123;</span><br><span class="line">      <span class="attr">status</span>: <span class="number">200</span>,</span><br><span class="line">      <span class="attr">contentType</span>: <span class="string">&#x27;application/json;charset=utf-8&#x27;</span>,</span><br><span class="line">      <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">        <span class="attr">success</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">data</span>: &#123;</span><br><span class="line">          <span class="attr">loading</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="attr">dataSource</span>: [],</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;),</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 其他请求继续走</span></span><br><span class="line">    interceptedRequest.<span class="title function_">continue</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>本以为完美的逻辑，结果崩了！ 因为<code>fetch</code>请求返回的数据结构不一定都是</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  success<span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  data<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  	loading<span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    dataSource<span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>解法：</p>
+<p>1、前端生成请求对应的组件列表如下：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">interceptMap<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;https://xxx.yyy/zzz.json&quot;</span><span class="punctuation">:</span><span class="string">&quot;TablePc&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>2、后端配置一份组件映射到返回数据结构在配置中心：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;TablePc&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    success<span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    data<span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      dataSource<span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      loading<span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>3、预渲染拦截的时候判断在 <strong>interceptMap</strong> 里面的才做拦截返回，其它的继续走请求</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><p>预渲染实践过程参考了业界一些比较优秀的方案，<code>工欲善其事，必先利其器</code>，在具体实践之前整体了解同时通读文档是及其必要的，这样子才能避免踩一些不必要的坑</p>
+<ul>
+<li><a href="https://tech.meituan.com/2018/11/15/first-contentful-paint-practice.html">《构建时预渲染：网页首帧优化实践》</a></li>
+<li><a href="https://pptr.dev/#?product=Puppeteer&version=v1.18.1&show=api-class-page">Puppeteer文档</a> &#x2F; <a href="https://www.kancloud.cn/luponu/puppeteer/870156">Puppeteer中文文档</a></li>
+<li><a href="https://developers.google.com/web/tools/puppeteer/articles/ssr">Headless Chrome: an answer to server-side rendering JS sites</a> ：这篇自带梯子访问，用<code>express</code>框架的比较适合</li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/02/13/career-for-4-years/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

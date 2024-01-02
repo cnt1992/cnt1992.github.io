@@ -1,20 +1,143 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 常用的javascript语句 · Web前端爱好者</title><meta name="description" content="常用的javascript语句 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">常用的javascript语句</h1><div class="post-info">2013年9月22日</div><div class="post-content"><blockquote>
+<p>我只是大自然的搬运工…</p>
+</blockquote>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<ol>
+<li>document.write(“”); 输出语句</li>
+<li>JS中的注释为&#x2F;&#x2F;</li>
+<li>传统的HTML文档顺序是:<br> document-&gt;html-&gt;(head,body)</li>
+<li>一个浏览器窗口中的DOM顺序是:<br> window-&gt;(navigator,screen,history,location,document)</li>
+<li>得到表单中元素的名称和值:<br> document.getElementById(“表单中元素的ID号”).name(或value)</li>
+<li>一个小写转大写的JS:<br> document.getElementById(“output”).value&#x3D;document.getElementById(“input”).value.toUpperCase();</li>
+<li>JS中的值类型:<br> String,Number,Boolean,Null,Object,Function</li>
+<li>JS中的字符型转换成数值型:<br> parseInt(),parseFloat()</li>
+<li>JS中的数字转换成字符型:<br> (“” 变量)</li>
+<li>JS中的取字符串长度是:<br>(length)</li>
+<li>JS中的字符与字符相连接使用 号.</li>
+<li>JS中的比较操作符有:<br>&#x3D;&#x3D;等于,!&#x3D;不等于,&gt;,&gt;&#x3D;,&lt;.&lt;&#x3D;</li>
+<li>JS中声明变量使用:<br>var来进行声明</li>
+<li>JS中的判断语句结构:<br>if(condition){}else{}</li>
+<li>JS中的循环结构:<br>for([initial expression];[condition];[upadte expression]) {inside loop}</li>
+<li>循环中止的命令是:<br>break</li>
+<li>JS中的函数定义:<br>function functionName([parameter],…){statement[s]}</li>
+<li>当文件中出现多个form表单时.可以用document.forms[0],document.forms[1]来代替.</li>
+<li>窗口:<br>打开窗口window.open(), 关闭一个窗口:window.close(), 窗口本身:self</li>
+<li>状态栏的设置:<br>window.status&#x3D;”字符”;</li>
+<li>弹出提示信息:<br>window.alert(“字符”);</li>
+<li>弹出确认框:<br>window.confirm();</li>
+<li>弹出输入提示框:<br>window.prompt();</li>
+<li>指定当前显示链接的位置:<br>window.location.href&#x3D;”URL”</li>
+<li>取出窗体中的所有表单的数量:<br>document.forms.length</li>
+<li>关闭文档的输出流:<br>document.close();</li>
+<li>字符串追加连接符: &#x3D;</li>
+<li>创建一个文档元素:<br>document.createElement(),document.createTextNode()</li>
+<li>得到元素的方法:<br>document.getElementById()</li>
+<li>设置表单中所有文本型的成员的值为空:<br>var form &#x3D; window.document.forms[0]<br>for (var i &#x3D; 0; i &lt; form.elements.length;i ){<br>    if (form.elements.type &#x3D;&#x3D; “text”){<br>        form.elements.value &#x3D; “”;<br>    }<br>}</li>
+<li>复选按钮在JS中判断是否选中:<br>document.forms[0].checkThis.checked<br>(checked属性代表为是否选中返回TRUE或FALSE)</li>
+<li>单选按钮组(单选按钮的名称必须相同):<br>取单选按钮组的长度document.forms[0].groupName.length</li>
+<li>单选按钮组判断是否被选中也是用checked.</li>
+<li>下拉列表框的值:<br>document.forms[0].selectName.options[n].value<br>(n有时用下拉列表框名称加上.selectedIndex来确定被选中的值)</li>
+<li>字符串的定义:<br>var myString &#x3D; new String(“This is lightsword”);</li>
+<li>字符串转成大写:<br>string.toUpperCase(); 字符串转成小写:string.toLowerCase();</li>
+<li>返回字符串2在字符串1中出现的位置:<br>String1.indexOf(“String2”)!&#x3D;-1则说明没找到.</li>
+<li>取字符串中指定位置的一个字符:<br>StringA.charAt(9);</li>
+<li>取出字符串中指定起点和终点的子字符串:<br>stringA.substring(2,6);</li>
+<li>数学函数:<br>Math.PI(返回圆周率),Math.SQRT2(返回开方),Math.max(value1,value2)返回两个数中的<br>最在值,Math.pow(value1,10)返回value1的十次方,Math.round(value1)四舍五入函数,<br>Math.floor(Math.random()*(n 1))返回随机数</li>
+<li>定义日期型变量:<br>var today &#x3D; new Date();</li>
+<li>日期函数列表:<br>dateObj.getTime()得到时间,dateObj.getYear()得到年份,dateObj.getFullYear()得到四位的年份,<br>dateObj.getMonth()得到月份,dateObj.getDate()得到日,dateObj.getDay()得到日期几,<br>dateObj.getHours()得到小时,dateObj.getMinutes()得到分,dateObj.getSeconds()得到秒,<br>dateObj.setTime(value)设置时间,dateObj.setYear(val)设置年,<br>dateObj.setMonth(val)设置月,dateObj.setDate(val)设置日,<br>dateObj.setDay(val)设置星期几,dateObj.setHours设置小时,dateObj.setMinutes(val)设置分,<br>dateObj.setSeconds(val)设置秒 [注意:此日期时间从0开始计]</li>
+<li>IFRAME的表示方式:<br>[window.]frames[n].ObjFuncVarName,frames[“frameName”].ObjFuncVarName,frameName.ObjFuncVarName</li>
+<li>parent代表父亲对象,top代表最顶端对象</li>
+<li>打开子窗口的父窗口为:opener</li>
+<li>表示当前所属的位置:this</li>
+<li>当在超链接中调用JS函数时用:(javascript :)来开头后面加函数名</li>
+<li>在老的浏览器中不执行此JS:<!-- //--></li>
+<li>引用一个文件式的JS:<script type="text/javascript" src="aaa.js"></script></li>
+<li>指定在不支持脚本的浏览器显示的HTML:<noscript></noscript></li>
+<li>当超链和onCLICK事件都有时,则老版本的浏览器转向a.html,否则转向b.html.<br>例:<a href="a.html" onclick="location.href='b.html';return false">dfsadf</a></li>
+<li>JS的内建对象有:<br>Array,Boolean,Date,Error,EvalError,<br>Function,Math,Number,Object,RangeError,ReferenceError,<br>RegExp,String,SyntaxError,TypeError,URIError</li>
+<li>JS中的换行:\n</li>
+<li>窗口全屏大小:<script>function fullScreen(){ this.moveTo(0,0);this.outerWidth=screen.availWidth;
+this.outerHeight=screen.availHeight;}window.maximize=fullScreen;</script></li>
+<li>JS中的all代表其下层的全部元素</li>
+<li>JS中的焦点顺序:document.getElementByid(“表单元素”).tabIndex &#x3D; 1</li>
+<li>innerHTML的值是表单元素的值:<br>如<p id="para">“how are <em>you</em>“</p>,则innerHTML的值就是:how are <em>you</em></li>
+<li>innerTEXT的值和上面的一样,只不过不会把<em>这种标记显示出来.</li>
+<li>contentEditable可设置元素是否可被修改,isContentEditable返回是否可修改的状态.</li>
+<li>isDisabled判断是否为禁止状态.disabled设置禁止状态</li>
+<li>length取得长度,返回整型数值</li>
+<li>addBehavior()是一种JS调用的外部函数文件其扩展名为.htc</li>
+<li>window.focus()使当前的窗口在所有窗口之前.</li>
+<li>blur()指失去焦点.与FOCUS()相反.</li>
+<li>select()指元素为选中状态.</li>
+<li>防止用户对文本框中输入文本:<br>onfocus&#x3D;”this.blur()”</li>
+<li>取出该元素在页面中出现的数量:<br>document.all.tags(“div(或其它HTML标记符)”).length</li>
+<li>JS中分为两种窗体输出:模态和非模态.<br>window.showModaldialog(),window.showModeless()</li>
+<li>状态栏文字的设置:<br>window.status&#x3D;’文字’,默认的状态栏文字设置:window.defaultStatus &#x3D; ‘文字.’;</li>
+<li>添加到收藏夹:<br>external.AddFavorite(“<a href="http://meil.cnblogs.com";,"jaskdlf/">http://meil.cnblogs.com&quot;;,&quot;jaskdlf</a>“);</li>
+<li>JS中遇到脚本错误时不做任何操作:<br>window.onerror &#x3D; doNothing; 指定错误句柄的语法为:window.onerror &#x3D; handleError;</li>
+<li>JS中指定当前打开窗口的父窗口:<br>window.opener,支持opener.opener…的多重继续.</li>
+<li>JS中的self指的是当前的窗口</li>
+<li>JS中状态栏显示内容:window.status&#x3D;”内容”</li>
+<li>JS中的top指的是框架集中最顶层的框架</li>
+<li>JS中关闭当前的窗口:window.close();</li>
+<li>JS中提出是否确认的框:if(confirm(“Are you sure?”)){alert(“ok”);}else{alert(“Not Ok”);}</li>
+<li>JS中的窗口重定向:window.navigate(“<a href="http://meil.cnblogs.com/">http://meil.cnblogs.com</a>“;);</li>
+<li>JS中的打印:window.print()</li>
+<li>JS中的提示输入框:window.prompt(“message”,”defaultReply”);</li>
+<li>JS中的窗口滚动条:window.scroll(x,y)</li>
+<li>JS中的窗口滚动到位置:window.scrollby</li>
+<li>JS中设置时间间隔:setInterval(“expr”,msecDelay)或setInterval(funcRef,msecDelay)或setTimeout</li>
+<li>JS中的模态显示在IE4 行,在NN中不行:showModalDialog(“URL”[,arguments][,features]);</li>
+<li>JS中的退出之前使用的句柄:<br>function verifyClose(){event.returnValue&#x3D;”we really like you and hope you will stay longer.”;}} window.&#x3D;verifyClose;</li>
+<li>当窗体第一次调用时使用的文件句柄:onload()</li>
+<li>当窗体关闭时调用的文件句柄:onunload()</li>
+<li>window.location的属性:<br>protocol(http:),hostname(<a href="http://www.example.com),port(80),host(www.example.com:80)">www.example.com),port(80),host(www.example.com:80)</a>,<br>pathname(“&#x2F;a&#x2F;a.html”),hash(“#giantGizmo”,指跳转到相应的锚记),href(全部的信息)</li>
+<li>window.location.reload()刷新当前页面.</li>
+<li>window.history.back()返回上一页,window.history.forward()返回下一页,<br>window.history.go(返回第几页,也可以使用访问过的URL)</li>
+<li>document.write()不换行的输出,document.writeln()换行输出</li>
+<li>document.body.noWrap&#x3D;true;防止链接文字折行.</li>
+<li>变量名.charAt(第几位),取该变量的第几位的字符.</li>
+<li>“abc”.charCodeAt(第几个),返回第几个字符的ASCii码值.</li>
+<li>字符串连接:string.concat(string2),或用 &#x3D;进行连接</li>
+<li>变量.indexOf(“字符”,起始位置),返回第一个出现的位置(从0开始计算)</li>
+<li>string.lastIndexOf(searchString[,startIndex])最后一次出现的位置.</li>
+<li>string.match(regExpression),判断字符是否匹配.</li>
+<li>string.replace(regExpression,replaceString)替换现有字符串.</li>
+<li>string.split(分隔符)返回一个数组存储值.</li>
+<li>string.substr(start[,length])取从第几位到指定长度的字符串.</li>
+<li>string.toLowerCase()使字符串全部变为小写.</li>
+<li>string.toUpperCase()使全部字符变为大写.</li>
+<li>parseInt(string[,radix(代表进制)])强制转换成整型.</li>
+<li>parseFloat(string[,radix])强制转换成浮点型.</li>
+<li>isNaN(变量):测试是否为数值型.</li>
+<li>定义常量的关键字:const,定义变量的关键字:var</li>
+</ol>
+</div></article></div></main><footer><div class="paginator"><a href="/2013/09/22/%E5%85%BC%E5%AE%B9IE6~IE9%E7%9A%84CSS%20Hack/" class="prev">PREV</a><a href="/2013/08/30/Solr%E5%B8%B8%E7%94%A8%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

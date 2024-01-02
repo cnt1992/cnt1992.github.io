@@ -1,20 +1,51 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 天猫2017届前端开发实习生内推 · Web前端爱好者</title><meta name="description" content="天猫2017届前端开发实习生内推 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">天猫2017届前端开发实习生内推</h1><div class="post-info">2016年7月6日</div><div class="post-content"><h2 id="关于天猫"><a href="#关于天猫" class="headerlink" title="关于天猫"></a>关于天猫</h2><p>关于天猫我就不多加以介绍，直接 <a href="https://www.zhihu.com/question/33589154">搬砖</a>，欢迎有兴趣的同学砸简历给我</p>
+<blockquote>
+<p>点击右边发送简历 →_→ <a href="mailto:cnt19920613@gmail.com">cnt19920613@gmail.com</a></p>
+</blockquote>
+<h2 id="岗位描述Job-Description"><a href="#岗位描述Job-Description" class="headerlink" title="岗位描述Job Description"></a>岗位描述Job Description</h2><p>在这里，你将： </p>
+<ul>
+<li>有机会与视觉设计师一起，美化产品线Web功能的设计， </li>
+<li>有机会与交互设计师一起，完成产品线Web功能的开发与实现；</li>
+<li>有机会做全栈式开发,</li>
+<li>有机会做移动端开发， </li>
+<li>有机会做性能、架构等方面的改进与优化， </li>
+<li>还有机会从一个产品的设计到发布由自己亲手打造；</li>
+</ul>
+<p>你还将加入到我们业内最前沿Web技术的研究与开发中。</p>
+<h2 id="岗位要求Qualifications"><a href="#岗位要求Qualifications" class="headerlink" title="岗位要求Qualifications"></a>岗位要求Qualifications</h2><ul>
+<li>我们希望你，可以熟练使用各种 Web 前端技术，包括HTML(5)&#x2F;CSS(3)&#x2F;Javascript 等，并有相关的项目开发经验或成果； </li>
+<li>我们希望你，用过git，grunt或gulp等工具，最好有自己的github仓库； </li>
+<li>我们希望你，有基于Ajax 应用的开发经验，有NodeJS&#x2F;Java开发经验，或者有移动端开发经验；深刻理解 Web 标准，对可用性、可访问性等相关知识有实际的了解； 对算法、数据结构、建模有一定了解； </li>
+<li>我们希望你，关注新事物、新技术，有较强的学习能力，喜欢挑战；并且，个性乐观开朗，逻辑性强，善于和各种背景的人合作。</li>
+</ul>
+<h2 id="工作地点Location"><a href="#工作地点Location" class="headerlink" title="工作地点Location"></a>工作地点Location</h2><p>杭州市(Hangzhou),北京市(Beijing)</p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+</div></article></div></main><footer><div class="paginator"><a href="/2016/08/06/summary-of-react-base-on-practice/" class="prev">PREV</a><a href="/2016/04/28/sublime-license-code/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

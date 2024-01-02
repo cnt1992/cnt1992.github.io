@@ -1,20 +1,67 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> CSS Grid Layout 不完整指南 · Web前端爱好者</title><meta name="description" content="CSS Grid Layout 不完整指南 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">CSS Grid Layout 不完整指南</h1><div class="post-info">2017年1月20日</div><div class="post-content"><p>| 本文还没写完。。。</p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p><code>CSS Grid Layout</code>，即网格布局系统，旨在用最简单的方式改变用户界面。</p>
+<p>CSS发展至今，最基础也最核心的部分是布局，从一开始的用黑科技<code>float</code>进行多列布局，到后来的<code>flex</code>布局的出现，再到现在想讲的<code>Grid</code>布局系统，可以说大大加快网页布局的书写之外语义化也更加明确了。</p>
+<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p>从下图看出，目前主流浏览器尚且不支持该属性（截至现在最新Chrome版本为55），所以想要体验<code>Grid</code>属性请先打开<a href="chrome://flags/">chrome:&#x2F;&#x2F;flags&#x2F;</a>将<code>experimental Web Platform features</code>开启。</p>
+<iframe style="border: none;width: 100%;height: 520px;background: " src="https://caniuse.bitsofco.de/embed/index.html?feat=css-grid&periods=future_3,current,past_1,past_2"></iframe>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<h2 id="示例一览"><a href="#示例一览" class="headerlink" title="示例一览"></a>示例一览</h2><p>我们先从一个最经典的三列布局（左右固定宽度中间自适应）来看看如何用<code>grid</code>实现：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.container</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">display</span>: grid;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">grid-template-columns</span>: <span class="number">100px</span> auto <span class="number">150px</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">grid-template-areas</span>: <span class="string">&quot;left main right&quot;</span>;</span></span><br><span class="line"><span class="language-css">            </span></span><br><span class="line"><span class="language-css">            <span class="attribute">min-height</span>: <span class="number">400px</span>;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.left</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">grid-area</span>: left;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.main</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">grid-area</span>: main;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.right</span> &#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">grid-area</span>: right;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span>&gt;</span></span><br><span class="line">            left</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;main&quot;</span>&gt;</span></span><br><span class="line">            main</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span>&gt;</span></span><br><span class="line">            right</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>1.Grid Container</p>
+<p>想让一个容器变成<code>Grid</code>，只需要如下声明：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: grid | inline-grid | subgrid;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">grid</th>
+<th align="center">inline-grid</th>
+<th align="center">subgrid</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">说明</td>
+<td align="center">块状级别grid</td>
+<td align="center">内联级别grid</td>
+<td align="center">自身已经是一个grid item，同时声明自己是一个grid container</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意： <code>column</code>, <code>float</code>, <code>clear</code>, 以及 <code>vertical-align</code> 对声明了<code>display: grid;</code> 的元素无效。</p>
+</blockquote>
+<p>2.Grid Items</p>
+<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><ul>
+<li><a href="https://css-tricks.com/snippets/css/complete-guide-grid/">complete-guide-grid</a></li>
+<li><a href="https://bitsofco.de/3-new-css-features-to-learn-in-2017/">3-new-css-features-to-learn-in-2017</a></li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/03/28/es-proposal-async-functions/" class="prev">PREV</a><a href="/2016/12/25/summary-of-my-2016/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

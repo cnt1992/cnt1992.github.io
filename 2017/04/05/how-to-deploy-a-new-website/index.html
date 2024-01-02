@@ -1,20 +1,129 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 前端工程师全栈之路之部署环境搭建篇 · Web前端爱好者</title><meta name="description" content="前端工程师全栈之路之部署环境搭建篇 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">前端工程师全栈之路之部署环境搭建篇</h1><div class="post-info">2017年4月4日</div><div class="post-content"><p>又是一年清明雨上，去年写<a href="http://cnt1992.xyz/2016/04/08/upgrade-nginx-to-http2/">前端工程师学习Nginx实践配置HTTP2.0篇</a>的时候心想着有钱能买个服务器，一年过去了，我终于有了一个腾讯云的服务器！！！（虽然只有一个月免费试用期… ）。</p>
+<p>这篇文章想要偏向实践兼顾理论地系统性介绍如何在一个全新的Linux服务器上部署一个Node应用，我们知道Node依然很火，同时也越来越多全栈情怀的工程师诞生，这篇文章以<code>Nginx + Node + Mongodb</code>的技术架构来介绍如何从0开始一步步部署一个应用。</p>
+<p>首先，想要实践的童鞋得先有一台Linux服务器，土豪直接去<strong>腾讯云</strong>或者<strong>阿里云</strong>等云平台购买，像我优雅的舍不得花钱的申请一个月的免费试用玩玩。</p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
+<h2 id="一点点知识储备"><a href="#一点点知识储备" class="headerlink" title="一点点知识储备"></a>一点点知识储备</h2><p>有了云服务器之后，第一步是登录到这台服务器，最简单的命令就是打开一个<strong>终端</strong>，然后输入：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ssh 账号@服务器IP</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 输入密码之后直接回车</span></span></span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<p>登录上去之后只有一个命令行界面，那么需要懂一些基本的<strong>Linux</strong>命令了，这里列举一下我们将要用到的命令（诸如：ls&#x2F;cat&#x2F;cd&#x2F;vi这些命令就不介绍了），具体使用过程也可以回头看：</p>
+<ul>
+<li>ps：显示当前进程的状态，我们经常需要查看某个进程是否开启着，例如想查看所有进程信息：<code>ps -ef</code>，关于参数介绍可以直接输入命令行<code>ps --help all</code>查看具体含义</li>
+<li>grep：过滤或者搜索特定的字符，例如结合<code>ps</code>命令我们想过滤出<strong>nginx</strong>的进程，那么可以用：<code>ps -ef | grep nginx</code></li>
+<li>wget&#x2F;curl：这两个货都可以用来下载指定URL的内容，比如下载二进制安装包，用法上有一些差别，同时功能上也有一些区别，例如下载某个URL的内容：<code>wget URL</code>&#x2F;<code>curl -O URL</code></li>
+<li>tar：解压命令，我们一般下载了二进制压缩包之后需要解压进行编译，假如解压xxx.tar.gz包直接用：<code>tar zxvf xxx.tar.gz</code></li>
+<li>yum：一个包管理器，可以理解为Mac平台下的brew，或者是Node下的npm，这货提供了查找，增加，删除软件包(.rpm)的功能，例如我们在安装<strong>Nginx</strong>之前需要安装一个<strong>openssl</strong>库，那么可以直接使用：<code>yum -y install openssl</code>进行安装</li>
+</ul>
+<p>值得一提的一点是，我们不可能记住所有命令提供的参数，这时候要么网上搜索，要么直接就用Linux自带的<code>man</code>命令（当然全英的，英文也是程序员必备技能）。</p>
+<p>一切准备就绪，<del>撸</del>搞起来。</p>
+<blockquote>
+<p>我们所有操作的基础路径在<code>/usr/local/src</code>，也就是下载的二进制包都会放在这里统一管理，请先进入该目录，若不想用这个目录下面有些路径需要对应调整</p>
+</blockquote>
+<h2 id="安装Nginx"><a href="#安装Nginx" class="headerlink" title="安装Nginx"></a>安装Nginx</h2><p>其实我们完全可以不用<strong>Nginx</strong>，无非就是<strong>Node</strong>应用起来之后在访问的时候需要多一个端口号而已。但为了不暴露我们实际应用的端口号，用<strong>Nginx</strong>来做反向代理是非常有必要的，<strong>Nginx</strong>的介绍可以翻看我一年前写的文章：<a href="http://cnt1992.xyz/2016/03/18/simple-intro-to-nginx/">传送门1</a>&#x2F;<a href="http://cnt1992.xyz/2016/04/08/upgrade-nginx-to-http2/">传送门2</a>。在安装<strong>Nginx</strong>之前得先安装一些必要的编译工具及库文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel</span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
+<blockquote>
+<p>上面安装的库列表如果有一个出错，那么后面的库就不会自动安装，所以如果你看到命令行有出错并且提示哪个库，就排查掉那个库再继续安装</p>
+</blockquote>
+<p>紧接着安装<strong>PCRE</strong>，这家伙提供了Rewrite功能：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 先下载二进制包</span></span></span><br><span class="line">wget http://downloads.sourceforge.net/project/pcre/pcre/8.35/pcre-8.35.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 解压</span></span></span><br><span class="line">tar zxvf pcre-8.35.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 进入安装目录编译安装</span></span></span><br><span class="line">cd pcre-8.35</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+<p>现在就可以正式安装<strong>Nginx</strong>了，跟上面安装同样的方法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 先返回上一级目录</span></span></span><br><span class="line">cd ..</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 下载二进制包</span></span></span><br><span class="line">wget http://nginx.org/download/nginx-1.10.3.tar.gz(截止本文最新的稳定版本)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 解压</span></span></span><br><span class="line">tar zxvf nginx-1.10.3.tar.gz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 进入安装目录编译安装</span></span></span><br><span class="line">cd nginx-1.10.3</span><br><span class="line">./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-pcre=/usr/local/src/pcre-8.35</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 
-block copyright
-    include partial/copyright
+<p>安装成功之后可以执行 <code>/usr/local/nginx/sbin/nginx -v</code>查看版本，但我们不想每次都输那么一长串命令，所以可以简化一些命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 编辑~/.bashrc文件</span></span></span><br><span class="line">vi ~/.bashrc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 在~/.bashrc文件找到alias直接输入o在下一行加入下面命令：</span></span></span><br><span class="line">alias nginx=&#x27;/usr/local/nginx/sbin/nginx&#x27;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 然后按一下`esc`键，再`shift+;`，输入`x`保存退出，然后还要让配置文件生效：</span></span></span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>安装好了<strong>Nginx</strong>之后我们还需要配置一下，这里就直接命令带过：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 创建www组跟www用户用于nginx的进程</span></span></span><br><span class="line">/usr/sbin/groupadd www </span><br><span class="line">/usr/sbin/useradd -g www www</span><br></pre></td></tr></table></figure>
+
+<p>编辑<strong>Nginx</strong>配置文件（文件路径在<code>/usr/local/nginx/conf/nginx.conf</code>），我们先只改user，也就是第一行被注释的改成：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">user www www;</span><br></pre></td></tr></table></figure>
+
+<p>其它的等下再改，保存退出之后启动<strong>Nginx</strong>，输入下面命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 配置文件检查</span></span></span><br><span class="line">nginx -t</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 上面检查没问题之后启动</span></span></span><br><span class="line">nginx</span><br></pre></td></tr></table></figure>
+
+<p>这个时候直接浏览器输入你的IP就可以访问到<strong>Nginx</strong>的欢迎界面了。</p>
+<h2 id="安装Node"><a href="#安装Node" class="headerlink" title="安装Node"></a>安装Node</h2><p>在安装<strong>Node</strong>之前，其实我推荐先安装<a href="https://github.com/creationix/nvm">nvm</a>，<strong>Node</strong>版本控制器，可以安装指定版本的<strong>Node</strong>同时又可以随时切换不同版本，只需要一条命令自动安装：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>上面命令成功之后，执行以下<code>source ~/.bashrc</code>让<strong>nvm</strong>命令生效，然后我们就可以愉快地安装最新稳定版的<strong>Node</strong>了：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nvm install v6.10.1</span><br></pre></td></tr></table></figure>
+
+<p>由于我们是第一次安装了<strong>Node</strong>，所以<strong>nvm</strong>会自动将这个版本的<strong>Node</strong>作为默认版本，这时可以输入<code>node -v</code>&#x2F;<code>npm -v</code>看看我们安装的版本。</p>
+<h2 id="安装Mongodb"><a href="#安装Mongodb" class="headerlink" title="安装Mongodb"></a>安装Mongodb</h2><p>听说用<strong>Node</strong>的都很喜欢用<strong>Mongodb</strong>数据库？那么我们这个例子也安装一下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 下载二进制包</span></span></span><br><span class="line">wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.0.6.tgz</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 解压</span></span></span><br><span class="line">tar -zxvf mongodb-linux-x86_64-3.0.6.tgz </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 直接将解压包移动到指定目录</span></span></span><br><span class="line">mv  mongodb-linux-x86_64-3.0.6/ /usr/local/mongodb</span><br></pre></td></tr></table></figure>
+
+<p><strong>Mongodb</strong>可执行的命令放在<code>/usr/local/mongodb/bin/</code>下面，为了方便不带这么长的前缀，可以将路径添加到<strong>PATH</strong>里面：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">echo &quot;export PATH=/usr/local/mongodb/bin:$PATH&quot; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>紧接着创建数据库目录，执行下面命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir -p /data/db</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-p参数会自动级联创建文件夹，也就是data文件夹不存在先创建data文件夹再创建db文件夹</p>
+</blockquote>
+<p>当然，如果你不想用默认的数据库目录，也可以指定<code>--dbpath=xxx</code>来启动，这时启动<strong>Mongodb</strong>：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mongod</span><br></pre></td></tr></table></figure>
+
+<h2 id="上传代码"><a href="#上传代码" class="headerlink" title="上传代码"></a>上传代码</h2><blockquote>
+<p>这里我们为了演示直接采用本地代码直接上传，实际项目中我们一般把代码提交到<strong>github</strong>然后利用<code>github hook</code>触发代码拉取。</p>
+</blockquote>
+<p>假设我们本地代码路径在<code>~/node/test</code>，那么可以直接用<code>scp</code>命令上传到我们的服务器路径<code>/node/app</code>：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scp -r ~/node/test root@服务器IP:/node/test</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 输入密码回车</span></span></span><br></pre></td></tr></table></figure>
+
+<p>上传成功之后就可以用<strong>Node</strong>命令启动了，比如我的代码启动之后就下面这样子：</p>
+<p><img src="/img/node-deploy/node_deploy.png" alt="node应用启动"></p>
+<p>然后直接在浏览器打开：<a href="">http:&#x2F;&#x2F;服务器IP:9990</a>，就可以看到你的应用启动了！好了，结束，拜~</p>
+<p>等等，作为有追求的全栈工程师，这还没完，这离我们想要的效果还有些出入：</p>
+<ul>
+<li>访问可不可以去掉端口号？</li>
+<li>启动<strong>Node</strong>应用就一直挂着命令行?</li>
+</ul>
+<p>带着这两个问题，我们继续。</p>
+<h2 id="安装pm2"><a href="#安装pm2" class="headerlink" title="安装pm2"></a>安装pm2</h2><p>嗯，<a href="https://github.com/Unitech/pm2">pm2</a>作为<strong>Node</strong>应用管理器，在生产环境下强烈建议使用，本地开发的建议使用<a href="https://github.com/remy/nodemon">nodemon</a>，能够监听文件改动并自动重启应用。</p>
+<p><strong>pm2</strong>只是一个<strong>npm</strong>包，安装一下无痛感使用：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i -g pm2</span><br></pre></td></tr></table></figure>
+
+<p>这个时候我们就可以愉快地使用<strong>pm2</strong>来启动我们的应用了：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pm2 start index.js</span><br></pre></td></tr></table></figure>
+
+<p>更多<strong>pm2</strong>的命令可以阅读上面的链接。</p>
+<h2 id="Nginx反向代理"><a href="#Nginx反向代理" class="headerlink" title="Nginx反向代理"></a>Nginx反向代理</h2><p>要去掉端口号访问很简单，只需要利用<strong>Nginx</strong>反向代理到<strong>Node</strong>应用即可，直接在<code>/usr/local/nginx/conf/nginx.conf</code>找到<code>location</code>直接添加下面：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">location /app/ &#123;</span><br><span class="line">    proxy_pass http://127.0.0.1:9990;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后执行下面命令重新加载<strong>Nginx</strong>配置文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果执行上面命令出现 <code>nginx: [error] invalid PID number &quot;&quot; in &quot;/usr/local/nginx/logs/nginx.pid&quot;</code>错误提示，那么先执行以下<code>nginx -c /usr/local/nginx/conf/nginx.conf</code>即可</p>
+</blockquote>
+<p>这时就可以愉快的用 <a href="">http://IP/app</a> 访问应用了。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/02/13/career-for-4-years/" class="prev">PREV</a><a href="/2017/03/28/es-proposal-async-functions/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

@@ -1,20 +1,95 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 浅谈webpack · Web前端爱好者</title><meta name="description" content="浅谈webpack - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">浅谈webpack</h1><div class="post-info">2015年7月28日</div><div class="post-content"><h3 id="关于Webpack"><a href="#关于Webpack" class="headerlink" title="关于Webpack"></a>关于Webpack</h3><p>或许你对<a href="http://webpack.github.io/docs/">Webpack</a>并没那么熟悉，那你应该听过<a href="http://www.html-js.com/article/browserify.org">browserify</a>吧，如果没有听过browserify，那应该知道<a href="http://gulpjs.com/">gulp</a>或者<a href="http://gruntjs.com/getting-started">grunt</a>这两个东西吧。</p>
+<p>其实Webpack就是一个模块加载器，官方的原话如下：</p>
+<p><code>webpack takes modules with dependencies and generates static assets representing those modules.</code></p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
+<p>在谈Webpack之前，我们先谈谈两个规范：<a href="https://github.com/seajs/seajs/issues/242">CMD</a>和<a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>。</p>
+<p><code>CMD</code>，也称<code>通用模块定义</code>，是一种同步的模块机制，相信玩过Node的童鞋对下面这种写法一点也不陌生：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> demo = <span class="built_in">require</span>(<span class="string">&#x27;otherModule&#x27;</span>);</span><br><span class="line"><span class="comment">// some code...</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = demo;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<p><code>AMD</code>，也称<code>异步模块定义</code>，是一种异步的模块机制，比较典型的是<a href="http://www.requirejs.cn/home.html">requireJS</a>的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="title function_">define</span>( [<span class="string">&#x27;module1&#x27;</span>,<span class="string">&#x27;module2&#x27;</span>], <span class="keyword">function</span>(<span class="params">module1,module2</span>)&#123;</span><br><span class="line">    <span class="comment">// some code...</span></span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">module</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
+<p>对比上面两种规范的写法，显然我们更加愿意接受<code>CMD</code>，相信写过一大堆callback的童鞋深有体会。<strong>随着npm成为主流的JavaScript组件发布平台，越来越多的前端项目也依赖于npm上的项目</strong>，这时候browserify就出现了，它支持<code>require()</code>的同步语法去加载npm模块。</p>
+<p>当然在最近公布的ES2015(ES6)里也定义了一套新的模块机制，写法大概如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;module1&#125; <span class="keyword">from</span> <span class="string">&#x27;module1&#x27;</span>;</span><br><span class="line"><span class="comment">// some code...</span></span><br><span class="line"><span class="keyword">export</span> module2;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
 
-block copyright
-    include partial/copyright
+<h3 id="为何用webpack"><a href="#为何用webpack" class="headerlink" title="为何用webpack"></a>为何用webpack</h3><p>webpack具有非常好的功能特性：</p>
+<ol>
+<li>同时支持CMD和AMD模块；</li>
+<li>支持模块加载器和插件机制，可对模块进行定制；</li>
+<li>可通过配置，打包成多个文件，有效利用浏览器的缓存机制提升性能；</li>
+<li>对样式文件和图片等静态资源视为模块进行打包，配合loader加载器可以支持sass，less等css预处理器；</li>
+<li>内置source map，即使打包在一起依旧方便调试。</li>
+</ol>
+<h3 id="webpack使用入门"><a href="#webpack使用入门" class="headerlink" title="webpack使用入门"></a>webpack使用入门</h3><h4 id="全局安装webpack"><a href="#全局安装webpack" class="headerlink" title="全局安装webpack"></a>全局安装webpack</h4><p>在终端执行下面代码将webpack安装到全局：<code>npm install -g webpack</code>，若是mac或者linux系统提示权限不足，请用<code>sudo npm install -g webpack</code>然后输入管理员密码执行。</p>
+<h4 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h4><ul>
+<li><p>新建一个名为xxx的项目，在该项目根目录下打开终端，执行<code>npm init</code>，接下来填写一些项目的基本信息，最后确认ok之后会在根目录下生成package.json文件。</p>
+</li>
+<li><p>新建一些示例文件，大概示意图如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">xxx</span><br><span class="line">    assets</span><br><span class="line">        css</span><br><span class="line">            demo.<span class="property">less</span></span><br><span class="line">        js</span><br><span class="line">            entry.<span class="property">js</span></span><br><span class="line">            index.<span class="property">js</span></span><br><span class="line">        html</span><br><span class="line">            index.<span class="property">html</span></span><br><span class="line">    build</span><br><span class="line">    package.<span class="title function_">json</span>(上一步生成的文件)</span><br><span class="line">    webpack.<span class="property">config</span>.<span class="title function_">js</span>(webpack核心配置文件)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="配置webpack-config-js"><a href="#配置webpack-config-js" class="headerlink" title="配置webpack.config.js"></a>配置webpack.config.js</h4><p>我们在使用webpack的时候默认配置文件是<code>webpack.config.js</code>，下面配置一下这个js文件（稍微复杂了一点，已经有详细的说明）：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>);</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="comment">// webpack入口文件</span></span><br><span class="line">    entry : <span class="string">&#x27;./assets/js/entry.js&#x27;</span>, </span><br><span class="line">    <span class="comment">// webpack输出文件，</span></span><br><span class="line">    output : &#123;</span><br><span class="line">        path : <span class="string">&#x27;./build&#x27;</span>,</span><br><span class="line">        publicPath : <span class="string">&#x27;/assets/&#x27;</span>,</span><br><span class="line">        filename : <span class="string">&#x27;bundle.js&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// loader加载器，包括了less编译，图片压缩为base64，es6转为es5三个</span></span><br><span class="line">    <span class="variable language_">module</span> : &#123;</span><br><span class="line">        loaders : [</span><br><span class="line">            &#123; test : <span class="regexp">/\.less/</span>, loader : <span class="string">&#x27;style-loader!css-loader!less-loader&#x27;</span> &#125;,</span><br><span class="line">            &#123; test : <span class="regexp">/\.(png|jpg)$/</span>, loader : <span class="string">&#x27;url-loader?limit=8192&#x27;</span> &#125;,</span><br><span class="line">            &#123; test : <span class="regexp">/\.js$/</span>, exclude : <span class="regexp">/node_modules/</span>, loader : <span class="string">&#x27;babel-loader&#x27;</span> &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 文件不写扩展名时使用的默认扩展名</span></span><br><span class="line">    resolve : &#123;</span><br><span class="line">        extensions : [<span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;.js&#x27;</span>, <span class="string">&#x27;.json&#x27;</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 插件，提取公用的JS出来，重复利用</span></span><br><span class="line">    plugins : [</span><br><span class="line">        <span class="keyword">new</span> webpack.<span class="property">optimize</span>.<span class="title class_">CommonsChunkPlugin</span>(<span class="string">&#x27;common.js&#x27;</span>)</span><br><span class="line">    ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="完善其他demo文件"><a href="#完善其他demo文件" class="headerlink" title="完善其他demo文件"></a>完善其他demo文件</h4><ul>
+<li>index.html文件</li>
+</ul>
+<p>index.html文件只需要引入bundle.js即可，代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">%lt;script src=&quot;/assets/bundle.js&quot;&gt;<span class="symbol">&amp;lt;</span>/script<span class="symbol">&amp;gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>index.js文件</li>
+</ul>
+<p>index.js文件写了一个es6的demo，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">People</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"> name </span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">sayHi</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> name = <span class="string">`hi <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span> !`</span>;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title class_">People</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>entry.js文件</li>
+</ul>
+<p>entry.js文件则引入index.js文件以及less样式文件写一些demo代码：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="title class_">People</span> = <span class="built_in">require</span>(<span class="string">&#x27;./index&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="title class_">People</span>(<span class="string">&#x27;sky&#x27;</span>);</span><br><span class="line">p.<span class="title function_">sayHi</span>();</span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;../css/demo.less&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>demo.less</li>
+</ul>
+<p>demo.less文件主要写一些演示的样式代码：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>:<span class="number">#f00</span>;</span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="启动webpack"><a href="#启动webpack" class="headerlink" title="启动webpack"></a>启动webpack</h4><p>这时候上面的整个项目已经准备好，只需要在项目根目录下面，用webpack的命令执行即可：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// webpack 命令行的几种基本命令,更多命令可以在终端输入webpack --help</span></span><br><span class="line">$ webpack <span class="comment">// 最基本的启动webpack方法</span></span><br><span class="line">$ webpack -w <span class="comment">// 提供watch方法，实时进行打包更新</span></span><br><span class="line">$ webpack -p <span class="comment">// 对打包后的文件进行压缩，提供production</span></span><br><span class="line">$ webpack -d <span class="comment">// 提供source map，方便调试。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p>经过上一步的webpack执行命令之后，build文件夹下面应该多了一个<code>bundle.js</code>文件，这时候打开<code>index.html</code>文件会发现less样式也已经生效。</p>
+<h3 id="实战项目注意点"><a href="#实战项目注意点" class="headerlink" title="实战项目注意点"></a>实战项目注意点</h3><ul>
+<li>项目中如果需要引入Zepto这类前端包是不兼容webpack的，需要加入包引出的声明：<br><code>module.exports=Zepto</code></li>
+</ul>
+<h3 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h3><p>前端组件化是一条很漫长的路，也只有前端这个圈子在不断的造轮子却还依旧欣欣向荣的景象，在新技术层出不穷的情况下，保持对新技术的热情追求，但追根到底，背后的<code>模块化</code>思想才是支持这些东西源源不断的动力。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/08/13/%E6%94%B6%E9%9B%86%E7%A7%BB%E5%8A%A8%E7%AB%AF%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9/" class="prev">PREV</a><a href="/2015/06/11/Javascript%E7%89%88%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

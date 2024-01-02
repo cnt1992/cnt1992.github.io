@@ -1,20 +1,44 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 从程序猿角度来看2016年为啥那么6 · Web前端爱好者</title><meta name="description" content="从程序猿角度来看2016年为啥那么6 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">从程序猿角度来看2016年为啥那么6</h1><div class="post-info">2016年1月4日</div><div class="post-content"><p>最近网上流传一张图来说明<code>2016年很6</code>，大概就是下面的意思：</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">2016</span>=<span class="number">666</span>+<span class="number">666</span>+<span class="number">666</span>+<span class="number">6</span>+<span class="number">6</span>+<span class="number">6</span></span><br><span class="line"><span class="attribute">2016</span>=<span class="number">777</span>+<span class="number">777</span>+<span class="number">77</span>+<span class="number">77</span>+<span class="number">77</span>+<span class="number">77</span>+<span class="number">77</span>+<span class="number">77</span></span><br><span class="line"><span class="attribute">2016</span>=<span class="number">888</span>+<span class="number">888</span>+<span class="number">88</span>+<span class="number">88</span>+<span class="number">8</span>+<span class="number">8</span>+<span class="number">8</span>+<span class="number">8</span>+<span class="number">8</span>+<span class="number">8</span>+<span class="number">8</span>+<span class="number">8</span></span><br><span class="line"><span class="attribute">2016</span>=<span class="number">999</span>+<span class="number">999</span>+<span class="number">9</span>+<span class="number">9</span></span><br></pre></td></tr></table></figure>
 
-block site_title
-    != page.title + " · " + config.title
+<p>看起来确实很6吧，不过作为<code>程序猿</code>的我看到上面的数字第一想法就是：咦，这个的算法是咋实现的？</p>
+<p>于是，带着上面的疑问，简单去实现了一个算法来计算出上面这样的结果。</p>
+<h2 id="先瞎掰一下"><a href="#先瞎掰一下" class="headerlink" title="先瞎掰一下"></a>先瞎掰一下</h2><p>咳咳，在开始算法之前，请允许我先扯一下 <code>6</code> 这个词，网络用语意思是 <code>溜溜溜</code>，形容很牛逼；<br>但是，在伟大的数学当中，<code>6</code> 可是一个 <code>完美数</code>，不知道啥是完美数？移步 <a href="https://zh.wikipedia.org/wiki/%E5%AE%8C%E5%85%A8%E6%95%B0">维基百科</a>。作为第一个完美数，<code>6</code> 当然拥有至高无上的地位！纯属个人瞎掰，下面正式开始。</p>
+<h2 id="抽象化"><a href="#抽象化" class="headerlink" title="抽象化"></a>抽象化</h2><p>算法最有趣的地方应该就是将现实复杂的事物简单抽象化，以此例子抽象化之后的意思大概就是：</p>
+<blockquote>
+<p>给定一个数字（假设是2016），求将其分解成 <strong>N</strong> 个 <code>各位数都相等</code> 的数的和（假设这里的位数分别为6、7、8、9）</p>
+</blockquote>
+<h2 id="步骤分解"><a href="#步骤分解" class="headerlink" title="步骤分解"></a>步骤分解</h2><p>知道了算法的意思之后，就可以分解步骤了，大概如下：</p>
+<p>1.将位数分别为6、7、8、9存进一个数组，用来遍历求出不同结果；<br>2.求出<code>各位数都相等</code>的数，这里基于第一步的基数；<br>3.将2016进行分解；<br>4.将结果串联起来</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p>我也不知道该怎么扯了，非常扯淡的算法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">spiltYear</span>(<span class="params"> year </span>)&#123;</span><br><span class="line">    <span class="comment">// 将year显式转为数字，避免传入字符串报错</span></span><br><span class="line">    year = <span class="built_in">parseInt</span>( year, <span class="number">10</span> );    </span><br><span class="line">    <span class="keyword">if</span>( year &lt; <span class="number">1000</span> )&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;                </span><br><span class="line">    <span class="keyword">var</span> baseArr = [<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>];</span><br><span class="line">    baseArr.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params"> base, i </span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> result = [];</span><br><span class="line">        <span class="keyword">var</span> val1 = base + <span class="number">10</span> * base,                <span class="comment">// 十位数</span></span><br><span class="line">            val2 = base + <span class="number">10</span> * base + <span class="number">100</span> * base;   <span class="comment">// 百位数</span></span><br><span class="line">        <span class="keyword">var</span> num2 = <span class="title class_">Math</span>.<span class="title function_">floor</span>( year / val2 ),</span><br><span class="line">            num1 = <span class="title class_">Math</span>.<span class="title function_">floor</span>( ( year - num2 * val2 ) / val1 ),</span><br><span class="line">            numBase = ( year - num2 * val2 - num1 * val1 ) / base,</span><br><span class="line">            flag = numBase == <span class="title class_">Math</span>.<span class="title function_">floor</span>( numBase ) ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">if</span>( !flag )&#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;当前年份不符合条件&#x27;</span>);</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>( num2 )&#123;</span><br><span class="line">            result.<span class="title function_">push</span>(val2);</span><br><span class="line">            num2--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>( num1 )&#123;</span><br><span class="line">            result.<span class="title function_">push</span>(val1);</span><br><span class="line">            num1--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>( numBase )&#123;</span><br><span class="line">            result.<span class="title function_">push</span>(base);</span><br><span class="line">            numBase--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;2016=%s&#x27;</span>,result.<span class="title function_">join</span>(<span class="string">&#x27;+&#x27;</span>));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">spiltYear</span>(<span class="number">2016</span>);</span><br></pre></td></tr></table></figure>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>2016年本想写一篇长长的总结2015年，然而下笔却发现写不了啥东西，2016年希望所有人都666！</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/03/18/simple-intro-to-nginx/" class="prev">PREV</a><a href="/2015/12/17/CSS%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%B9%8BPostCss/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

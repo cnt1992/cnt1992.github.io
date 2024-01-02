@@ -1,20 +1,44 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> a note about postcss author share · Web前端爱好者</title><meta name="description" content="a note about postcss author share - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">a note about postcss author share</h1><div class="post-info">2016年4月14日</div><div class="post-content"><blockquote>
+<p><a href="https://github.com/postcss/postcss">PostCSS</a> 的作者 <code>Andrey Sitnik</code> 远从俄罗斯来到淘宝城做分享！</p>
+</blockquote>
+<p>没听过 <code>PostCSS</code> ？先简单看看我之前写的 <a href="http://cnt1992.xyz/2015/12/17/CSS%E5%90%8E%E7%BD%AE%E5%A4%84%E7%90%86%E5%99%A8%E4%B9%8BPostCss/">CSS后置处理器之PostCss</a> 做个入门。</p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<p>穿着拖鞋略有点腼腆的小伙子从下面几个方面介绍了<code>PostCSS</code>：</p>
+<h2 id="Why"><a href="#Why" class="headerlink" title="Why ?"></a>Why ?</h2><h2 id="提问环节的一些干货"><a href="#提问环节的一些干货" class="headerlink" title="提问环节的一些干货"></a>提问环节的一些干货</h2><blockquote>
+<p>Q：请问如何提高个人开源作品的影响力？<br>A：第一点也是很重要的一点，放在 <code>GitHub</code> 上的 <code>README.md</code> 请尽量用英文写，其实那些优秀的开源作品的作者不一定都是用英语作为母语，而且别人不会去在意你英文写得好不好，而是在意你开源的作品牛不牛逼；其次，如果觉得自己的作品很不错，可以去 <code>twitter</code> 上 <strong>[At]</strong> 那些致力于开源作品的人，他们其实也特别希望有更多的优秀作品开源出来；</p>
+</blockquote>
+<blockquote>
+<p>Q：<code>PostCSS</code> 的性能怎样？如何测试出来的？<br>A：<code>PostCSS</code> 性能测试是用来 <a href="https://github.com/gemini-testing/gemini">gemini</a> ，这是一个非常棒的回归性能测试工具，由于 <code>PostCSS</code> 自己写了一套解析 <code>STYLE</code> 的算法，所以性能方面对比来看是非常好的。</p>
+</blockquote>
+<h2 id="个人体会"><a href="#个人体会" class="headerlink" title="个人体会"></a>个人体会</h2><p>如 <code>AI</code> 所言，由于母语的限制，很多国内优秀作品没有在国外流行开来主要还是不用英文的 <code>README</code> ，要养成良好的文档习惯，不要畏惧。同时，发现问题不难，去解决一个问题也不难，难的是一直坚持下去。</p>
+<p>最后，附上现场照片一张，难得写过 <code>PostCSS</code> 插件推崇它的我坐在第一排认真听分享（假装听得懂英语ing）。</p>
+<p><img src="/img/postcss-author.jpg" alt="PostCSS作者分享照片"></p>
+</div></article></div></main><footer><div class="paginator"><a href="/2016/04/28/sublime-license-code/" class="prev">PREV</a><a href="/2016/04/08/upgrade-nginx-to-http2/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

@@ -1,20 +1,45 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 2016小结 · Web前端爱好者</title><meta name="description" content="2016小结 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">2016小结</h1><div class="post-info">2016年12月25日</div><div class="post-content"><p>12月25日，西方的<strong>过年</strong>，对东方人们来说距离新的一年<strong>2017</strong>只剩<strong>5</strong>天。</p>
+<p>来天猫已经快10个月，这10个月都在<code>忙 忙 忙</code>中度过，忙着开各种需求评审会，忙着跟业务方各种<del>撕逼</del>洽谈，忙着在半夜三更才能安安静静地写代码修bug。但老生常谈的是，这一年还是些许的小结值得写下来，算是给自己这一年的交代，以及给自己未来一年该怎么继续走一个思考。</p>
+<span id="more"></span>
 
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
-
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<h2 id="技术成长"><a href="#技术成长" class="headerlink" title="技术成长"></a>技术成长</h2><p>年初选择从京东跳槽过来天猫，最看重的还是天猫前端的技术，从13年双十一天猫全面切换到<code>Node</code>技术栈开始，到今年的<code>Weex</code>在双十一展现出<strong>web与native融合</strong>的不俗能力，不得不说天猫前端至少在业内还算是一个不错的团队存在。虽然外界看来，阿里系的开源框架都为了<code>KPI</code>而出现，并且不久后便夭折（当然，我自己也觉得很多东西其实都是为了<code>KPI</code>而出来的），但是对于<code>前端er</code>来说，我开始慢慢觉得：与其拒绝，不如从中学到一些东西，然后提取出好的抛弃坏的，让自己得到成长，转化成自己的技能。</p>
+<p>这一年的<code>React</code>&#x2F;<code>Vue</code>&#x2F;<code>Angular</code>三足鼎立，似乎对于这边来说更青睐于<code>React</code>。比如对于我在的小组负责天猫交易来说，业务情况是需要管理各种状态，而且相对来说比较复杂，这样能选择的当然是<code>React</code>。经手的多个项目几乎都采用了<code>React</code>技术栈，用上<code>Flux</code>&#x2F;<code>Redux</code>框架。当然，并不重复性的从<code>搭建脚手架 -&gt; 开发页面 -&gt; 联调</code>，而是在<code>Redux</code>框架的基础上封装一套适用于这边的业务场景的SDK<code>Rschema</code>，这个SDK解放了前端的重复性劳动：</p>
+<ol>
+<li>前端不再关注页面长什么样子（页面模块搭建依赖于JSON数据）</li>
+<li>前端主要负责模块的研发（基于npm包的形式开发）</li>
+</ol>
+<p>不知道<code>Rschema</code>哪天是不是也会开源，但我觉得对于我所接触的业务来说是一个非常不错的SDK。（适合各自团队的才是最好的）</p>
+<p>关于单页面应用，虽然<code>react-router</code>可以很好的解决浏览器后退的问题，但依然不够完美，一个路由一个<code>component</code>在理想状态下是对的，但一个<code>component</code>对应多个<code>status</code>的时候，<strong>浏览器后退</strong>似乎又成为了一个无法避免的问题所在，当你有多个<code>status</code>还需要改成多个<code>component</code>的时候真的会疯掉。发现<code>Swiper</code>这货除了手势滑动之后，其实也可以做成<strong>伪单页面应用</strong>，动态控制<code>Swiper</code>的页面从而达到新的页面从右侧滑入，左划后退，体验上还不错。但总体而言，对于单页面应用还是保持意见，虽然达到了接近原生的体验，但是首次加载的时间耗费以及如果业务很复杂的时候似乎成本有点高。</p>
+<h2 id="为人处世"><a href="#为人处世" class="headerlink" title="为人处世"></a>为人处世</h2><p>出来工作两年，脾气似乎没有怎么改。自己坚信的一些东西，始终没能轻易动摇。在公司与人相处，<strong>和善</strong>是第一。但是也不能一味的退让，毕竟大家都是平等的。在京东也是，在阿里也是，一旦触及自己底线的东西坚决不退让。很多时候为了赶上线，做出来的东西都大大折扣，需求方不满意，自己也没有成就感，这种情况在我看来依然是不允许发生的。所以，能忍让的东西忍让，忍让不了的时候就必须一步不让。</p>
+<p>一开始的时候，觉得应该做一个<strong>老好人</strong>，但是时间久了会发现这种对于别人来说成本很低的事情真的是很尴尬的存在。比如今天谁谁谁过来随便找你做个事情，你就满口答应下来做了，过一天谁谁谁又过来找你做东西，你又满口答应了，也是，无穷无尽的加班，只为了做这些事情（但这些事情真的是有意义的么，自己考量过么，更客观点，老大们知道么），这样子久了自己学不到什么不说，让这些找你做事的人觉得这个成本很低，所以我总觉得<strong>老好人</strong>对于我来说是坚决不会做的。</p>
+<p>新参与进来的业务，总是被当做一个<code>资源</code>那样子用。下周要发布了，这周才告知到我这里。一开始毕竟新入这个业务不熟悉，所以就忍让。等到对业务稍微熟悉了，也就把这些问题抛出来要求解决。这对于我来说就是要告诉别人我不愿意被当做一个<code>资源</code>来使用，也让别人知道也让我随随便便被使唤的成本很高，虽然短期看来是得罪了人，但长远来看，对自己必须是有利的。</p>
+<h2 id="未来计划"><a href="#未来计划" class="headerlink" title="未来计划"></a>未来计划</h2><p>从<strong>重构</strong>转型到<strong>大前端</strong>，虽然不再专注于<code>CSS</code>，而偏向于<code>JavaScript</code>，但是依然关注更优雅的写样式代码。未来，依然是倾向于功能实现，毕竟毕业前几年依旧是打怪升级的时间，不过想花更多时间关注所做的东西的性能。同时，也想多思考自己所做的东西，存在的价值及意义。不想只是一味的写代码，做一个码农，而应该花时间思考自己所做的事情的意义。</p>
+<p>嗯，在接下来的<strong>2017</strong>年，希望少加班（当然是不可能的了…）</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/01/20/A-Complete-Guide-to-Grid/" class="prev">PREV</a><a href="/2016/12/17/tmall-recruit/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>

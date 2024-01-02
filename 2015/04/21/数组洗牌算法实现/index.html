@@ -1,20 +1,39 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 数组洗牌算法 · Web前端爱好者</title><meta name="description" content="数组洗牌算法 - SkyCai"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://cnt1992.github.io/atom.xml" title="Web前端爱好者"><meta name="generator" content="Hexo 7.0.0"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/cnt1992" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><span style="display:none !important;"><span id="busuanzi_container_page_pv">本文总阅读量<span id="busuanzi_value_page_pv"></span></span></span><article class="post-block"><h1 class="post-title">数组洗牌算法</h1><div class="post-info">2015年4月20日</div><div class="post-content"><p>在做<a href="http://www.paipai.com/">拍拍首页</a>改版过程碰到一个需求，抽象出来的意思就是：从一个数组当中随机抽出几个组成一个新的数组，然后思考了一下，代码如下()：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 判断数组是否包含某个元素</span></span><br><span class="line">  <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">contains</span> = <span class="keyword">function</span>(<span class="params">obj</span>) &#123;</span><br><span class="line">      <span class="keyword">var</span> i = <span class="variable language_">this</span>.<span class="property">length</span>;</span><br><span class="line">      <span class="keyword">while</span> (i--) &#123;</span><br><span class="line">          <span class="keyword">if</span> (<span class="variable language_">this</span>[i] === obj) &#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在min和max之间随机生成一个数字</span></span><br><span class="line">  <span class="keyword">var</span> randomNum = <span class="keyword">function</span> (<span class="params">min, max</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (max == <span class="literal">undefined</span>) &#123;</span><br><span class="line">          max = min;</span><br><span class="line">          min = <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * (max - min) + min);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">shuffle</span> (obj, arrLen) &#123;</span><br><span class="line">	<span class="keyword">var</span> randomArr = [],</span><br><span class="line">            $obj = obj,</span><br><span class="line">            len = $obj.<span class="property">length</span> + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> ( randomArr.<span class="property">length</span> &lt; arrLen ) &#123;</span><br><span class="line">            <span class="keyword">var</span> num = randomNum (len);</span><br><span class="line">            <span class="keyword">if</span> ( randomArr.<span class="title function_">contains</span>(num) ) &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            randomArr.<span class="title function_">push</span>(num);</span><br><span class="line">        &#125;	</span><br><span class="line">        <span class="keyword">return</span> randomArr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-block site_title
-    != page.title + " · " + config.title
+<p>写完之后，虽然功能实现了，但是发现代码有点多而且逻辑有点复杂，我考虑的是从数组中随机抽出一个元素放入一个新的数组，只要新的数组的个数未到达指定个数，就不断循环从原数组中取元素，同时不能取出跟新数组重复元素，这样一来时间复杂度相对较高。</p>
+<span id="more"></span>
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+<p>回到正题，doodle了一下，发现原来这个可以用传说中的<em>洗牌算法</em>来实现，基本原理是：从所有元素中随机选取一个与第一个元素进行交换，然后在第二个之后选择一个元素与第二个交换，直到最后一个元素。这样能确保每个元素在每个位置的概率都是1&#x2F;n。</p>
+<p>于是改进算法，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//生成从1到length之间的随机数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">shuffleArray</span> ( len ) &#123;</span><br><span class="line">	<span class="keyword">var</span> arr = [], temp, index, i ;</span><br><span class="line">	<span class="keyword">if</span> ( !len ) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">1</span>; i &lt;= len; i++) &#123;</span><br><span class="line">		arr.<span class="title function_">push</span>(i-<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//利用洗牌算法打乱数组</span></span><br><span class="line">	<span class="keyword">for</span> ( i = <span class="number">1</span>; i &lt;= len; i++ ) &#123;</span><br><span class="line">		<span class="comment">//随机生成i到len之间的随机数</span></span><br><span class="line">		index = <span class="built_in">parseInt</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * ( len - i ), <span class="number">10</span>) + i;</span><br><span class="line">		<span class="keyword">if</span> ( index != i ) &#123;</span><br><span class="line">			temp = arr[i];</span><br><span class="line">			arr[i] = arr[index];</span><br><span class="line">			arr[index] = temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-block container
-    include mixins/post
-    +post(page)
-
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
-
-block copyright
-    include partial/copyright
+<p>思考继续改进中…</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2015/06/11/Javascript%E7%89%88%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="prev">PREV</a><a href="/2015/04/04/%E6%95%B4%E7%90%86%E8%87%AA%E5%B7%B1%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99%E8%B5%84%E6%BA%90/" class="next">NEXT</a></div><div id="gitment_title" onClick="showGitment()" class="gitment_title">显示评论</div><div id="J_commentContainer" style="display:none;"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>const myTheme = {
+    render(state, instance) {
+        const container = document.createElement('div');
+        container.lang = "en-US";
+        container.className = 'gitment-container gitment-root-container';
+        container.appendChild(instance.renderHeader(state, instance));
+        container.appendChild(instance.renderEditor(state, instance));
+        container.appendChild(instance.renderComments(state, instance));
+        container.appendChild(instance.renderFooter(state, instance));
+        return container;
+    }
+}
+function showGitment() {
+    document.querySelector('#gitment_title').style.display = 'none';
+    document.querySelector('#J_commentContainer').style.display = 'block';
+    document.querySelector('#J_commentContainer').classList.add('gitment_container');
+    var gitment = new Gitment({
+        id: window.location.pathname,
+        theme: myTheme,
+        owner: 'cnt1992',
+        repo: 'cnt1992.github.io',
+        oauth: {
+            client_id: '09b981847c8a38e58a62',
+            client_secret: '1feb91ebe731e68f89af0e6c43928f5f61d0bbf9'
+        }
+    });
+    gitment.render('J_commentContainer');
+}</script><div class="copyright"><p>© 2015 - 2024 <a href="https://cnt1992.github.io">SkyCai</a>, Where there is a will there is a way.</p><p style="display:none !important;"><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span id="busuanzi_container_site_uv">本站总访客数<span id="busuanzi_value_site_uv"></span>人次</span></p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-75181437-1",'auto');ga('send','pageview');</script><script async="" src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></body></html>
